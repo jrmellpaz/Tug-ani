@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    @apply m-0 p-0 bg-white;
+}
+
+/* Header */
+.header-button {
+    @apply outline-none w-12 h-12 rounded-full
+    flex justify-center items-center
+    hover:bg-gray-300;
+}
+
+/* Admin Header */
+.admin-text {
+    @apply text-xl font-interBold text-gray-600;
+    padding-bottom: 1px;
+}
+
+input[type=checkbox] {
+  -ms-transform: scale(1.5); /* IE */
+  -moz-transform: scale(1.5); /* FF */
+  -webkit-transform: scale(1.5); /* Safari and Chrome */
+  -o-transform: scale(1.5); /* Opera */
+  transform: scale(1.5);
+  accent-color: black;
+}
