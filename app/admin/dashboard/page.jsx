@@ -1,20 +1,17 @@
-"use client";
+import AdminLogoutButton from "@/app/components/Admin/AdminLogoutButton";
+import DashboardLink from "../../components/Admin/DashboardLink";
 
-import { logout } from "@/lib/actions";
-import Button from "../../components/Admin/Button";
-
-export default function AdminHome() {
+export default function AdminDashboard() {
 
     return (
-        <main className="mt-20 bg-white">
-            <div className="h-96 w-dvw">
-                <Button />
-                <Button />
-                <Button />
-            </div>
-            <button onClick={() => logout() }>
-                Logout
-            </button>
+        <main className="box-border p-8 pb-16 mt-20 h-fit w-dvw bg-white grid grid-cols-[repeat(auto-fill,_minmax(240px,_1fr))] gap-4">
+            <DashboardLink href="/admin/dashboard/articles">Articles</DashboardLink>
+            <DashboardLink href="/admin/dashboard/authors">Authors</DashboardLink>
+            <DashboardLink href="/admin/dashboard/categories">Categories</DashboardLink>
+            <DashboardLink href="/admin/dashboard/multimedia">Multimedia</DashboardLink>
+            <DashboardLink href="/admin/dashboard/tags">Tags</DashboardLink>
+            <DashboardLink href="/admin/dashboard/about">About us</DashboardLink>
+            <AdminLogoutButton />
         </main>
     );
 }

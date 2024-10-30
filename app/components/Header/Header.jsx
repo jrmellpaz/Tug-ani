@@ -3,6 +3,7 @@
 import React from "react";
 import Menu from "./Menu.jsx";
 import Searchbar from "./Seachbar.jsx";
+import Link from "next/link.js";
 
 export default function Header() {
     const[menuOpened, setMenuOpened] = React.useState(false);
@@ -22,10 +23,12 @@ export default function Header() {
                 <button onClick={handleMenuClick} className="header-button" title="Menu"> 
                     <img src="/menu.svg" alt="Menu" />
                 </button>
-                <div className="h-16 w-fit flex flex-row justify-center items-center gap-3">
-                    <img className="h-2/3" src="/logo.svg" alt="Tug-ani logo" />
-                    <h1 className="font-bebas text-2xl">Tug-ani</h1>
-                </div>
+                <Link href={"/"}>
+                    <div className="h-16 w-fit flex flex-row justify-center items-center gap-3">
+                        <img className="h-2/3" src="/logo.svg" alt="Tug-ani logo" />
+                        <h1 className="font-bebas text-2xl">Tug-ani</h1>
+                    </div>
+                </Link>
                 <button onClick={handleSearchbarClick} className="header-button" title="Search">
                     <img src="/search.svg" alt="Search" />
                 </button>
