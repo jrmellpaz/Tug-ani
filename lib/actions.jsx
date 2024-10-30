@@ -6,15 +6,9 @@ import { auth } from "./firebase";
 import { createSession, deleteSession } from "./sessions";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
-const testUser = {
-    id: "1",
-    email: "contact@cosdensolutions.io",
-    password: "12345678",
-};
-
 const loginSchema = z.object({
     email: z.string().email({ message: "Invalid email address" }).trim(),
-     password: z
+    password: z
         .string()
         .min(6, { message: "Password must be at least 8 characters." })
         .trim(),
