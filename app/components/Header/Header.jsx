@@ -17,19 +17,19 @@ export default function Header() {
         setSearchbarOpened(!searchbarOpened);
     }
 
-    const inactive = "outline-none w-12 h-12 rounded-full flex justify-center items-center hover:bg-gray-100";
-    const active = "outline-none w-12 h-12 rounded-full flex justify-center items-center bg-[#7B1113]";
+    const inactive = "outline-none w-12 h-12 rounded-full flex justify-center items-center hover:bg-gray-200";
+    const active = "outline-none w-12 h-12 rounded-full flex justify-center items-center bg-tugAni-red";
 
     return (
         <nav className="fixed w-dvw">
-            <div className="w-full h-16 bg-white shadow-md flex items-center justify-between pl-3 pr-3">
+            <div className="w-full h-16 bg-tugAni-white shadow-md flex items-center justify-between pl-3 pr-3">
                 <button onClick={handleMenuClick} className={menuOpened ? active : inactive} title="Menu"> 
                     <img src={menuOpened ? "/menu-active.svg" : "/menu.svg"} alt="Menu" />
                 </button>
                 <Link href={"/"}>
                     <div className="h-16 w-fit flex flex-row justify-center items-center gap-3">
                         <img className="h-2/3" src="/logo.svg" alt="Tug-ani logo" />
-                        <h1 className="font-bebas text-2xl">Tug-ani</h1>
+                        <h1 className="font-bebas text-2xl text-tugAni-black">Tug-ani</h1>
                     </div>
                 </Link>
                 <button onClick={handleSearchbarClick} className={searchbarOpened ? active : inactive} title="Search">

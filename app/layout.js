@@ -32,6 +32,31 @@ const interItalic = localFont({
 	variable: "--font-inter-italic",
 });
 
+const openSansRegular = localFont({
+	src: "./fonts/openSans-regular.ttf",
+	variable: "--font-openSans-regular",
+});
+
+const openSansBold = localFont({
+	src: "./fonts/openSans-bold.ttf",
+	variable: "--font-openSans-bold",
+});
+
+const openSansItalic = localFont({
+	src: "./fonts/openSans-italic.ttf",
+	variable: "--font-openSans-italic",
+});
+
+const openSansBoldItalic = localFont({
+	src: "./fonts/openSans-boldItalic.ttf",
+	variable: "--font-openSans-boldItalic",
+});
+
+const gotham = localFont({
+	src: "./fonts/gotham.otf",
+	variable: "--font-gotham",
+});
+
 export const metadata = {
 	title: "Tug-ani",
 	description: "Tug-ani is the official school publication of the University of the Philippines Cebu since its advent in 1974.",
@@ -41,7 +66,7 @@ export default function RootLayout({ children }) {
 	return (
 		<html lang="en">
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable} ${interRegular.variable} ${interBold.variable} ${interItalic.variable} antialiased`}
+				className={`${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable} ${interRegular.variable} ${interBold.variable} ${interItalic.variable} ${openSansRegular.variable} ${openSansBold.variable} ${openSansItalic.variable} ${openSansBoldItalic.variable} ${gotham.variable} antialiased bg-tugAni-white`}
 			>
 				{children}
 			</body>

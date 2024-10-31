@@ -15,15 +15,15 @@ body {
 
 /* Admin Header */
 .admin-text {
-    @apply text-xl font-interBold text-gray-600;
-    padding-bottom: 1px;
+    @apply text-xl font-openSansBold text-gray-600;
+    padding-bottom: 2px;
 }
 
 input[type=checkbox] {
-    -ms-transform: scale(1.5); /* IE */
-    -moz-transform: scale(1.5); /* FF */
-    -webkit-transform: scale(1.5); /* Safari and Chrome */
-    -o-transform: scale(1.5); /* Opera */
+    -ms-transform: scale(1.5); 
+    -moz-transform: scale(1.5); 
+    -webkit-transform: scale(1.5); 
+    -o-transform: scale(1.5); 
     transform: scale(1.5);
-    accent-color: black;
+    accent-color: #5A051B;
 }

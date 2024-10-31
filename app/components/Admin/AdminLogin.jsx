@@ -16,16 +16,16 @@ export function AdminLogin() {
     return (
         <form 
 			action={loginAction}
-			className="mt-28 ml-auto mr-auto p-8 pb-16 pt-16 w-96 min-w-2/3 bg-white flex-col border border-solid border-gray-200 rounded-xl"
+			className="mt-28 ml-auto mr-auto p-8 pb-16 pt-16 w-96 min-w-2/3 bg-tugAni-white flex-col border border-solid border-gray-300 rounded-xl"
 		>
-            <h1 className="text-center text-3xl font-interBold mb-12">Login</h1>
+            <h1 className="text-center text-3xl font-openSansBold mb-12 text-tugAni-red">Login</h1>
             <div className="flex-col mb-8">
               	<div className="m-2 ml-4">
                 	<label className="font-interRegular" htmlFor="email">Email</label>
               	</div>
               	<div>
                 	<input required
-						className="rounded-full p-2 pl-4 pr-4 outline-none font-interRegular box-border w-full border border-solid border-slate-300 focus:border-black"  
+						className="rounded-full p-2 pl-4 pr-4 outline-none font-interRegular box-border w-full border border-solid border-slate-300 focus:border-tugAni-red bg-tugAni-white"  
 						type="email" 
 						id="email" 
 						name="email"
@@ -38,7 +38,7 @@ export function AdminLogin() {
               	</div>
               	<div>
 					<input required
-						className="rounded-full p-2 pl-4 pr-4 outline-none font-interRegular box-border w-full border border-solid border-slate-300 focus:border-black"  
+						className="rounded-full p-2 pl-4 pr-4 outline-none font-interRegular box-border w-full border border-solid border-slate-300 focus:border-tugAni-red bg-tugAni-white"  
 						type={seePassword ? "text" : "password"} 
 						id="password" 
 						name="password"
@@ -76,7 +76,7 @@ function SubmitButton() {
 		<button 
 			disabled={pending}
 			type="submit"
-			className="font-interRegular bg-black text-white p-2 pl-4 pr-4 border rounded-xl"
+			className="font-interRegular bg-tugAni-red text-tugAni-white p-2 pl-5 pr-5 border rounded-full"
 		>
 			Login
 		</button>

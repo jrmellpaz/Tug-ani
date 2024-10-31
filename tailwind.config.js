@@ -48,13 +48,21 @@ module.exports = {
   				'3': 'hsl(var(--chart-3))',
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
-  			}
+  			},
+			"tugAni-black": "#171413",
+			"tugAni-white": "#F2F0EE",
+			"tugAni-red": "#5A051B",
   		},
   		fontFamily: {
   			bebas: ["var(--font-bebas-neue)"],
   			interRegular: ["var(--font-inter-regular)"],
   			interBold: ["var(--font-inter-bold)"],
-  			interItalic: ["var(--font-inter-italic)"]
+  			interItalic: ["var(--font-inter-italic)"],
+			openSansRegular: ["var(--font-openSans-regular)"],
+			openSansBold: ["var(--font-openSans-bold)"],
+			openSansItalic: ["var(--font-openSans-italic)"],
+			openSansBoldItalic: ["var(--font-openSans-boldItalic)"],
+			gotham: ["var(--font-gotham)"],
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
