@@ -7,6 +7,9 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+	screen: {
+		"mobile": "450px",
+	},
   	extend: {
   		colors: {
   			background: 'hsl(var(--background))',

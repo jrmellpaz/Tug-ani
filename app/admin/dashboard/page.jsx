@@ -4,7 +4,7 @@ import DashboardLink from "../../components/Admin/DashboardLink";
 export default function AdminDashboard() {
 
     return (
-        <main className="box-border p-8 pb-16 mt-20 h-fit w-dvw bg-tugAni-white grid grid-cols-[repeat(auto-fill,_minmax(240px,_1fr))] gap-4">
+        <main className="box-border p-8 pb-16 h-fit w-dvw bg-tugAni-white grid grid-cols-[repeat(auto-fill,_minmax(240px,_1fr))] gap-4">
             <DashboardLink href="/admin/dashboard/articles">Articles</DashboardLink>
             <DashboardLink href="/admin/dashboard/authors">Authors</DashboardLink>
             <DashboardLink href="/admin/dashboard/categories">Categories</DashboardLink>

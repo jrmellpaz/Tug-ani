@@ -6,17 +6,14 @@ body {
     @apply m-0 p-0 bg-white;
 }
 
-/* Header
-.header-button {
-    @apply outline-none w-12 h-12 rounded-full
-    flex justify-center items-center
-    hover:bg-gray-300;
-} */
+::selection {
+    color: #F2F0EE;
+    background-color: #5A051B;
+}
 
-/* Admin Header */
-.admin-text {
-    @apply text-xl font-openSansBold text-gray-600;
-    padding-bottom: 2px;
+::-moz-selection {
+    color: #F2F0EE;
+    background-color: #5A051B;
 }
 
 input[type=checkbox] {
@@ -26,4 +23,27 @@ input[type=checkbox] {
     -o-transform: scale(1.5); 
     transform: scale(1.5);
     accent-color: #5A051B;
+}
+
+input::file-selector-button {
+    background-color: #5A051B;
+    color: #F2F0EE;
+    border: none;
+    outline: none;
+    border-radius: 50px;
+    padding: 0.25em 0.75em;
+    margin-right: 0.5em;
+    cursor: pointer;
+}
+
+input::file-selector-button:hover {
+    --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+/* Admin Header */
+.admin-text {
+    @apply text-xl font-openSansBold text-gray-600;
+    padding-bottom: 2px;
 }
