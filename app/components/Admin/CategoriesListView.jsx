@@ -57,14 +57,14 @@ export default function CategoriesListView() {
                                 {item?.title}
                             </h2>
                             {item?.id !== "news" && <div className="dropdown dropdown-bottom dropdown-end">
-                                <div tabIndex={0} role="button" className="btn m-1 rounded-full bg-base-100 border-none shadow-none hover:bg-gray-200">
+                                <div tabIndex={0} role="button" className="p-2 rounded-full bg-base-100 border-none shadow-none hover:bg-gray-200">
                                     <img src="/options.svg" alt="Options" />
                                 </div>
-                                <ul tabIndex={0} className="dropdown-content rounded-box z-[1] w-52 shadow-md font-openSansRegular pt-4 pb-4 bg-tugAni-white">
+                                <ul tabIndex={0} className="dropdown-content rounded-xl z-[1] w-36 shadow-md font-openSansRegular pt-3 pb-3 bg-tugAni-white">
                                     <Link href={`/admin/dashboard/categories/form?id=${item?.id}`}>
-                                        <button className="flex flex-row items-center w-full p-4 pl-8 gap-4 hover:bg-gray-200">
+                                        <button className="flex flex-row items-center w-full p-3 pl-5 gap-4 hover:bg-gray-200">
                                             <img src="/edit.svg" alt="Edit" />
-                                            <span>Edit</span>
+                                            <span className="text-sm">Edit</span>
                                         </button>
                                     </Link>
                                         <button 
@@ -73,10 +73,10 @@ export default function CategoriesListView() {
                                                 setDeleteId(item?.id);
                                                 document.getElementById('my_modal_2').showModal(item?.id);
                                             }}
-                                            className="flex flex-row items-center w-full p-4 pl-8 gap-4 hover:bg-gray-200"
+                                            className="flex flex-row items-center w-full p-3 pl-5 gap-4 hover:bg-gray-200"
                                         >
                                             <img src="/delete.svg" alt="Delete" />
-                                            <span className="text-red-500">Delete</span>
+                                            <span className="text-red-500 text-sm">Delete</span>
                                         </button>
                                 </ul>
                             </div> }

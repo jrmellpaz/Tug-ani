@@ -4,8 +4,6 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 // Create new category
 export const createNewCategory = async ({ data, image }) => {
-    const whiteSpace = new RegExp("/^\s+$/");
-
     if (!data?.title) {
         throw new Error("Title is undefined.");
     }
@@ -40,8 +38,6 @@ export const createNewCategory = async ({ data, image }) => {
 
 // Update existing category
 export const updateCategory = async ({ data, image }) => {
-    const whiteSpace = new RegExp("/^\s+$/");
-
     if (!data?.title) {
         throw new Error("Title is undefined.");
     }
