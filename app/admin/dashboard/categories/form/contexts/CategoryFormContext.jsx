@@ -1,6 +1,7 @@
 "use client";
 
-import { createNewCategory } from "@/lib/firebase/category/write";
+import { getCategory } from "@/lib/firebase/category/read";
+import { createNewCategory, deleteCategory, updateCategory } from "@/lib/firebase/category/write";
 import { createContext, useContext, useState } from"react";
 
 const CategoryFormContext = createContext();
@@ -37,6 +38,64 @@ export default function CategoryFormContextProvider({ children }) {
         setIsLoading(false);
     };
 
+    const handleUpdate = async () => {
+        setError(null);
+        setIsLoading(true);
+        setIsDone(false);
+
+        try {
+            await updateCategory({data: data, image: image});
+            setIsDone(true);
+        }
+        catch (error) {
+            setError(error?.message);
+        }
+
+        setIsLoading(false);
+    };
+
+    const handleDelete = async (id) => {
+        setError(null);
+        setIsLoading(true);
+        setIsDone(false);
+
+        try {
+            if(id === "news") {
+                throw new Error("News category cannot be erased.");
+            }
+            
+            await deleteCategory(id);
+            setIsDone(true);
+        }
+        catch (error) {
+            setError(error?.message);
+        }
+
+        setIsLoading(false);
+    };
+
+    const fetchData = async (id) => {
+        setError(null);
+        setIsLoading(true);
+        setIsDone(false);
+
+        try {
+            const res = await getCategory(id);
+
+            if (res.exists()) {
+                setData(res.data());
+            }
+            else {
+                throw new Error(`No category with id ${id} exists (?_?)`);
+            }
+        }
+        catch (error) {
+            setError(error?.message);
+        }
+
+        setIsLoading(false);
+    }
+
     return (
         <CategoryFormContext.Provider
             value={{
@@ -46,8 +105,11 @@ export default function CategoryFormContextProvider({ children }) {
                 isDone,
                 handleData,
                 handleCreate,
+                handleUpdate,
+                handleDelete,
                 image,
                 setImage,
+                fetchData
             }}
         >
             {children}

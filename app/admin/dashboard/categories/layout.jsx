@@ -1,4 +1,4 @@
-import CategoryFormContextProvider from "./contexts/CategoryFormContext";
+import CategoryFormContextProvider from "./form/contexts/CategoryFormContext";
 
 export default function Layout({ children }) {
     return (

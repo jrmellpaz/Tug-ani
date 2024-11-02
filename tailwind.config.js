@@ -74,5 +74,19 @@ module.exports = {
   		}
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+	require("tailwindcss-animate"),
+	require("daisyui"),
+  ],
+  daisyui: {
+	darkTheme: "light",
+	themes: [
+		{
+			light: {
+				...require("daisyui/src/theming/themes")["light"],
+				"background-color": "#F2F0EE",
+			}
+		}
+	]
+  }
 };
