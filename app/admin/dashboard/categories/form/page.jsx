@@ -161,7 +161,7 @@ export default function CategoriesForm() {
                     <ErrorMessage header="An error has occured ૮(˶ㅠ︿ㅠ)ა" message={error} />
                 }
                 {isDone && 
-                    <SuccessMessage header={`Category ${updateCategoryId ? "updated" : "created"} successfully ٩( ᐖ )人( ᐛ )و`} message="Clear the current inputs to create a new one." />
+                    <SuccessMessage header={`Category ${updateCategoryId ? "updated" : "created"} successfully ٩( ᐖ )人( ᐛ )و`} message={updateCategoryId ? "Feel free to do another changes to the category information." : "Clear the current inputs to create a new one."} />
                 }
                 {!isDone && <div className="flex justify-end mt-12">
                     <button

@@ -1,13 +1,12 @@
 "use client";
 
-import { getAuthor } from "@/lib/firebase/author/read";
-import { createNewAuthor, deleteAuthor, updateAuthor } from "@/lib/firebase/author/write";
-import { useRouter } from "next/navigation";
+import { getArticle } from "@/lib/firebase/article/read";
+import { createNewArticle, deleteArticle, updateArticle } from "@/lib/firebase/article/write";
 import { createContext, useContext, useState } from"react";
 
-const AuthorFormContext = createContext();
+const ArticleFormContext = createContext();
 
-export default function AuthorFormContextProvider({ children }) {
+export default function ArticleFormContextProvider({ children }) {
     const [data, setData] = useState({});
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -29,7 +28,7 @@ export default function AuthorFormContextProvider({ children }) {
         setIsDone(false);
 
         try {
-            await createNewAuthor({data: data, image: image});
+            await createNewArticle({data: data, image: image});
             setIsDone(true);
         }
         catch (error) {
@@ -45,7 +44,7 @@ export default function AuthorFormContextProvider({ children }) {
         setIsDone(false);
 
         try {
-            await updateAuthor({data: data, image: image});
+            await updateArticle({data: data, image: image});
             setIsDone(true);
         }
         catch (error) {
@@ -61,11 +60,11 @@ export default function AuthorFormContextProvider({ children }) {
         setIsDone(false);
 
         try {
-            if(id === "news") {
-                throw new Error("News category cannot be erased.");
-            }
+            // if(id === "news") {
+            //     throw new Error("News category cannot be erased.");
+            // }
             
-            await deleteAuthor(id);
+            await deleteArticle(id);
             setIsDone(true);
         }
         catch (error) {
@@ -81,13 +80,13 @@ export default function AuthorFormContextProvider({ children }) {
         setIsDone(false);
 
         try {
-            const res = await getAuthor(id);
+            const res = await getArticle(id);
 
             if (res.exists()) {
                 setData(res.data());
             }
             else {
-                throw new Error(`No category with id ${id} exists (?_?)`);
+                throw new Error(`No article with id ${id} exists (?_?)`);
             }
         }
         catch (error) {
@@ -98,7 +97,7 @@ export default function AuthorFormContextProvider({ children }) {
     }
 
     return (
-        <AuthorFormContext.Provider
+        <ArticleFormContext.Provider
             value={{
                 data,
                 isLoading,
@@ -114,8 +113,8 @@ export default function AuthorFormContextProvider({ children }) {
             }}
         >
             {children}
-        </AuthorFormContext.Provider>
+        </ArticleFormContext.Provider>
     );
 }
 
-export const useAuthorForm = () => useContext(AuthorFormContext);
+export const useArticleForm = () => useContext(ArticleFormContext);

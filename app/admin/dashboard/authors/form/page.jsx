@@ -35,10 +35,10 @@ export default function AuthorsForm() {
 
     return(
         <section className="p-8 max-[600px]:p-0 w-dvw flex flex-col items-center">
-            <h1 className="font-gotham text-3xl tracking-tighter text-tugAni-red mb-8 text-center">{updateAuthorId ? `Updating Author ID: "${updateAuthorId}"`: "Add an author" }</h1> 
+            <h1 className="font-gotham text-3xl tracking-tighter text-tugAni-red mb-8 text-center">{updateAuthorId ? `Updating author: "${data?.name}"`: "Add an author" }</h1> 
             {updateAuthorId &&
                 <div className="p-8 pt-0 pb-0 w-5/6">
-                    <WarnMessage header={`You are currently updating the author with ID: "${updateAuthorId}" ╰[ ⁰ ᐞ ⁰ ]╯`} />
+                    <WarnMessage header={`You are currently updating the author: "${data?.name}" ╰[ ⁰ ᐞ ⁰ ]╯`} />
                 </div>
             }
             <form
@@ -133,8 +133,8 @@ export default function AuthorsForm() {
                     </div>
                     <div className="flex flex-col w-full">
                         <span className="text-xs font-openSansItalic text-gray-500">For best results, it is recommended that the profile image is in the square (1:1) aspect ratio.</span>
-                        {data?.iconURL && !image && <div className="w-full mt-2">
-                            <img src={data?.iconURL} alt="Author image" className="border border-solid border-slate-300 rounded-xl" />
+                        {data?.photoURL && !image && <div className="w-full mt-2">
+                            <img src={data?.photoURL} alt="Author image" className="border border-solid border-slate-300 rounded-xl" />
                         </div>}
                         {image && <div className="w-full mt-2">
                             <img src={URL.createObjectURL(image)} alt="Author image" className="border border-solid border-slate-300 rounded-xl" />
@@ -158,7 +158,7 @@ export default function AuthorsForm() {
                     <ErrorMessage header="An error has occured ૮(˶ㅠ︿ㅠ)ა" message={error} />
                 }
                 {isDone && 
-                    <SuccessMessage header={`Author ${updateAuthorId ? "updated" : "created"} successfully ٩( ᐖ )人( ᐛ )و`} message="Clear the current inputs to create a new one." />
+                    <SuccessMessage header={`Author ${updateAuthorId ? "updated" : "created"} successfully ٩( ᐖ )人( ᐛ )و`} message={updateAuthorId ? "Feel free to do another changes to the author information." : "Clear the current inputs to create a new one."} />
                 }
                 {!isDone && <div className="flex justify-end mt-12">
                     <button
