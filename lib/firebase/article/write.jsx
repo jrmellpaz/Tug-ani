@@ -15,8 +15,12 @@ export const createNewArticle = async ({ data, image }) => {
         throw new Error("Slug must not contain any spaces. Instead, use a dash (-) to separate words.");
     }
 
-    if (!data?.description) {
-        throw new Error("Description is undefined.");
+    if(!data?.categoryId) {
+        throw new Error("Category is undefined.")
+    }
+
+    if(!data?.authorId) {
+        throw new Error("Author is undefined.")
     }
 
     if (!image && !data?.imageURL) {
@@ -30,6 +34,7 @@ export const createNewArticle = async ({ data, image }) => {
     const imageURL = await getDownloadURL(imageRef);
 
     const firestoreRef = doc(db, `articles/${id}`);
+    console.log(data, id, imageURL);
     await setDoc(firestoreRef, {
         ...data,
         id: id,
@@ -38,13 +43,13 @@ export const createNewArticle = async ({ data, image }) => {
     });
 }
 
-// export const uploadContentImage = async (image) => {
-//     const id = doc(collection(db, "ids")).id;
-//     const imageRef = ref(storage, `contentImages/${id}`);
-//     await uploadBytes(imageRef, image);
-//     const imageURL = await getDownloadURL(imageRef);
-//     return imageURL;
-// }
+export const uploadContentImage = async (image) => {
+    const id = doc(collection(db, "ids")).id;
+    const imageRef = ref(storage, `contentImages/${id}`);
+    await uploadBytes(imageRef, image);
+    const imageURL = await getDownloadURL(imageRef);
+    return imageURL;
+}
 
 // Update an existing article
 export const updateArticle = async ({ data, image }) => {
@@ -57,10 +62,6 @@ export const updateArticle = async ({ data, image }) => {
     }
     else if(data?.slug.indexOf(" ") >= 0) {
         throw new Error("Slug must not contain any spaces. Instead, use a dash (-) to separate words.");
-    }
-
-    if (!data?.description) {
-        throw new Error("Description is undefined.");
     }
 
     let imageURL = data?.imageURL;

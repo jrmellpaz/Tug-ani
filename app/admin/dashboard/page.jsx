@@ -1,5 +1,5 @@
-import AdminLogoutButton from "@/app/components/Admin/AdminLogoutButton";
-import DashboardLink from "../../components/Admin/DashboardLink";
+import AdminLogoutButton from "@/app/components/Admin/AdminLogoutButton.jsx";
+import DashboardLink from "../../components/Admin/DashboardLink.jsx";
 
 export default function AdminDashboard() {
 

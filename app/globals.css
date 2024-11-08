@@ -56,6 +56,13 @@ input::file-selector-button:hover {
     overflow: hidden;
 }
 
+.title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+}
+
 ::-webkit-scrollbar {
     height: 0.25em;
     width: 0.25em;
