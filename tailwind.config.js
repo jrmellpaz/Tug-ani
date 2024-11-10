@@ -85,6 +85,13 @@ module.exports = {
 			light: {
 				...require("daisyui/src/theming/themes")["light"],
 				"background-color": "#F2F0EE",
+				".checkbox": {
+					"--chkbg": "#5A051B",
+					"--chkfg": "#F2F0EE",
+					"height": "1rem",
+					"width": "1rem",
+					"border-radius": "4px",
+				}
 			}
 		}
 	]

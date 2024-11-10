@@ -41,8 +41,6 @@ export default function ArticlesListView() {
         return <ErrorMessage header="No data found (ó﹏ò｡)" message="An error occurred. Refresh to fetch data." />
     }
 
-    // gap-4 items-center grid grid-cols-[repeat(auto-fill,_400px)] auto-rows-max gap-y-8 justify-center
-
     return (
         <section className="w-full flex flex-col items-center gap-4">
             {data?.map((item, key) => { 

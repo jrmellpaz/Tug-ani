@@ -44,13 +44,13 @@ export function AdminLogin() {
 						id="password" 
 						name="password"
 					/>
-					<div className="m-4 mt-4 flex gap-2">
+					<div className="m-4 mt-4 flex gap-2 items-center">
 						<input 
 							onChange={handleSeePassword}
-							className="cursor-pointer"
+							className="cursor-pointer checkbox border-tugAni-black hover:border-tugAni-red checked:border-tugAni-red"
 							type="checkbox" 
-							id="checkbox" /
-						>
+							id="checkbox" 
+						/>
 						<label className="cursor-pointer font-openSansRegular text-sm" htmlFor="checkbox">See password</label>
 					</div>
             	</div>

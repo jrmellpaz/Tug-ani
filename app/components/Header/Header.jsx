@@ -17,14 +17,17 @@ export default function Header() {
         setSearchbarOpened(!searchbarOpened);
     }
 
-    const inactive = "outline-none w-12 h-12 rounded-full flex justify-center items-center hover:bg-gray-200";
-    const active = "outline-none w-12 h-12 rounded-full flex justify-center items-center bg-tugAni-red";
+    const inactive = "outline-none w-10 h-10 rounded-full flex justify-center items-center hover:bg-gray-200 focus:bg-gray-300";
+    const active = "outline-none w-10 h-10 rounded-full flex justify-center items-center bg-tugAni-red";
 
     return (
         <nav className="fixed w-dvw">
-            <div className="w-full h-16 bg-tugAni-white shadow-md flex items-center justify-between pl-3 pr-3">
-                <button onClick={handleMenuClick} className={menuOpened ? active : inactive} title="Menu"> 
-                    <img src={menuOpened ? "/menu-active.svg" : "/menu.svg"} alt="Menu" />
+            <div className="w-full h-16 bg-tugAni-white shadow-md flex items-center justify-between px-8">
+                <button 
+                    onClick={handleMenuClick} className={menuOpened ? active : inactive} 
+                    title="Menu"
+                > 
+                    <img src={menuOpened ? "/close.svg" : "/menu.svg"} alt="Menu" />
                 </button>
                 <Link href={"/"}>
                     <div className="h-16 w-fit flex flex-row justify-center items-center gap-3">
@@ -32,7 +35,10 @@ export default function Header() {
                         <h1 className="font-bebas text-2xl text-tugAni-black">Tug-ani</h1>
                     </div>
                 </Link>
-                <button onClick={handleSearchbarClick} className={searchbarOpened ? active : inactive} title="Search">
+                <button 
+                    onClick={handleSearchbarClick} className={searchbarOpened ? active : inactive} 
+                    title="Search"
+                >
                     <img src={searchbarOpened ? "/search-active.svg" : "/search.svg"} alt="Search" />
                 </button>
             </div>
