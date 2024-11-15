@@ -124,6 +124,29 @@ export default function CategoriesForm() {
                         className="rounded-xl p-2 pl-4 pr-4 outline-none font-openSansRegular box-border w-full border border-solid border-slate-300 focus:border-tugAni-red bg-tugAni-white resize-none"
                     ></textarea>
                 </div>
+                <div className="flex flex-row justify-between items-center mb-4">
+                    <div className="w-60 font-openSansBold">
+                        <label 
+                            htmlFor="categoryOrder"
+                            className="text-tugAni-black"
+                        >
+                            Display order
+                        </label>
+                        <span className="text-red-400">*</span>
+                    </div>
+                    <input required
+                        type="number"
+                        onChange={(event) => {
+                            handleData("order", Number(event.target.value));
+                        }}
+                        value={String(data?.order)}
+                        min="0"
+                        id="categoryOrder"
+                        name="categoryOrder"
+                        placeholder="Order when displayed"
+                        className="rounded-full p-2 pl-4 pr-4 outline-none font-openSansRegular box-border w-full border border-solid border-slate-300 focus:border-tugAni-red bg-tugAni-white resize-none"
+                    />
+                </div>
                 <div className="flex flex-row justify-between items-start mb-4">
                     <div className="w-60 font-openSansBold">
                         <label 

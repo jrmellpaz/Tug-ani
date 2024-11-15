@@ -5,7 +5,7 @@ import { collection, doc, getDoc, onSnapshot } from 'firebase/firestore';
 import useSWRSubscription from 'swr/subscription'
  
 export default function useCategories() {
-    const { data, error} = useSWRSubscription(["categories"], ([path], { next }) => {
+    const { data, error } = useSWRSubscription(["categories"], ([path], { next }) => {
         const ref = collection(db, path);
 
         const unsub = onSnapshot(ref, (snaps) => {
