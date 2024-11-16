@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import { decrypt } from "./lib/sessions";
 import { NextResponse } from "next/server";
+import { auth } from "./lib/firebase";
 
 // const protectedRoutes = ["/admin/dashboard/", "/admin/dashboard/articles"];
 const protectedRoutes = new RegExp("^/admin/dashboard")

@@ -6,6 +6,7 @@ import SuccessMessage from "@/app/components/Admin/SuccessMessage";
 import { useSearchParams } from "next/navigation";
 import WarnMessage from "@/app/components/Admin/WarnMessage";
 import { useEffect, useRef } from "react";
+import AdminHeader from "../../../../components/Admin/AdminHeader";
 
 export default function CategoriesForm() {
     const searchParams = useSearchParams();
@@ -34,6 +35,8 @@ export default function CategoriesForm() {
     }, [updateCategoryId])
 
     return(
+        <>
+        <AdminHeader href="/admin/dashboard/categories" />
         <section className="p-8 max-[600px]:p-0 w-dvw flex flex-col items-center">
             <h1 className="font-gotham text-3xl tracking-tighter text-tugAni-red mb-8 text-center">{updateCategoryId ? `Updating "${updateCategoryId}"`: "Add a category" }</h1> 
             {updateCategoryId &&
@@ -198,5 +201,6 @@ export default function CategoriesForm() {
                 </div>}
             </form>
         </section>
+        </>
     );
 }

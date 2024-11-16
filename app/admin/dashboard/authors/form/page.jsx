@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import WarnMessage from "@/app/components/Admin/WarnMessage";
 import { useEffect, useRef } from "react";
 import { useAuthorForm } from "./contexts/AuthorFormContext";
+import AdminHeader from "@/app/components/Admin/AdminHeader";
 
 export default function AuthorsForm() {
     const searchParams = useSearchParams();
@@ -34,6 +35,8 @@ export default function AuthorsForm() {
     }, [updateAuthorId])
 
     return(
+        <>
+        <AdminHeader href="/admin/dashboard/authors" />
         <section className="p-8 max-[600px]:p-0 w-dvw flex flex-col items-center">
             <h1 className="font-gotham text-3xl tracking-tighter text-tugAni-red mb-8 text-center">{updateAuthorId ? `Updating author: "${data?.name}"`: "Add an author" }</h1> 
             {updateAuthorId &&
@@ -172,5 +175,6 @@ export default function AuthorsForm() {
                 </div>}
             </form>
         </section>
+        </>
     );
 }

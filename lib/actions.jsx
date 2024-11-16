@@ -4,7 +4,7 @@ import { z } from "zod";
 import { redirect } from "next/navigation";
 import { auth } from "./firebase";
 import { createSession, deleteSession } from "./sessions";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 const loginSchema = z.object({
     email: z.string().email({ message: "Invalid email address" }).trim(),
@@ -45,5 +45,9 @@ export async function login(prevState, formData) {
 
 export async function logout() {
     await deleteSession();
+    signOut(auth).then(() => {
+    }).catch((error) => {
+        console.log(error?.message);
+    })
     redirect("/admin/login");
 }
