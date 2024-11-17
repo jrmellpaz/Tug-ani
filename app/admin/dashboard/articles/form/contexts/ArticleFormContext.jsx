@@ -86,7 +86,8 @@ export default function ArticleFormContextProvider({ children }) {
                 setData(res.data());
             }
             else {
-                throw new Error(`No article with id ${id} exists (?_?)`);
+                // throw new Error(`No article with id ${id} exists (?_?)`);
+                setData(null);
             }
         }
         catch (error) {

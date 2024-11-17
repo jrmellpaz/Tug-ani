@@ -2,7 +2,7 @@
 
 import ErrorMessage from "@/app/components/Admin/ErrorMessage";
 import SuccessMessage from "@/app/components/Admin/SuccessMessage";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import WarnMessage from "@/app/components/Admin/WarnMessage";
 import { useEffect, useRef } from "react";
 import useCategories from "@/lib/firebase/category/read";
@@ -16,7 +16,7 @@ import GridSkeleton from "./GridSkeleton";
 export default function ArticlesForm() {
     const searchParams = useSearchParams();
     const updateArticleId = searchParams.get("id");
-    const imgInputRef = useRef();
+    console.log("id:", updateArticleId);
 
     const {
         data,
@@ -33,11 +33,8 @@ export default function ArticlesForm() {
     } = useArticleForm();
 
     useEffect(() => {
-        if (updateArticleId) {
-            fetchData(updateArticleId);
-            imgInputRef.current.required = false;
-        }
-    }, [updateArticleId])
+        fetchData(updateArticleId);
+    }, [])
 
     if (isLoading) {
         return <GridSkeleton />;
@@ -195,9 +192,8 @@ export default function ArticlesForm() {
                         {image && <div className="w-full mt-1">
                             <img src={URL.createObjectURL(image)} alt="Article image" className="border border-solid border-slate-300 rounded-xl" />
                         </div>}
-                        <input required
+                        <input
                             type="file"
-                            ref={imgInputRef}
                             accept="image/*"
                             onChange={event => {
                                 event.preventDefault();
@@ -228,6 +224,7 @@ function SelectCategoryField() {
     return (
         <select
             value={data?.categoryId}
+            defaultValue="News"
             onChange={event => {
                 handleData("categoryId", event.target.value);
             }} 
@@ -235,7 +232,7 @@ function SelectCategoryField() {
             id="articleCategory"
             className="p-2 bg-gray-200 font-openSansRegular border-solid border-r-[16px] border-r-transparent outline-none text-tugAni-black text-sm"
         >   
-            <option value="News" selected className="p-2 hover:bg-tugAni-red hover:text-tugAni-white">News</option>
+            <option value="News" className="p-2 hover:bg-tugAni-red hover:text-tugAni-white">News</option>
             {categories && categories?.filter(category => category.title !== "News").map((category) => {
                 return <option 
                     key={category?.id} 
