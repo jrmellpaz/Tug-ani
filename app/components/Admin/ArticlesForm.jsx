@@ -136,6 +136,20 @@ export default function ArticlesForm() {
                 <div className="flex flex-row justify-between items-center  border border-solid border-slate-200 border-b-0 pl-2 box-border">
                     <div className="w-60 font-openSansBold box-border">
                         <label 
+                            htmlFor="articleSubcategory"
+                            className="text-sm text-tugAni-black"
+                        >
+                            Subcategory
+                        </label>
+                        <span className="text-sm text-red-400">*</span>
+                    </div>
+                    <div className="box-border w-full border-none">
+                        <SelectSubcategoryField />
+                    </div>
+                </div>
+                <div className="flex flex-row justify-between items-center  border border-solid border-slate-200 border-b-0 pl-2 box-border">
+                    <div className="w-60 font-openSansBold box-border">
+                        <label 
                             htmlFor="articleAuthor"
                             className="text-sm text-tugAni-black"
                         >
@@ -190,7 +204,7 @@ export default function ArticlesForm() {
                             <img src={data?.imageURL} alt="Article image" className="h-full border border-solid border-slate-300 rounded-xl" />
                         </div>}
                         {image && <div className="w-full mt-1">
-                            <img src={URL.createObjectURL(image)} alt="Article image" className="border border-solid border-slate-300 rounded-xl" />
+                            <img src={URL.createObjectURL(image)} alt="Article image" className="border border-solid border-red-900 rounded-xl" />
                         </div>}
                         <input
                             type="file"
@@ -223,8 +237,9 @@ function SelectCategoryField() {
 
     return (
         <select
+            required
             value={data?.categoryId}
-            defaultValue="News"
+            defaultValue="disabled"
             onChange={event => {
                 handleData("categoryId", event.target.value);
             }} 
@@ -232,16 +247,48 @@ function SelectCategoryField() {
             id="articleCategory"
             className="p-2 bg-gray-200 font-openSansRegular border-solid border-r-[16px] border-r-transparent outline-none text-tugAni-black text-sm"
         >   
-            <option value="News" className="p-2 hover:bg-tugAni-red hover:text-tugAni-white">News</option>
-            {categories && categories?.filter(category => category.title !== "News").map((category) => {
+            <option value="disabled" disabled className="text-gray-500 p-2">Choose a category</option>
+            {categories && categories?.sort((a, b) => a.order - b.order).map((category) => {
                 return <option 
                     key={category?.id} 
-                    value={category?.title}
+                    value={category?.id}
                     className="p-2 hover:bg-tugAni-red hover:text-tugAni-white"
                 >
                     {category?.title}
                 </option>
             })}
+        </select>
+    );
+}
+
+function SelectSubcategoryField() {
+    const {
+        data,
+        handleData,
+    } = useArticleForm();
+    const { data: categories } = useCategories();
+
+    return (
+        <select
+            required
+            value={data?.subcategory}
+            onChange={event => {
+                handleData("subcategory", event.target.value);
+            }}
+            name="articleSubcategory"
+            id="articleSubcategory"
+            className="p-2 bg-gray-200 font-openSansRegular border-solid border-r-[16px] border-r-transparent outline-none text-tugAni-black text-sm"
+        >
+            {data?.categoryId && JSON.parse(categories.filter(category => category.id === data?.categoryId)[0].subcategories).map((subcategory) => {
+                return <option
+                    key={subcategory}
+                    value={subcategory}
+                    className="p-2 hover:bg-tugAni-red hover:text-tugAni-white"
+                >
+                    {subcategory}
+                </option>
+            })
+            }
         </select>
     );
 }
@@ -255,6 +302,7 @@ function SelectAuthorField() {
 
     return (
         <select
+            required
             value={data?.authorId}
             onChange={event => {
                 handleData("authorId", event.target.value);

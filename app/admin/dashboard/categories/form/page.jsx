@@ -82,6 +82,31 @@ export default function CategoriesForm() {
                 <div className="flex flex-row justify-between items-start mb-4">
                     <div className="w-60 font-openSansBold">
                         <label 
+                            htmlFor="categorySub"
+                            className="text-tugAni-black"
+                        >
+                            Subcategories
+                        </label>
+                        <span className="text-red-400">*</span>
+                    </div>
+                    <div className="box-border w-full">
+                        <span className="text-xs font-openSansItalic text-gray-500"> Separate subcategories by comma.</span>
+                        <input required
+                            type="text"
+                            onChange={(event) => {
+                                handleData("subcategories", JSON.stringify(event.target.value.split(/\s*,\s*(?:,\s*)*/)));
+                            }}
+                            value={data?.subcategories ? JSON.parse(data?.subcategories) : data?.subcategories}
+                            id="categorySub"
+                            name="categorySub"
+                            placeholder="Separate by comma"
+                            className="mt-2 rounded-full p-2 pl-4 pr-4 outline-none font-openSansRegular box-border w-full border border-solid border-slate-300 focus:border-tugAni-red bg-tugAni-white"
+                        />
+                    </div>
+                </div>
+                <div className="flex flex-row justify-between items-start mb-4">
+                    <div className="w-60 font-openSansBold">
+                        <label 
                             htmlFor="categorySlug"
                             className="text-tugAni-black"
                         >

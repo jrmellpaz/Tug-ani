@@ -31,7 +31,7 @@ export default function CategoriesListView() {
     }
 
     return (
-        <section className="w-full gap-4 items-center grid grid-cols-[repeat(auto-fill,_400px)] auto-rows-max gap-y-8 justify-center box-border">
+        <section className="w-full gap-4 pb-16 items-center grid grid-cols-[repeat(auto-fill,_400px)] auto-rows-max gap-y-8 justify-center box-border">
             {data?.sort((a, b) => a.order - b.order).map((item, key) => {
                 return <div key={item?.id} className="card bg-base-100 w-96 shadow-xl h-full">
                     <figure>
@@ -41,12 +41,12 @@ export default function CategoriesListView() {
                             className="aspect-video object-cover" 
                         />
                     </figure>
-                    <div className="card-body text-tugAni-black">
+                    <div className="px-6 pb-6 mt-2 text-tugAni-black">
                         <div className="flex flex-row justify-between w-full">
                             <h2 className="card-title font-openSansBold text-lg">
                                 {item?.title}
                             </h2>
-                            {item?.id !== "news" && <div className="dropdown dropdown-bottom dropdown-end">
+                            <div className="dropdown dropdown-bottom dropdown-end">
                                 <div tabIndex={0} role="button" className="p-2 rounded-full bg-base-100 border-none shadow-none hover:bg-gray-200">
                                     <img src="/options.svg" alt="Options" />
                                 </div>
@@ -57,23 +57,30 @@ export default function CategoriesListView() {
                                             <span className="text-sm">Edit</span>
                                         </button>
                                     </Link>
-                                        <button 
-                                            onClick={(event) => {
-                                                console.log(item.id);
-                                                setDeleteId(item?.id);
-                                                document.getElementById('my_modal_2').showModal(item?.id);
-                                            }}
-                                            className="flex flex-row items-center w-full p-3 pl-5 gap-4 hover:bg-gray-200"
-                                        >
-                                            <img src="/delete.svg" alt="Delete" />
-                                            <span className="text-red-500 text-sm">Delete</span>
-                                        </button>
+                                    {item?.id !== "news" && <button 
+                                        onClick={(event) => {
+                                            console.log(item.id);
+                                            setDeleteId(item?.id);
+                                            document.getElementById('my_modal_2').showModal(item?.id);
+                                        }}
+                                        className="flex flex-row items-center w-full p-3 pl-5 gap-4 hover:bg-gray-200"
+                                    >
+                                        <img src="/delete.svg" alt="Delete" />
+                                        <span className="text-red-500 text-sm">Delete</span>
+                                    </button> }
                                 </ul>
-                            </div> }
+                            </div>
                         </div>
-                        <p className="font-openSansItalic text-sm">
-                            {item?.slug}
-                        </p>
+                        <div className="font-openSansRegular text-xs flex flex-row gap-1 flex-wrap mb-3">
+                            {item?.subcategories ? JSON.parse(item?.subcategories).filter(subcategory => subcategory.length > 0).map((subcategory, key) => {
+                                return <span 
+                                    key={key}
+                                    className="text-base-100 bg-tugAni-red rounded-badge px-3 py-1"
+                                >
+                                    {subcategory}
+                                </span>
+                            }) : item?.subcategories}
+                        </div>
                         <p className="font-openSansRegular desc">
                             {item?.description}
                         </p>
