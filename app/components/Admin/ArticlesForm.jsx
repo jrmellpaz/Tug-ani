@@ -200,11 +200,11 @@ export default function ArticlesForm() {
                         </div>
                     </div>
                     <div className="flex flex-col w-full box-border">
-                        {data?.imageURL && !image && <div className="h-96 w-full mt-1">
-                            <img src={data?.imageURL} alt="Article image" className="h-full border border-solid border-slate-300 rounded-xl" />
+                        {data?.imageURL && !image && <div className="h-full md:h-96 w-full mt-1">
+                            <img src={data?.imageURL} alt="Article image" className="w-full h-auto md:h-full md:w-auto border border-solid border-slate-300 rounded-xl" />
                         </div>}
                         {image && <div className="w-full mt-1">
-                            <img src={URL.createObjectURL(image)} alt="Article image" className="border border-solid border-red-900 rounded-xl" />
+                            <img src={URL.createObjectURL(image)} alt="Article image" className="w-full h-auto md:h-full md:w-auto border border-solid border-slate-300 rounded-xl" />
                         </div>}
                         <input
                             type="file"
@@ -232,7 +232,8 @@ function SelectCategoryField() {
     const {
         data,
         handleData,
-    } = useArticleForm()
+    } = useArticleForm();
+
     const { data: categories } = useCategories();
 
     return (
@@ -266,6 +267,7 @@ function SelectSubcategoryField() {
         data,
         handleData,
     } = useArticleForm();
+
     const { data: categories } = useCategories();
 
     return (
@@ -279,7 +281,7 @@ function SelectSubcategoryField() {
             id="articleSubcategory"
             className="p-2 bg-gray-200 font-openSansRegular border-solid border-r-[16px] border-r-transparent outline-none text-tugAni-black text-sm"
         >
-            {data?.categoryId && JSON.parse(categories.filter(category => category.id === data?.categoryId)[0].subcategories).map((subcategory) => {
+            {data?.categoryId && categories && JSON.parse(categories.find(category => category.id === data?.categoryId).subcategories).filter(subcategory => subcategory !== "").map((subcategory) => {
                 return <option
                     key={subcategory}
                     value={subcategory}
@@ -297,7 +299,8 @@ function SelectAuthorField() {
     const {
         data,
         handleData,
-    } = useArticleForm()
+    } = useArticleForm();
+
     const { data: authors } = useAuthors();
 
     return (
