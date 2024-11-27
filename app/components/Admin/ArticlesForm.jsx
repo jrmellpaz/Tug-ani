@@ -242,7 +242,7 @@ function SelectCategoryField() {
             value={data?.categoryId}
             defaultValue="disabled"
             onChange={event => {
-                handleData("categoryId", event.target.value);
+                handleData("categoryId", event.target.value === "disabled" ? "" : event.target.value);
             }} 
             name="articleCategory" 
             id="articleCategory"
@@ -275,12 +275,13 @@ function SelectSubcategoryField() {
             required
             value={data?.subcategory}
             onChange={event => {
-                handleData("subcategory", event.target.value);
+                handleData("subcategory", event.target.value === "disabled" ? "" : event.target.value);
             }}
             name="articleSubcategory"
             id="articleSubcategory"
             className="p-2 bg-gray-200 font-openSansRegular border-solid border-r-[16px] border-r-transparent outline-none text-tugAni-black text-sm"
         >
+            <option value="disabled" disabled selected className="text-gray-500 p-2">Choose a subcategory</option>
             {data?.categoryId && categories && JSON.parse(categories.find(category => category.id === data?.categoryId).subcategories).filter(subcategory => subcategory !== "").map((subcategory) => {
                 return <option
                     key={subcategory}
@@ -308,12 +309,13 @@ function SelectAuthorField() {
             required
             value={data?.authorId}
             onChange={event => {
-                handleData("authorId", event.target.value);
+                handleData("authorId", event.target.value === "disabled" ? "" : event.target.value);
             }} 
             name="articleCategory" 
             id="articleCategory"
             className="p-2 bg-gray-200 font-openSansRegular border-solid border-r-[16px] border-r-transparent outline-none text-tugAni-black text-sm"
         >   
+            <option value="disabled" disabled selected className="text-gray-500 p-2">Choose an author</option>
             {authors && authors?.map((author) => {
                 return <option 
                     key={author?.id} 

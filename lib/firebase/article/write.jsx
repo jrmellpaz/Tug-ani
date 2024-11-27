@@ -34,12 +34,12 @@ export const createNewArticle = async ({ data, image }) => {
     const imageURL = await getDownloadURL(imageRef);
 
     const firestoreRef = doc(db, `articles/${id}`);
-    console.log(data, id, imageURL);
+
     await setDoc(firestoreRef, {
         ...data,
         id: id,
         imageURL: imageURL,
-        timestamp: Timestamp.now(),
+        publishedTimestamp: Timestamp.now(),
     });
 }
 
@@ -75,7 +75,7 @@ export const updateArticle = async ({ data, image }) => {
     await updateDoc(firestoreRef, {
         ...data,
         imageURL: imageURL,
-        timestamp: Timestamp.now(),
+        editedTimestamp: Timestamp.now(),
     });
 }
 

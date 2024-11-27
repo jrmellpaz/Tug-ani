@@ -39,7 +39,7 @@ export default function ArticlesListView() {
     return (
         <section className="w-full flex flex-col items-center gap-4 mb-12">
             {data?.map((item, key) => { 
-                return <div key={item?.id} className="w-full flex flex-row rounded-box card-side bg-base-100 shadow-xl h-28 ">
+                return <div key={item?.id} className="w-full flex flex-row rounded-box card-side bg-base-100 shadow-xl h-36">
                 <figure className="hidden md:block transition-all">
                     <img
                         src={item?.imageURL}
@@ -48,13 +48,21 @@ export default function ArticlesListView() {
                     />
                 </figure>
                 <div className="flex flex-row justify-between w-full">
-                <div className="pl-4 flex flex-col text-tugAni-black grow pt-3">
+                <div className="pl-4 flex flex-col text-tugAni-black grow pt-3 justify -center">
                     <div className="flex flex-row justify-between w-full items-center">
-                        <h2 className="card-title font-gotham text-xl title tracking-tighter">
+                        <h2 className="card-title font-gotham text-xl title tracking-tighter m-0 p-0">
                             {item?.title}
                         </h2>
                     </div>
-                    <div className="flex flex-row gap-2 items-center shrink text-ellipsis overflow-hidden whitespace-nowrap">
+                    <span className="font-openSansRegular text-xs my-1">
+                        {`Published on
+                        ${String(new Date(item?.publishedTimestamp.seconds * 1000)).replace(/^\w+\s(.*)\sGMT\+\d+\s\(.+\)$/, '$1 PHT')}
+                        ${
+                            item?.editedTimestamp && 
+                            ` | Updated on ${String(new Date(item?.editedTimestamp.seconds * 1000)).replace(/^\w+\s(.*)\sGMT\+\d+\s\(.+\)$/, '$1 PHT')}`
+                        }`}
+                    </span>
+                    <div className="flex flex-row gap-2 items-center shrink text-ellipsis whitespace-nowrap">
                         {item?.categoryId && categories && <span className="text-base-100 text-xs bg-tugAni-red rounded-badge px-2 py-1 whitespace-nowrap">
                             {categories.find(category => category.id === item?.categoryId).title} 
                         </span>}
@@ -71,9 +79,6 @@ export default function ArticlesListView() {
                         </div>
                         <p className="font-openSansBold text-sm title">
                             {item?.authorId && authors && authors.find(author => author.id === item?.authorId)?.name}
-                            <span className="font-openSansRegular">
-                                &nbsp;•&nbsp;Updated on {item?.authorId && authors && authors.find(author => author.id === item?.authorId)?.timestamp.toDate().toDateString()}
-                            </span>
                         </p>
                     </div>
                     
