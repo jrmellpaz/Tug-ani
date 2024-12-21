@@ -66,16 +66,16 @@ export default function ArticlesForm() {
                     <ErrorMessage header="An error has occured ૮(˶ㅠ︿ㅠ)ა" message={error} />
                 }
                 {isDone && 
-                    <SuccessMessage header={`Article ${updateArticleId ? "updated" : "created"} successfully ٩( ᐖ )人( ᐛ )و`} message={updateArticleId ? "Feel free to do another changes to the article" : "Clear the current inputs to create a new one."} />
+                    <SuccessMessage header={`Article ${updateArticleId ? "updated" : "published"} successfully ٩( ᐖ )人( ᐛ )و`} message={updateArticleId ? "Feel free to do another changes to the article" : "Clear the current inputs to create a new article."} />
                 }
                 {!isDone && <div className="flex justify-end my-4">
                     <button
                         disabled={isLoading || isDone} 
                         type="submit"
-                        title={`${updateArticleId ? "Update" : "Create"} article`}
+                        title={`${updateArticleId ? "Update" : "Publish"} article`}
                         className="font-openSansRegular bg-tugAni-red text-tugAni-white p-2 pl-5 pr-5 border rounded-full hover:shadow-md"
                     >
-                        {isLoading ? "Loading..." : updateArticleId ? "Update article" : "Create article"}
+                        {isLoading ? "Loading..." : updateArticleId ? "Update article" : "Publish article"}
                     </button>
                 </div>}
                 <TextAreaAutosize required
