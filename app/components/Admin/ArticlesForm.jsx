@@ -39,9 +39,9 @@ export default function ArticlesForm() {
     }, [])
 
     if (isLoading) {
-        return <GridSkeleton />;
+        return <span className="loading loading-spinner loading-lg text-tugAni-red mt-20 block mx-auto"></span>
     }
-
+    
     return(
         <section className="px-8 max-[600px]:px-4 w-dvw flex flex-col items-center overflow-x-hidden">
             {/* <h1 className="font-gotham text-3xl tracking-tighter text-tugAni-red mb-8 text-center">{updateArticleId ? `Updating "${data?.title}"`: "Add an article" }</h1>  */}
@@ -307,13 +307,13 @@ function SelectAuthorField() {
     const { data: authors } = useAuthors();
 
     return (
-        <>
         <mdui-select 
             multiple
             required="true" 
             class="example-multiple"
             placeholder="Select author(s)"
             value={data?.authorId ? JSON.parse(data?.authorId) : undefined}
+            defaultValue=""
             onChange={event => {
                 handleData("authorId", event.target.value === "disabled" ? "" : JSON.stringify(event.target.value));
             }}
@@ -335,38 +335,6 @@ function SelectAuthorField() {
                     </div>
                 </mdui-menu-item>
             })}
-            {/* <mdui-menu-item value="item-1">
-                Item 1
-            </mdui-menu-item>
-            <mdui-menu-item value="item-2">
-                Item 2
-            </mdui-menu-item>
-            <mdui-menu-item value="item-3">
-                Item 3
-            </mdui-menu-item> */}
         </mdui-select>
-        {console.log("ids:", data?.authorId)}
-        </>
-            // <select
-        //     required
-        //     value={data?.authorId}
-        //     onChange={event => {
-        //         handleData("authorId", event.target.value === "disabled" ? "" : event.target.value);
-        //     }} 
-        //     name="articleCategory" 
-        //     id="articleCategory"
-        //     className="p-2 bg-gray-200 font-openSansRegular border-solid border-r-[16px] border-r-transparent outline-none text-tugAni-black text-sm"
-        // >   
-        //     <option value="disabled" disabled selected className="text-gray-500 p-2">Choose an author</option>
-        //     {authors && authors?.map((author) => {
-        //         return <option 
-        //             key={author?.id} 
-        //             value={author?.id}
-        //             className="p-2 hover:bg-tugAni-red hover:text-tugAni-white"
-        //         >
-        //             {author?.name}
-        //         </option>
-        //     })}
-        // </select>
     );
 }

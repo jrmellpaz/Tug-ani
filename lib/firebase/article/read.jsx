@@ -30,7 +30,13 @@ export default function useArticles(searchQuery = "") {
     useEffect(() => {
         const fetchCount = async () => {
             try {
-                const count = await getArticleCount(searchQuery);
+                let count;
+                if (searchQuery) {
+                    count = await getArticleCount(searchQuery);
+                }
+                else {
+                    count = await getArticleCount();
+                }
                 setTotalCount(count);
             }
             catch (error) {
@@ -39,7 +45,6 @@ export default function useArticles(searchQuery = "") {
         };
 
         fetchCount();
-        // Reset states when searchQuery changes
         setData([]);
         setLastVisible(null);
         setHasMore(true);
@@ -47,30 +52,55 @@ export default function useArticles(searchQuery = "") {
     }, [searchQuery]);
 
     useEffect(() => {
-        console.log("Data length:", data.length);
-        console.log("Total count:", totalCount);
-    }, [data, totalCount]);
+        setHasMore(data.length < totalCount);
+    }, [data]);
 
     const fetchArticles = async (nextPage = false) => {
         setLoading(true);
 
         try {
             let q;
-            if (nextPage && lastVisible) {
-                q = query(ref, orderBy("publishedTimestamp"), startAfter(lastVisible), limit(ITEMS_PER_PAGE));
-            } else {
-                q = query(ref, orderBy("publishedTimestamp"), limit(ITEMS_PER_PAGE));
-            }
-
-            if (searchQuery) {
-                q = query(ref, orderBy("publishedTimestamp"), where("title", ">=", searchQuery), where("title", "<=", searchQuery + "\uf8ff"), limit(ITEMS_PER_PAGE));  
+            if (searchQuery.length > 0) {
+                if (nextPage && lastVisible) {
+                    q = query(
+                        ref,
+                        orderBy("publishedTimestamp", "desc"),
+                        where("title", ">=", searchQuery),
+                        where("title", "<=", searchQuery + "\uf8ff"),
+                        startAfter(lastVisible),
+                        limit(ITEMS_PER_PAGE)
+                    );
+                } else {
+                    q = query(
+                        ref,
+                        orderBy("publishedTimestamp", "desc"),
+                        where("title", ">=", searchQuery),
+                        where("title", "<=", searchQuery + "\uf8ff"),
+                        limit(ITEMS_PER_PAGE)
+                    );
+                }
+            } 
+            else {
+                if (nextPage && lastVisible) {
+                    q = query(
+                        ref,
+                        orderBy("publishedTimestamp", "desc"),
+                        startAfter(lastVisible),
+                        limit(ITEMS_PER_PAGE)
+                    );
+                } else {
+                    q = query(
+                        ref,
+                        orderBy("publishedTimestamp", "desc"),
+                        limit(ITEMS_PER_PAGE)
+                    );
+                }
             }
 
             const snapshot = await getDocs(q);
             const articles = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
             setData((prevData) => nextPage ? [...prevData, ...articles] : articles);
             setLastVisible(snapshot.docs[snapshot.docs.length - 1]);
-            setHasMore(snapshot.docs.length === ITEMS_PER_PAGE);
         }
         catch (error) {
             setError(error.message);
