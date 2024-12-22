@@ -77,7 +77,7 @@ export default function ArticlesListView() {
                     />
                     <button
                         onClick={() => setSearchQuery(inputSearchValue)}
-                        className="p-2 px-4 flex items-center justify-center bg-base-200 hover:bg-base-300 rounded-r-badge shadow active:bg-gray-300"
+                        className="py-2 pl-4 pr-5  flex items-center justify-center bg-base-200 hover:bg-base-300 rounded-r-badge shadow active:bg-gray-300"
                     >
                         <Search className="text-tugAni-black" />
                     </button>
