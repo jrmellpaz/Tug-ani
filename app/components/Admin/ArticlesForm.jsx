@@ -2,7 +2,7 @@
 
 import ErrorMessage from "@/app/components/Admin/ErrorMessage";
 import SuccessMessage from "@/app/components/Admin/SuccessMessage";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import WarnMessage from "@/app/components/Admin/WarnMessage";
 import { useEffect, useRef } from "react";
 import useCategories from "@/lib/firebase/category/read";
@@ -12,6 +12,8 @@ import TextAreaAutosize from "react-textarea-autosize";
 import { CircleHelpIcon } from "lucide-react";
 import { useArticleForm } from "@/app/admin/dashboard/articles/form/contexts/ArticleFormContext";
 import GridSkeleton from "./GridSkeleton";
+import 'mdui/components/select.js';
+import 'mdui/components/menu-item.js';
 
 export default function ArticlesForm() {
     const searchParams = useSearchParams();
@@ -157,7 +159,7 @@ export default function ArticlesForm() {
                         </label>
                         <span className="text-sm text-red-400">*</span>
                     </div>
-                    <div className="box-border w-full border-none">
+                    <div className="box-border w-full border-none bg-gray-200">
                         <SelectAuthorField />
                     </div>
                 </div>
@@ -305,26 +307,66 @@ function SelectAuthorField() {
     const { data: authors } = useAuthors();
 
     return (
-        <select
-            required
-            value={data?.authorId}
+        <>
+        <mdui-select 
+            multiple
+            required="true" 
+            class="example-multiple"
+            placeholder="Select author(s)"
+            value={data?.authorId ? JSON.parse(data?.authorId) : undefined}
             onChange={event => {
-                handleData("authorId", event.target.value === "disabled" ? "" : event.target.value);
-            }} 
-            name="articleCategory" 
-            id="articleCategory"
-            className="p-2 bg-gray-200 font-openSansRegular border-solid border-r-[16px] border-r-transparent outline-none text-tugAni-black text-sm"
-        >   
-            <option value="disabled" disabled selected className="text-gray-500 p-2">Choose an author</option>
+                handleData("authorId", event.target.value === "disabled" ? "" : JSON.stringify(event.target.value));
+            }}
+        >
             {authors && authors?.map((author) => {
-                return <option 
+                return <mdui-menu-item 
                     key={author?.id} 
                     value={author?.id}
-                    className="p-2 hover:bg-tugAni-red hover:text-tugAni-white"
+                    className="hover:bg-gray-300"
                 >
-                    {author?.name}
-                </option>
+                    <div className="flex flex-row gap-2">
+                        <img
+                            src={author?.photoURL}
+                            className="rounded-full w-6 h-6 object-cover aspect-square"
+                        />
+                        <span>
+                            {author?.name}
+                        </span>
+                    </div>
+                </mdui-menu-item>
             })}
-        </select>
+            {/* <mdui-menu-item value="item-1">
+                Item 1
+            </mdui-menu-item>
+            <mdui-menu-item value="item-2">
+                Item 2
+            </mdui-menu-item>
+            <mdui-menu-item value="item-3">
+                Item 3
+            </mdui-menu-item> */}
+        </mdui-select>
+        {console.log("ids:", data?.authorId)}
+        </>
+            // <select
+        //     required
+        //     value={data?.authorId}
+        //     onChange={event => {
+        //         handleData("authorId", event.target.value === "disabled" ? "" : event.target.value);
+        //     }} 
+        //     name="articleCategory" 
+        //     id="articleCategory"
+        //     className="p-2 bg-gray-200 font-openSansRegular border-solid border-r-[16px] border-r-transparent outline-none text-tugAni-black text-sm"
+        // >   
+        //     <option value="disabled" disabled selected className="text-gray-500 p-2">Choose an author</option>
+        //     {authors && authors?.map((author) => {
+        //         return <option 
+        //             key={author?.id} 
+        //             value={author?.id}
+        //             className="p-2 hover:bg-tugAni-red hover:text-tugAni-white"
+        //         >
+        //             {author?.name}
+        //         </option>
+        //     })}
+        // </select>
     );
 }
