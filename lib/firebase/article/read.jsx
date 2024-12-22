@@ -1,7 +1,7 @@
 "use client";
 
 import { db } from '@/lib/firebase';
-import { collection, getCountFromServer, getDocs, limit, orderBy, query, startAfter, where } from 'firebase/firestore';
+import { collection, doc, getCountFromServer, getDoc, getDocs, limit, orderBy, query, startAfter, where } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 
 const getArticleCount = async (searchQuery = "") => {

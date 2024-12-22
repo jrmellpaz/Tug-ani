@@ -96,9 +96,11 @@ export default function ArticlesListView() {
                         <div className="flex flex-row justify-between w-full">
                         <div className="pl-4 flex flex-col text-tugAni-black grow pt-3 justify -center">
                             <div className="flex flex-row justify-between w-full items-center">
-                                <h2 className="card-title font-gotham text-xl title tracking-tighter m-0 p-0">
-                                    {item?.title}
-                                </h2>
+                                <Link href={`/admin/dashboard/articles/form?id=${item?.id}`}>
+                                    <h2 className="card-title font-gotham text-xl title tracking-tighter m-0 p-0 hover:text-tugAni-red active:text-tugAni-red cursor-pointer">
+                                        {item?.title}
+                                    </h2>
+                               </Link>
                             </div>
                             <span className="font-openSansRegular text-xs my-1 text-gray-500 title">
                                 {`Published on ${String(new Date(item.publishedTimestamp.seconds * 1000)).replace(/^\w+\s(.*)\sGMT\+\d+\s\(.+\)$/, '$1 PHT')}`}
@@ -190,9 +192,11 @@ export default function ArticlesListView() {
                         <div className="flex flex-row justify-between w-full">
                         <div className="pl-4 flex flex-col text-tugAni-black grow pt-3 justify -center">
                             <div className="flex flex-row justify-between w-full items-center">
-                                <h2 className="card-title font-gotham text-xl title tracking-tighter m-0 p-0">
-                                    {item?.title}
-                                </h2>
+                                <Link href={`/admin/dashboard/articles/form?id=${item?.id}`}>
+                                    <h2 className="card-title font-gotham text-xl title tracking-tighter m-0 p-0 hover:text-tugAni-red active:text-tugAni-red active:underline cursor-pointer">
+                                        {item?.title}
+                                    </h2>
+                               </Link>
                             </div>
                             <span className="font-openSansRegular text-xs my-1 text-gray-500 title">
                                 {`Published on ${String(new Date(item.publishedTimestamp.seconds * 1000)).replace(/^\w+\s(.*)\sGMT\+\d+\s\(.+\)$/, '$1 PHT')}`}

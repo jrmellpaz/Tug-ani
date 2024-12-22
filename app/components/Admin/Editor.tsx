@@ -1,6 +1,6 @@
 "use client";
 
-// import { useCreateBlockNote } from "@blocknote/react";
+import "@blocknote/core/fonts/inter.css";
 import { BlockNoteView, lightDefaultTheme, Theme } from "@blocknote/mantine";
 import "@blocknote/mantine/style.css";
 import { uploadContentImage } from "@/lib/firebase/article/write";
@@ -9,26 +9,15 @@ import { useEffect, useMemo, useState } from "react";
 import { BlockNoteEditor, PartialBlock } from "@blocknote/core";
 
 async function handleUploadFile(file: File) {
-    // const body = new FormData();
-    // body.append("file", file);
     const imageURL = await uploadContentImage(file);
     return imageURL;
 }
 
 export default function Editor() {
     const { data, handleData, isLoading } = useArticleForm();
-    
     const [initialContent, setInitialContent] = useState<PartialBlock[] | undefined | "loading">("loading");
 
-
     useEffect(() => {
-        // waitData.then((text: string) => {
-        //     console.log("heyyy47698436598");
-        //     const content = data?.content ? (JSON.parse(text) as PartialBlock[]) : undefined;
-        //     setInitialContent(content);
-        //     console.log("heyy2222", content);
-        // })
-
         const content = data?.content ? (JSON.parse(data?.content) as PartialBlock[]) : undefined;
         setInitialContent(content);
     }, []);
@@ -52,7 +41,7 @@ export default function Editor() {
                 background: "#f2f0ee"
             }
         },
-        fontFamily: "openSansRegular"
+        fontFamily: "openSansRegular",
     } satisfies Theme;
 
     const theme = {
