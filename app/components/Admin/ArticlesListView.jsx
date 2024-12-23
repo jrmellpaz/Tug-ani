@@ -1,7 +1,7 @@
 "use client";
 
 import useArticles from "@/lib/firebase/article/read";
-import ErrorMessage from "./ErrorMessage";
+import ErrorMessage from "../ErrorMessage";
 import GridSkeleton from "./GridSkeleton";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";

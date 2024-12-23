@@ -1,9 +1,9 @@
 "use client";
 
-import ErrorMessage from "@/app/components/Admin/ErrorMessage";
-import SuccessMessage from "@/app/components/Admin/SuccessMessage";
+import ErrorMessage from "@/app/components/ErrorMessage";
+import SuccessMessage from "@/app/components/SuccessMessage";
 import { useSearchParams } from "next/navigation";
-import WarnMessage from "@/app/components/Admin/WarnMessage";
+import WarnMessage from "@/app/components/WarnMessage";
 import { useEffect, useRef } from "react";
 import { useAuthorForm } from "./contexts/AuthorFormContext";
 import AdminHeader from "@/app/components/Admin/AdminHeader";

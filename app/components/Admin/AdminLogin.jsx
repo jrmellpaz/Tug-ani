@@ -3,7 +3,7 @@
 import { login } from "@/lib/actions";
 import { useState, useActionState } from "react";
 import { useFormStatus } from "react-dom";
-import ErrorMessage from "./ErrorMessage";
+import ErrorMessage from "../ErrorMessage";
 
 export function AdminLogin() {
     const [seePassword, setSeePassword] = useState(false);

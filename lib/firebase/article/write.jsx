@@ -27,6 +27,10 @@ export const createNewArticle = async ({ data, image }) => {
         throw new Error("Image is not selected.");
     }
 
+    if (!data?.content) {
+        throw new Error("Content is empty.");
+    }
+
     const id = doc(collection(db, "ids")).id;
 
     const imageRef = ref(storage, `articles/${id}`);
@@ -62,6 +66,18 @@ export const updateArticle = async ({ data, image }) => {
     }
     else if(data?.slug.indexOf(" ") >= 0) {
         throw new Error("Slug must not contain any spaces. Instead, use a dash (-) to separate words.");
+    }
+
+    if(!data?.categoryId) {
+        throw new Error("Category is undefined.")
+    }
+
+    if(!data?.authorId) {
+        throw new Error("Author is undefined.")
+    }
+
+    if (!data?.content && data?.content.length === 0) {
+        throw new Error("Content is empty.");
     }
 
     let imageURL = data?.imageURL;

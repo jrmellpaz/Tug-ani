@@ -1,7 +1,7 @@
 "use client";
 
 import useCategories from "@/lib/firebase/category/read";
-import ErrorMessage from "./ErrorMessage";
+import ErrorMessage from "../ErrorMessage";
 import GridSkeleton from "./GridSkeleton";
 import Link from "next/link";
 import { useCategoryForm } from "@/app/admin/dashboard/categories/form/contexts/CategoryFormContext";

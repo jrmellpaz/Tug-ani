@@ -21,8 +21,8 @@ export default function Header() {
     const active = "outline-none w-10 h-10 rounded-full flex justify-center items-center bg-tugAni-red";
 
     return (
-        <nav className="fixed w-dvw">
-            <div className="w-full h-16 bg-tugAni-white shadow-md flex items-center justify-between px-8">
+        <>
+            <div className="w-full h-16 bg-tugAni-white flex items-center justify-between">
                 <button 
                     onClick={handleMenuClick} className={menuOpened ? active : inactive} 
                     title="Menu"
@@ -44,6 +44,6 @@ export default function Header() {
             </div>
             {searchbarOpened && <Searchbar />}
             {menuOpened && <Menu />}
-        </nav>
+        </>
     );
 }

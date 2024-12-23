@@ -1,6 +1,6 @@
 "use client";
 
-import ErrorMessage from "./ErrorMessage";
+import ErrorMessage from "../ErrorMessage";
 import GridSkeleton from "./GridSkeleton";
 import Link from "next/link";
 import { useState } from "react";
