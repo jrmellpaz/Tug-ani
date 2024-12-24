@@ -38,7 +38,11 @@ export default function ArticlesForm() {
     }, []);
 
     const handleGenerateSlug = () => {
-        const generatedSlug = data.title.trim().toLowerCase().replace(/\s+/g, "-");
+        const generatedSlug = data.title
+            .trim()
+            .toLowerCase()
+            .replace(/[^\w\s-]/g, "")
+            .replace(/\s+/g, "-");
         handleData("slug", generatedSlug);
     }
 
