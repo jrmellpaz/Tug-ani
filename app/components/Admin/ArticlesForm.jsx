@@ -110,7 +110,7 @@ export default function ArticlesForm() {
                         </label>
                         <span className="text-red-400 text-sm">*&nbsp;</span>
                         <div
-                            className="tooltip"
+                            className="tooltip tooltip-right"
                             data-tip="Slug must not have spaces. Use dashes instead."
                         >
                             <CircleHelpIcon width="16px" height="16px" className="text-gray-500" />
@@ -215,7 +215,7 @@ export default function ArticlesForm() {
                         </label>
                         <span className="text-sm text-red-400">*&nbsp;</span>
                         <div
-                            className="tooltip box-border"
+                            className="tooltip tooltip-right box-border"
                             data-tip="For best results, it is recommended that the image is in the 16:9 aspect ratio."
                         >
                             <CircleHelpIcon width="16px" height="16px" className="text-gray-500" />

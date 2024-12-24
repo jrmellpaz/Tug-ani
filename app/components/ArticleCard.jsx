@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { AuthorCard } from "./AuthorCard";
-import { getCategory } from "@/lib/firebase/category/read_server";
+import { CategoryCard } from "./CategoryCard";
 
 export default function ArticleCard({ article, className = "" }) {
     const formattedDate = new Date(article.publishedTimestamp.seconds * 1000).toLocaleDateString("en-GB", {
@@ -11,11 +11,14 @@ export default function ArticleCard({ article, className = "" }) {
     });
 
     return (
-        <Link href={`/article/${article?.id}`} className={cn("w-full flex flex-col gap-2 sm:gap-4 sm:flex-row h-auto items-start articleCard cursor-pointer transition-all", className)}>
+        <Link 
+            href={`/article/${article?.id}`} 
+            className={cn("w-full flex flex-col gap-2 sm:gap-4 sm:flex-row h-auto items-center articleCard cursor-pointer transition-all", className)}
+        >
             <img
                 src={article?.imageURL}
                 alt={article?.slug}
-                className="object-cover aspect-video w-full sm:w-auto sm:h-28 rounded-box transition-all"
+                className="object-cover aspect-video w-full sm:w-auto sm:h-32 rounded-box transition-all"
             />
             <div className="flex flex-col text-tugAni-black grow pt-1 w-[80%] justify-center">
                 <CategoryCard categoryId={article?.categoryId} className="text-xs text-tugAni-red uppercase font-openSansBold" />
@@ -51,12 +54,5 @@ export default function ArticleCard({ article, className = "" }) {
                 </div> */}
             </div>
         </Link>
-    );
-}
-
-async function CategoryCard({ categoryId, className="" }) {
-    const category = await getCategory(categoryId);
-    return (
-        <span className={cn(className)}>{category.title}</span>
     );
 }

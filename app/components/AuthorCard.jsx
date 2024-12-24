@@ -19,7 +19,7 @@ export async function AuthorCard({ authorId, className="" }) {
                         alt={author.name}
                         className="aspect-square rounded-full w-6 h-6 object-cover"
                     />
-                    <p className="font-openSansRegular text-sm whitespace-nowrap">{author.name}</p>
+                    <p className="font-openSansBold text-sm whitespace-nowrap">{author.name}</p>
                 </div>
             ))}
         </div>
