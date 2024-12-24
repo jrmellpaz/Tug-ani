@@ -102,7 +102,7 @@ function Banner({ article }) {
 
     return (
         <Link 
-            href={`/article/${article?.id}`}
+            href={`/articles/${article?.id}`}
             className="w-full md:h-96 flex flex-col-reverse md:flex-row h-auto items-center gap-2 cursor-pointer articleCard box-border"
         >
             <div className="flex flex-col text-tugAni-black grow w-full justify-center shrink">

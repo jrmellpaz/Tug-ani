@@ -53,10 +53,3 @@ export default function ArticleCard({ article, className = "" }) {
         </Link>
     );
 }
-
-async function CategoryCard({ categoryId, className = "" }) {
-    const category = await getCategory(categoryId);
-    return (
-        <span className={cn(className)}>{category.title}</span>
-    );
-}
