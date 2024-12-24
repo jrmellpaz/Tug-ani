@@ -11,7 +11,7 @@ export default function ArticleCard({ article, className = "" }) {
     });
 
     return (
-        <Link href={`/admin/dashboard/articles/form?id=${article?.id}`} className={cn("w-full flex flex-col gap-2 md:gap-4 md:flex-row h-auto items-start articleCard cursor-pointer transition-all", className)}>
+        <Link href={`/articles/${article?.id}`} className={cn("w-full flex flex-col gap-2 md:gap-4 md:flex-row h-auto items-start articleCard cursor-pointer transition-all", className)}>
             <img
                 src={article?.imageURL}
                 alt={article?.slug}
@@ -54,7 +54,7 @@ export default function ArticleCard({ article, className = "" }) {
     );
 }
 
-async function CategoryCard({ categoryId, className = "" }) {
+export async function CategoryCard({ categoryId, className = "" }) {
     const category = await getCategory(categoryId);
     return (
         <span className={cn(className)}>{category.title}</span>
