@@ -1,7 +1,11 @@
 import { getArticles } from "@/lib/firebase/article/read_server";
 import ArticleCard from "./ArticleCard";
+import Link from "next/link";
+import { CategoryCard } from "./CategoryCard";
+import { AuthorCard } from "./AuthorCard";
+import { getCategories } from "@/lib/firebase/category/read_server";
 
-export default async function ArticleListView({ title }) {
+export default async function LatestArticlesView({ title }) {
     const articles = await getArticles();
 
     if(!articles) {
@@ -12,12 +16,113 @@ export default async function ArticleListView({ title }) {
 
     return (
         <section>
-            <h1 className="font-openSansBold text-tugAni-red mb-4">{title}</h1>
             <div className="flex flex-col gap-4">
                 {articles.map((article, key) => {
-                    return <ArticleCard key={key} article={article} />
+                    if (key === 0) {
+                        return (
+                            <>
+                                <Banner key={key} article={article} />
+                                <h1 className="text-xl font-openSansBold text-tugAni-red mt-8 mb-4">{title}</h1>
+                            </>
+                        );
+                    }
+                    else {
+                        return (
+                            <>
+                                <ArticleCard key={key} article={article} />
+                                {key < articles.length-1 && <div className="divider m-0"></div>}
+                            </>
+                        );
+                    }
                 })}
             </div>
         </section>
     )
+}
+
+export async function SectionView() {
+    const categories = await getCategories();
+
+    if(!categories) {
+        return <section>
+            <h1>No posts</h1>
+        </section>
+    }
+
+    return (
+        <section>
+            <div className="flex flex-col gap-4">
+                {categories.map((category, key) => {
+                    return (
+                        <>
+                            <h1 className="text-xl font-openSansBold text-tugAni-red mt-8 mb-4">{category.title}</h1>
+                            <Section key={key} category={category} />
+                        </>
+                    )
+                })}
+            </div>
+        </section>
+    );
+}
+
+async function Section({ category }) {
+    const articles = await getArticles(category.id);
+
+    if(!articles) {
+        return <section>
+            <h1>No posts</h1>
+        </section>
+    }
+
+    return (
+        <section>
+            <div className="flex flex-col gap-4">
+                {articles.map((article, key) => {
+                    return (
+                        <>
+                            <ArticleCard key={key} article={article} />
+                            {key < articles.length-1 && <div className="divider m-0"></div>}
+                        </>
+                    );
+                })}
+            </div>
+        </section>
+    );
+}
+
+function Banner({ article }) {
+    const formattedDate = new Date(article.publishedTimestamp.seconds * 1000).toLocaleString("en-GB", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true
+    });
+
+    return (
+        <Link 
+            href={`/article/${article?.id}`}
+            className="w-full md:h-96 flex flex-col-reverse md:flex-row h-auto items-center gap-2 cursor-pointer articleCard box-border"
+        >
+            <div className="flex flex-col text-tugAni-black grow w-full justify-center shrink">
+                <CategoryCard categoryId={article?.categoryId} className="text-xs text-tugAni-red uppercase font-openSansBold" />
+                <h2 className="font-gotham text-4xl long-text tracking-tighter m-0 p-0">
+                    {article?.title}
+                </h2>
+                <span className="font-openSansRegular text-xs my-1 text-gray-500 title">
+                    {formattedDate}
+                </span>
+                <p className="mt-4 long-text font-openSansRegular">
+                    {article?.description}
+                </p>
+                <AuthorCard authorId={article?.authorId} className="mt-4 overflow-hidden flex-wrap" />
+            </div>
+            <img
+                src={article?.imageURL}
+                alt={article?.slug}
+                className="object-cover aspect-video rounded-box transition-all md:h-96 md:w-auto w-full h-auto shrink-0"
+            />
+        </Link>
+    );
 }

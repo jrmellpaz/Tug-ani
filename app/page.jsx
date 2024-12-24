@@ -1,5 +1,5 @@
 import Header from "./components/Header/Header";
-import ArticleListView from "./components/ArticleListView";
+import LatestArticlesView, { SectionView } from "./components/ArticleListView";
 
 export default function Home() {
     return (
@@ -8,8 +8,12 @@ export default function Home() {
                 <Header />
             </nav>
             <main className="border-box w-full p-8 md:px-20 overflow-hidden">
-                <ArticleListView title="Latest Stories" />
+                <LatestArticlesView title="Latest Stories" />
+                <SectionView />
             </main>
+            {/* TODO:
+                - Add a footer component
+            */}
         </>
     );
 }

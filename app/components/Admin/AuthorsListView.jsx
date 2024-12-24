@@ -17,21 +17,11 @@ export default function AuthorsListView() {
     } = useAuthors();
 
     const {
-        dataForm,
-        isLoadingForm,
-        errorForm,
-        isDone,
-        handleData,
-        handleCreate,
-        handleUpdate,
         handleDelete,
-        image,
-        setImage,
-        fetchData
     } = useAuthorForm();
 
     if (isLoading) {
-        return <GridSkeleton />
+        return <span className="loading loading-spinner loading-lg text-tugAni-red mt-20 block mx-auto"></span>
     }
     if (error) {
         return <ErrorMessage header="Something went wrong (ó﹏ò｡)" message={error} />
@@ -43,7 +33,7 @@ export default function AuthorsListView() {
     return (
         <section className="w-full gap-4 items-center grid grid-cols-[repeat(auto-fill,_500px)] auto-rows-max gap-y-8 justify-center box-border">
             {data?.map((item, key) => {
-            return <div key={item?.id} className="bg-base-100 h-full flex flex-row gap-4 shadow-xl p-8 rounded-xl items-center max-[600px]:flex-col max-[600px]:w-full  max-[600px]:p-8">
+            return <div key={item?.id} className="bg-base-100 h-full flex flex-row gap-4 shadow p-8 rounded-box items-center max-[600px]:flex-col max-[600px]:w-full  max-[600px]:p-8">
                 <div className="avatar w-40 h-fit self-start max-[600px]:self-center">
                     <img 
                         src={item?.photoURL} 
