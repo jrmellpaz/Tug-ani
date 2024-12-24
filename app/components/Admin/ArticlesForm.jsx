@@ -18,7 +18,6 @@ import 'mdui/components/menu-item.js';
 export default function ArticlesForm() {
     const searchParams = useSearchParams();
     const updateArticleId = searchParams.get("id");
-    console.log("id:", updateArticleId);
 
     const {
         data,
@@ -36,7 +35,12 @@ export default function ArticlesForm() {
 
     useEffect(() => {
         fetchData(updateArticleId);
-    }, [])
+    }, []);
+
+    const handleGenerateSlug = () => {
+        const generatedSlug = data.title.trim().toLowerCase().replace(/\s+/g, "-");
+        handleData("slug", generatedSlug);
+    }
 
     if (isLoading) {
         return <span className="loading loading-spinner loading-lg text-tugAni-red mt-20 block mx-auto"></span>
@@ -83,6 +87,7 @@ export default function ArticlesForm() {
                 <TextAreaAutosize required
                     onChange={(event) => {
                         handleData("title", event.target.value);
+                        
                     }}
                     value={data?.title}
                     id="articleTitle"
@@ -107,19 +112,30 @@ export default function ArticlesForm() {
                             <CircleHelpIcon width="16px" height="16px" className="text-gray-500" />
                         </div>
                     </div>
-                    <TextAreaAutosize required
-                        disabled={updateArticleId}
-                        type="text"
-                        onChange={(event) => {
-                            handleData("slug", event.target.value);
-                        }}
-                        value={data?.slug}
-                        id="articleSlug"
-                        name="articleSlug"
-                        placeholder="Article slug"
-                        minRows={1}
-                        className="box-border text-sm resize-none p-2 ml-[1px] outline-none font-openSansRegular w-full bg-gray-200"
-                    />
+                    <div className="flex box-border w-full bg-gray-200 items-center">
+                        <TextAreaAutosize required
+                            disabled={updateArticleId}
+                            type="text"
+                            onChange={(event) => {
+                                handleData("slug", event.target.value);
+                            }}
+                            value={data?.slug}
+                            id="articleSlug"
+                            name="articleSlug"
+                            placeholder="Article slug"
+                            minRows={1}
+                            className="box-border text-sm resize-none p-2 ml-[1px] outline-none font-openSansRegular w-full bg-gray-200"
+                        />
+                        <button 
+                            type="button"
+                            title="Generate from title"
+                            onClick={handleGenerateSlug}
+                            disabled={!data?.title}
+                            className="bg-tugAni-red disabled:bg-gray-400 text-tugAni-white font-openSansRegular text-sm pointer px-[0.75em] py-[0.25em] mr-2 h-fit rounded-badge pointer" 
+                        >
+                            Generate
+                        </button>
+                    </div>
                 </div>
                 <div className="flex flex-row justify-between items-center  border border-solid border-slate-200 border-b-0 pl-2 box-border">
                     <div className="w-60 font-openSansBold box-border">

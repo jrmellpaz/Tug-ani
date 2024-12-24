@@ -11,11 +11,11 @@ export default function ArticleCard({ article, className = "" }) {
     });
 
     return (
-        <Link href={`/admin/dashboard/articles/form?id=${article?.id}`} className={cn("w-full flex flex-col gap-2 md:gap-4 md:flex-row h-auto items-start articleCard cursor-pointer transition-all", className)}>
+        <Link href={`/article/${article?.id}`} className={cn("w-full flex flex-col gap-2 sm:gap-4 sm:flex-row h-auto items-start articleCard cursor-pointer transition-all", className)}>
             <img
                 src={article?.imageURL}
                 alt={article?.slug}
-                className="object-cover aspect-video w-full md:w-auto md:h-28 rounded-box transition-all"
+                className="object-cover aspect-video w-full sm:w-auto sm:h-28 rounded-box transition-all"
             />
             <div className="flex flex-col text-tugAni-black grow pt-1 w-[80%] justify-center">
                 <CategoryCard categoryId={article?.categoryId} className="text-xs text-tugAni-red uppercase font-openSansBold" />
@@ -54,7 +54,7 @@ export default function ArticleCard({ article, className = "" }) {
     );
 }
 
-async function CategoryCard({ categoryId, className = "" }) {
+async function CategoryCard({ categoryId, className="" }) {
     const category = await getCategory(categoryId);
     return (
         <span className={cn(className)}>{category.title}</span>

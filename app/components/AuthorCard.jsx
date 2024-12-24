@@ -17,7 +17,7 @@ export async function AuthorCard({ authorId, className="" }) {
                     <img 
                         src={author.photoURL} 
                         alt={author.name}
-                        className="aspect-square rounded-full w-6 h-6"
+                        className="aspect-square rounded-full w-6 h-6 object-cover"
                     />
                     <p className="font-openSansRegular text-sm whitespace-nowrap">{author.name}</p>
                 </div>

@@ -1,10 +1,9 @@
 "use client";
 
 import ArticlesForm from "@/app/components/Admin/ArticlesForm";
-import { Suspense, useEffect } from "react";
+import { Suspense } from "react";
 import GridSkeleton from "../../../../components/Admin/GridSkeleton";
 import AdminHeader from "../../../../components/Admin/AdminHeader";
-import { useRouter } from "next/navigation";
 
 export default function Page() {
     return (
