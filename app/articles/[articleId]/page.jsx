@@ -25,7 +25,7 @@ export default async function Page({params}) {
             <div>
                 <img className="h-[400px] w-full object-cover" src={article?.imageURL} alt={article?.slug} />
                 <CategoryCard categoryId={article?.categoryId} className="text-xs text-tugAni-red uppercase font-openSansBold" />
-                <h1 className="font-gotham text-tugAni-red mb-1">
+                <h1 className="font-gotham text-tugAni-red mb-1 text-4xl">
                     {article?.title}
                 </h1>
                 <div className="flex items-center">
