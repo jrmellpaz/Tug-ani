@@ -33,22 +33,7 @@ export default function ArticleCard({ article, className = "" }) {
                     <span className="text-tugAni-red text-xs border border-tugAni-red bg-base-100 rounded-badge px-2 py-1 whitespace-nowrap">
                         {article?.subcategory} 
                     </span>
-                </div>
-                <div className="flex flex-row gap-4 articles-center mt-3 overflow-clip text-clip w-full">
-                    {JSON.parse(article?.authorId).map(authorId => {
-                        return <div key={authorId} className="flex flex-row gap-2 articles-center">
-                            <div className="avatar w-6 h-6 shrink-0">
-                                <img 
-                                    src={authors && authors.find(author => author.id === authorId)?.photoURL}
-                                    className="rounded-full w-full h-full object-cover aspect-square"
-                                />
-                            </div>
-                            <p className="font-openSansBold text-sm whitespace-nowrap">
-                                {authorId && authors && authors.find(author => author.id === authorId)?.name}
-                            </p>
-                        </div>
-                    })}
-                </div> */}
+                </div>*/}
             </div>
         </Link>
     );

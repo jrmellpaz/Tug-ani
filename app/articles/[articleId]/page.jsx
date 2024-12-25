@@ -3,7 +3,7 @@ import { AuthorCard } from "@/app/components/AuthorCard";
 import { CategoryCard } from "@/app/components/CategoryCard";
 
 export default async function Page({params}) {
-    const { articleId } = await params;
+    const { articleId } = params;
     const article = await getArticle(articleId);
     const formattedDate = new Date(article.publishedTimestamp.seconds * 1000).toLocaleDateString("en-GB", {
         day: "2-digit",
