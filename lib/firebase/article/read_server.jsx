@@ -30,6 +30,18 @@ export const getArticlesByCategory = async (categoryId) => {
     return articlesList;
 }
 
+export const getArticlesByAuthor = async (authorId) => {
+    const articlesRef = collection(db, "articles");
+    const articlesQuery = query(
+        articlesRef,
+        where("authorId", "array-contains", authorId),
+        orderBy("publishedTimestamp", "desc")
+    );
+    const articlesSnapshot = await getDocs(articlesQuery);
+    const articlesList = articlesSnapshot.docs.map(doc => doc.data());
+    return articlesList;
+}
+
 export const getArticle = async (id) => {
     const res =  await getDoc(doc(db, `articles/${id}`));
     return res.data();
