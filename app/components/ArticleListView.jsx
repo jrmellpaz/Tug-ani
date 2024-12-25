@@ -4,6 +4,7 @@ import Link from "next/link";
 import { CategoryCard } from "./CategoryCard";
 import { AuthorCard } from "./AuthorCard";
 import { getCategories } from "@/lib/firebase/category/read_server";
+import { ArrowRight } from "lucide-react";
 
 export default async function LatestArticlesView({ title }) {
     const articles = await getArticles();
@@ -16,13 +17,13 @@ export default async function LatestArticlesView({ title }) {
 
     return (
         <section>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 mb-8">
                 {articles.map((article, key) => {
                     if (key === 0) {
                         return (
                             <>
                                 <Banner key={key} article={article} />
-                                <h1 className="text-xl font-openSansBold text-tugAni-red mt-8 mb-4">{title}</h1>
+                                <h1 className="text-3xl font-bebas text-tugAni-red mt-8 mb-4">{title}</h1>
                             </>
                         );
                     }
@@ -30,7 +31,7 @@ export default async function LatestArticlesView({ title }) {
                         return (
                             <>
                                 <ArticleCard key={key} article={article} />
-                                {key < articles.length-1 && <div className="divider m-0"></div>}
+                                <div className="divider m-0 last:hidden"></div>
                             </>
                         );
                     }
@@ -54,10 +55,19 @@ export async function SectionView() {
             <div className="flex flex-col gap-4">
                 {categories.map((category, key) => {
                     return (
-                        <>
-                            <h1 className="text-xl font-openSansBold text-tugAni-red mt-8 mb-4">{category.title}</h1>
+                        <div 
+                            key={key}
+                            className="flex flex-col gap-4 bg-base-100 p-4 pt-8 rounded-box shadow" 
+                        >
+                            <Link
+                                href={`/category/${category.id}`}
+                                className="flex items-center gap-2 cursor-pointer group w-fit"
+                            >
+                                <h1 className="text-3xl font-bebas text-tugAni-red ml-4">{category.title}</h1>
+                                <ArrowRight className="text-tugAni-red group-hover:translate-x-1 transition-all" />
+                            </Link>
                             <Section key={key} category={category} />
-                        </>
+                        </div>
                     )
                 })}
             </div>
@@ -80,8 +90,8 @@ async function Section({ category }) {
                 {articles.map((article, key) => {
                     return (
                         <>
-                            <ArticleCard key={key} article={article} />
-                            {key < articles.length-1 && <div className="divider m-0"></div>}
+                            <ArticleCard key={key} article={article} type="section" />
+                            <div className="divider m-0 last:hidden"></div>
                         </>
                     );
                 })}
@@ -103,11 +113,11 @@ function Banner({ article }) {
     return (
         <Link 
             href={`/articles/${article?.id}`}
-            className="w-full md:h-96 flex flex-col-reverse md:flex-row h-auto items-center gap-2 cursor-pointer articleCard box-border"
+            className="w-full md:h-96 flex flex-col-reverse md:flex-row h-auto items-center gap-6 md:gap-2 cursor-pointer articleCard box-border"
         >
             <div className="flex flex-col text-tugAni-black grow w-full justify-center shrink">
-                <CategoryCard categoryId={article?.categoryId} className="text-xs text-tugAni-red uppercase font-openSansBold" />
-                <h2 className="font-gotham text-4xl long-text tracking-tighter m-0 p-0">
+                <CategoryCard categoryId={article?.categoryId} className="text-tugAni-red uppercase font-openSansBold" />
+                <h2 className="font-gotham text-4xl long-text tracking-tighter">
                     {article?.title}
                 </h2>
                 <span className="font-openSansRegular text-xs my-1 text-gray-500 title">

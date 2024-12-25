@@ -106,5 +106,5 @@ input::file-selector-button:hover {
 }
 
 .articleCard:hover h2 {
-  @apply text-tugAni-red underline underline-offset-4;
+  @apply text-tugAni-red underline;
 }

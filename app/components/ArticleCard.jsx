@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { AuthorCard } from "./AuthorCard";
-import { CategoryCard } from "./CategoryCard";
+import { CategoryCard, SubcategoryCard } from "./CategoryCard";
 
-export default function ArticleCard({ article, className = "" }) {
+export default function ArticleCard({ article, className, type }) {
     const formattedDate = new Date(article.publishedTimestamp.seconds * 1000).toLocaleDateString("en-GB", {
         day: "2-digit",
         month: "long",
@@ -11,14 +11,20 @@ export default function ArticleCard({ article, className = "" }) {
     });
 
     return (
-        <Link href={`/articles/${article?.id}`} className={cn("w-full flex flex-col gap-2 md:gap-4 md:flex-row h-auto items-start articleCard cursor-pointer transition-all", className)}>
+        <Link 
+            href={`/articles/${article?.id}`} 
+            className={cn("w-full flex flex-col gap-2 sm:gap-4 sm:flex-row h-auto items-start sm:items-center articleCard cursor-pointer transition-all p-3 rounded-box overflow-hidden hover:bg-[#ed1f3a10]", className)}
+        >
             <img
                 src={article?.imageURL}
                 alt={article?.slug}
                 className="object-cover aspect-video w-full sm:w-auto sm:h-32 rounded-box transition-all"
             />
             <div className="flex flex-col text-tugAni-black grow pt-1 w-[80%] justify-center">
-                <CategoryCard categoryId={article?.categoryId} className="text-xs text-tugAni-red uppercase font-openSansBold" />
+                {type === "section"
+                    ? <SubcategoryCard subcategory={article?.subcategory} className="text-xs text-tugAni-red uppercase font-openSansBold" />
+                    : <CategoryCard categoryId={article?.categoryId} className="text-xs text-tugAni-red uppercase font-openSansBold" />
+                }
                 <h2 className="font-gotham text-xl title tracking-tighter m-0 p-0">
                     {article?.title}
                 </h2>
