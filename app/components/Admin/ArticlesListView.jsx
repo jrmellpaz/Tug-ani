@@ -115,7 +115,7 @@ export default function ArticlesListView() {
                                     </span>
                                 </div>
                                 <div className="flex flex-row gap-4 items-center mt-3 overflow-clip text-clip w-full">
-                                    {JSON.parse(item?.authorId).map(authorId => {
+                                    {(item?.authorId).map(authorId => {
                                         return <div key={authorId} className="flex flex-row gap-2 items-center">
                                             <div className="avatar w-6 h-6 shrink-0">
                                                 <img 
@@ -214,7 +214,7 @@ export default function ArticlesListView() {
                                     </span>
                                 </div>
                                 <div className="flex flex-row gap-4 items-center mt-3 overflow-clip text-clip w-full">
-                                    {JSON.parse(item?.authorId).map(authorId => {
+                                    {(item?.authorId).map(authorId => {
                                         return <div key={authorId} className="flex flex-row gap-2 items-center">
                                             <div className="avatar w-6 h-6 shrink-0">
                                                 <img 

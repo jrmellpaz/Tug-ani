@@ -66,7 +66,6 @@ export default function ArticlesForm() {
                         handleUpdate(); 
                     }
                     else {
-                        console.log("data", data);
                         handleCreate();
                     }
                 }}
@@ -326,16 +325,24 @@ function SelectAuthorField() {
 
     const { data: authors } = useAuthors();
 
+    if (!authors) {
+        return <div className="skeleton "></div>
+    }
+
     return (
         <mdui-select 
             multiple
             required="true" 
             class="example-multiple"
             placeholder="Select author(s)"
-            value={data?.authorId ? JSON.parse(data?.authorId) : undefined}
-            defaultValue=""
+            value={data?.authorId ? data?.authorId.map(id => {
+                const author = authors.find(author => {
+                    author.id === id
+                });
+                return author ? author.name : id;
+            }) : []}
             onChange={event => {
-                handleData("authorId", event.target.value === "disabled" ? "" : JSON.stringify(event.target.value));
+                handleData("authorId", event.target.value);
             }}
         >
             {authors && authors?.map((author) => {

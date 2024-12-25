@@ -30,14 +30,7 @@ export const getArticlesByCategory = async (categoryId) => {
     return articlesList;
 }
 
-const getArticleCount = async (searchQuery = "") => {
-    const ref = collection(db, "articles");
-    let q;
-    if (searchQuery) {
-        q = query(ref, where("title", ">=", searchQuery), where("title", "<=", searchQuery + "\uf8ff"));
-    } else {
-        q = ref;
-    }
-    const snapshot = await getCountFromServer(q);
-    return snapshot.data().count;
+export const getArticle = async (id) => {
+    const res =  await getDoc(doc(db, `articles/${id}`));
+    return res.data();
 }

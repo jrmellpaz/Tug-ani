@@ -5,6 +5,7 @@ import { CategoryCard } from "@/app/components/CategoryCard";
 export default async function Page({ params }) {
     const { articleId } = params;
     const article = await getArticle(articleId);
+    console.log("article", article);
     const formattedDate = new Date(article.publishedTimestamp.seconds * 1000).toLocaleDateString("en-GB", {
         day: "2-digit",
         month: "long",

@@ -8,7 +8,7 @@ export default function AdminAuthors() {
             <AdminHeader href="/admin/dashboard" />
             <main className="p-8 pl-12 pr-12 w-dvw overflow-hidden"> 
                 <section className="flex flex-row justify-between items"> 
-                    <h1 className="font-gotham text-3xl tracking-tighter text-tugAni-red">Authors</h1> 
+                    <h1 className="font-bebas text-4xl text-tugAni-red">Authors</h1> 
                     <AddButton href="/admin/dashboard/authors/form" name="author" /> 
                 </section>
                 <section className="mt-8">
