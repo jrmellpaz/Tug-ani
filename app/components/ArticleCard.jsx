@@ -11,27 +11,33 @@ export default function ArticleCard({ article, className, type }) {
     });
 
     return (
-        <Link 
-            href={`/articles/${article?.id}`} 
+        <div
             className={cn("w-full flex flex-col gap-2 sm:gap-4 sm:flex-row h-auto items-start sm:items-center articleCard cursor-pointer transition-all p-3 rounded-box overflow-hidden hover:bg-[#ed1f3a10]", className)}
         >
-            <img
-                src={article?.imageURL}
-                alt={article?.slug}
-                className="object-cover aspect-video w-full sm:w-auto sm:h-32 rounded-box transition-all"
-            />
-            <div className="flex flex-col text-tugAni-black grow pt-1 w-[80%] justify-center">
-                {type === "section"
-                    ? <SubcategoryCard subcategory={article?.subcategory} className="text-xs text-tugAni-red uppercase font-openSansBold" />
-                    : <CategoryCard categoryId={article?.categoryId} className="text-xs text-tugAni-red uppercase font-openSansBold" />
-                }
-                <h2 className="font-gotham text-xl title tracking-tighter m-0 p-0">
-                    {article?.title}
-                </h2>
-                <span className="font-openSansRegular text-xs my-1 text-gray-500 title">
-                    {formattedDate}
-                </span>
-                <AuthorCard authorId={article?.authorId} className="mt-2 overflow-hidden" />
+            <Link 
+                href={`/articles/${article?.id}`} 
+                className="w-full sm:max-w-fit shrink-0"
+            >
+                <img
+                    src={article?.imageURL}
+                    alt={article?.slug}
+                    className="object-cover aspect-video w-full sm:w-auto sm:h-32 rounded-box transition-all"
+                />
+            </Link>
+            <div className="flex flex-col text-tugAni-black grow pt-1 w-full sm:w-[80%] justify-center">
+                <Link href={`/articles/${article?.id}`} className="w-full">
+                    {type === "section"
+                        ? <SubcategoryCard subcategory={article?.subcategory} className="text-xs text-tugAni-red uppercase font-openSansBold" />
+                        : <CategoryCard categoryId={article?.categoryId} className="text-xs text-tugAni-red uppercase font-openSansBold" />
+                    }
+                    <h2 className="font-gotham text-xl title tracking-tighter m-0 p-0">
+                        {article?.title}
+                    </h2>
+                    <span className="font-openSansRegular text-xs my-1 text-gray-500 title">
+                        {formattedDate}
+                    </span>
+                </Link>
+                <AuthorCard authorId={article?.authorId} className="mt-2 overflow-hidden shrink-0" />
                 {/* <div className="flex flex-row gap-2 articles-center shrink text-ellipsis whitespace-nowrap overflow-hidden">
                     {article?.categoryId && categories && <span className="text-base-100 text-xs bg-tugAni-red rounded-badge px-2 py-1 whitespace-nowrap">
                         {categories.find(category => category.id === article?.categoryId).title} 
@@ -41,6 +47,6 @@ export default function ArticleCard({ article, className, type }) {
                     </span>
                 </div>*/}
             </div>
-        </Link>
+        </div>
     );
 }

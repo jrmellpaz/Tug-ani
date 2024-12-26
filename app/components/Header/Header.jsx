@@ -1,13 +1,27 @@
 "use client";
 
-import React from "react";
-import Menu from "./Menu.jsx";
+import React, { useEffect, useRef } from "react";
 import Searchbar from "./Seachbar.jsx";
 import Link from "next/link.js";
+import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import { MenuIcon, X } from "lucide-react";
 
-export default function Header() {
-    const[menuOpened, setMenuOpened] = React.useState(false);
+export default function Header({ children }) {
+    const [menuOpened, setMenuOpened] = React.useState(false);
     const [searchbarOpened, setSearchbarOpened] = React.useState(false);
+    const [hidden, setHidden] = React.useState(false);
+
+    const { scrollY } = useScroll();
+    useMotionValueEvent(scrollY, "change", (latest) => {
+        const previous = scrollY.getPrevious();
+
+        if (latest > previous && latest > 150) {
+            setHidden(true);
+        }
+        else {
+            setHidden(false);
+        }
+    });
 
     function handleMenuClick() {
         setMenuOpened(!menuOpened);
@@ -17,33 +31,100 @@ export default function Header() {
         setSearchbarOpened(!searchbarOpened);
     }
 
-    const inactive = "outline-none w-10 h-10 rounded-full flex justify-center items-center hover:bg-gray-200 focus:bg-gray-300";
-    const active = "outline-none w-10 h-10 rounded-full flex justify-center items-center bg-tugAni-red";
+    return (
+        <motion.nav 
+            variants={{
+                visible: { y: 0 },
+                hidden: { y: "-100%" }
+            }}
+            animate={hidden ? "hidden" : "visible"}
+            transition={{ duration: 0.35, ease: "easeInOut" }}
+            className="box-border sticky top-0 w-full pt-4 px-[5%]"
+        >
+            <div className="w-full px-4 md:pb-2 flex flex-col drop-shadow rounded-2xl glass">
+                <div className="w-full h-16 flex items-center justify-between md:justify-center">
+                    <button 
+                        onClick={() => setMenuOpened(!menuOpened)} 
+                        title="Menu"
+                        className="flex justify-center items-center md:hidden outline-none w-10 h-10 rounded-full hover:bg-[#ed1f3a10]"
+                    > 
+                        <MenuIcon size={20} className="hover:text-tugAni-red" />
+                    </button>
+                    <Link href={"/"} className="flex justify-center items-center">
+                        <div className="h-16 w-fit flex flex-row justify-center items-center gap-3">
+                            <img className="h-2/3" src="/logo.svg" alt="Tug-ani logo" />
+                            <h1 className="font-bebas text-2xl text-tugAni-black">Tug-ani</h1>
+                        </div>
+                    </Link>
+                    <div></div>
+                </div>
+                <div className="w-full md:flex justify-center gap-4 h-10 hidden">
+                    <div className={`${searchbarOpened ? "hidden" : "flex"} justify-center items-center transition-all`}>
+                        {children}
+                    </div>
+                    <Searchbar
+                        searchbarOpened={searchbarOpened}
+                        setSearchbarOpened={setSearchbarOpened} 
+                    />
+                </div>
+            </div> 
+            <SideDrawer isOpen={menuOpened} setIsOpen={setMenuOpened}>
+                {children}
+            </SideDrawer>
+        </motion.nav>
+    );
+}
+
+function SideDrawer({ isOpen, setIsOpen, children }) {
+    const dialogRef = useRef(null);
+    const closeRef = useRef(null);
+
+    const [animation, setAnimation] = React.useState(false);
+
+    useEffect(() => {
+        if (isOpen) {
+            dialogRef.current.showModal();
+            setAnimation(false);
+        } else {
+            setAnimation(true);
+        }
+    }, [isOpen]);
+
+    const handleClose = (event) => {
+        if (event.target === dialogRef.current) {
+            setAnimation(true);
+        }
+    }
+
+    const handleAnimationEnd = () => {
+        if (animation) {
+            dialogRef.current.close();
+            setIsOpen(false);
+        }
+    }
 
     return (
-        <>
-            <div className="w-full h-16 bg-tugAni-white flex items-center justify-between">
+        <dialog
+            id="side-drawer"
+            ref={dialogRef}
+            className={`sidebar bg-base-100 p-0 ${animation ? "sidebar-close" : ""}`}
+            onClick={handleClose}
+            onAnimationEnd={handleAnimationEnd}
+        >
+            <div className="flex flex-col gap-4 p-4 h-full w-full">
                 <button 
-                    onClick={handleMenuClick} className={menuOpened ? active : inactive} 
-                    title="Menu"
+                    ref={closeRef}
+                    onClick={() => setAnimation(true)} 
+                    title="Close menu"
+                    className="flex justify-center items-center md:hidden outline-none w-10 h-10 rounded-full hover:bg-[#ed1f3a10] mt-4"
                 > 
-                    <img src={menuOpened ? "/close.svg" : "/menu.svg"} alt="Menu" />
+                    <X size={20} className="hover:text-tugAni-red" />
                 </button>
-                <Link href={"/"}>
-                    <div className="h-16 w-fit flex flex-row justify-center items-center gap-3">
-                        <img className="h-2/3" src="/logo.svg" alt="Tug-ani logo" />
-                        <h1 className="font-bebas text-2xl text-tugAni-black">Tug-ani</h1>
-                    </div>
-                </Link>
-                <button 
-                    onClick={handleSearchbarClick} className={searchbarOpened ? active : inactive} 
-                    title="Search"
-                >
-                    <img src={searchbarOpened ? "/search-active.svg" : "/search.svg"} alt="Search" />
-                </button>
+                <div className="w-full my-4">
+                    <Searchbar type="sidebar" />
+                </div>
+                {children}
             </div>
-            {searchbarOpened && <Searchbar />}
-            {menuOpened && <Menu />}
-        </>
+        </dialog>
     );
 }

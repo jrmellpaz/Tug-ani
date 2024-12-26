@@ -108,3 +108,42 @@ input::file-selector-button:hover {
 .articleCard:hover h2 {
   @apply text-tugAni-red underline;
 }
+
+.glass {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(6.8px);
+  -webkit-backdrop-filter: blur(6.8px);
+}
+
+@keyframes sidebar-in {
+  from {
+    transform: translateX(-500px);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes sidebar-out {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-500px);
+  }
+}
+
+.sidebar {
+  max-height: 100dvh;
+  height: 100dvh;
+  width: 320px;
+  margin: 0;
+  box-sizing: border-box;
+  animation: sidebar-in 0.5s forwards;
+  border-radius: 0 1em 1em 0;
+  padding: 0;
+}
+
+.sidebar-close {
+  animation: sidebar-out 0.5s;
+}
