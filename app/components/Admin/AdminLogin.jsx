@@ -73,7 +73,7 @@ function SubmitButton() {
 		<button 
 			disabled={pending}
 			type="submit"
-			className="font-openSansRegular bg-tugAni-red text-tugAni-white p-2 pl-5 pr-5 border rounded-full"
+			className="font-openSansRegular bg-tugAni-red text-tugAni-white p-2 pl-5 pr-5 border rounded-full disabled:bg-gray-300 "
 		>
 			Login
 		</button>

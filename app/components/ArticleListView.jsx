@@ -16,13 +16,13 @@ export default async function LatestArticlesView({ title }) {
     }
 
     return (
-        <div className="flex flex-col gap-4 mb-8">
+        <div className="flex flex-col items-center gap-4 mb-8">
             {articles.map((article, key) => {
                 if (key === 0) {
                     return (
                         <>
                             <Banner key={key} article={article} />
-                            <div className="flex flex-row items-center gap-3 mt-8">
+                            <div className="w-full flex flex-row justify-start items-center gap-3 mt-8">
                                 <TrendingUp className="w-12 h-12 text-tugAni-red" />
                                 <h1 className="text-3xl font-bebas text-tugAni-red">
                                     {title}
@@ -63,7 +63,7 @@ export async function SectionView() {
                             className="flex flex-col gap-4 odd:bg-tugAni-white p-4 pt-8 rounded-box odd:shadow" 
                         >
                             <Link
-                                href={`/category/${category.id}`}
+                                href={`/app/(user)/category/${category.id}`}
                                 className="flex items-center gap-2 cursor-pointer group w-fit"
                             >
                                 <h1 className="text-3xl font-bebas text-tugAni-red ml-4">{category.title}</h1>
@@ -114,34 +114,60 @@ function Banner({ article }) {
     });
 
     return (
-        <div
-            className="w-full md:h-96 flex flex-col-reverse md:flex-row h-auto items-center gap-6 md:gap-2 cursor-pointer articleCard box-border"
-        >
-            <div className="flex flex-col text-tugAni-black grow w-full justify-center shrink">
-                <Link href={`/articles/${article?.id}`}>
-                    <CategoryCard categoryId={article?.categoryId} className="text-tugAni-red uppercase font-openSansBold" />
-                    <h2 className="font-gotham text-4xl long-text tracking-tighter">
-                        {article?.title}
-                    </h2>
-                    <span className="font-openSansRegular text-xs my-1 text-gray-500 title">
-                        {formattedDate}
-                    </span>
-                    <p className="mt-4 long-text font-openSansRegular">
-                        {article?.description}
-                    </p>
-                </Link>
-                <AuthorCard authorId={article?.authorId} className="mt-4 overflow-hidden flex-wrap shrink-0" />
-            </div>
-            <Link 
-                href={`/articles/${article?.id}`}
-                className="w-full"
+        <>
+            <div
+                className="aspect-video max-w-[800px] w-full border relative bg-tugAni-black rounded-box overflow-clip md:hidden"
             >
+                <div
+                    className="absolute top-0 w-full h-full flex flex-col justify-end p-8 z-10 group"
+                >
+                    <Link href={`/app/(user)/articles/${article?.id}`}>
+                        <CategoryCard categoryId={article?.categoryId}
+                                      className="text-tugAni-white uppercase font-openSansBold drop-shadow"/>
+                        <h2 className="font-gotham text-4xl long-text tracking-tighter text-tugAni-white drop-shadow-2xl group-hover:underline">
+                            {article?.title}
+                        </h2>
+                        <span className="font-openSansRegular text-xs my-1 text-tugAni-white title">
+                            {formattedDate}
+                        </span>
+                    </Link>
+                    <AuthorCard authorId={article?.authorId} className="mt-4 overflow-hidden text-tugAni-white flex-wrap shrink-0 drop-shadow-2xl"/>
+                </div>
                 <img
-                    src={article?.imageURL}
-                    alt={article?.slug}
-                    className="object-cover aspect-video rounded-box transition-all md:h-96 md:w-auto w-full h-auto shrink-0"
+                    src={article.imageURL}
+                    alt={article.slug}
+                    className="object-cover aspect-video w-full opacity-50 rounded-box"
                 />
-            </Link>
-        </div>
+            </div>
+            <div
+                className="hidden w-full md:h-96 md:flex md:flex-row h-auto justify-between items-center gap-6 md:gap-2 cursor-pointer articleCard box-border"
+            >
+                <div className="flex flex-col text-tugAni-black grow max-w-fit w-full justify-center shrink">
+                    <Link href={`/app/(user)/articles/${article?.id}`}>
+                        <CategoryCard categoryId={article?.categoryId} className="text-tugAni-red uppercase font-openSansBold"/>
+                        <h2 className="font-gotham text-4xl long-text tracking-tighter">
+                            {article?.title}
+                        </h2>
+                        <span className="font-openSansRegular text-xs my-1 text-gray-500 title">
+                                {formattedDate}
+                        </span>
+                        <p className="mt-4 long-text font-openSansRegular">
+                            {article?.description}
+                        </p>
+                    </Link>
+                    <AuthorCard authorId={article?.authorId} className="mt-4 overflow-hidden flex-wrap shrink-0"/>
+                </div>
+                <Link
+                    href={`/app/(user)/articles/${article?.id}`}
+                    className="w-full flex justify-end"
+                >
+                    <img
+                        src={article?.imageURL}
+                        alt={article?.slug}
+                        className="object-cover aspect-video rounded-box transition-all md:h-96 md:w-auto shrink-0"
+                    />
+                </Link>
+            </div>
+        </>
     );
 }

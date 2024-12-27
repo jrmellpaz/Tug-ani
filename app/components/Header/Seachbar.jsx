@@ -53,7 +53,8 @@ export default function Searchbar({ searchbarOpened, setSearchbarOpened, type=""
                 className="flex items-center group w-full"
                 onSubmit={handleSubmit}
             >
-                <input 
+                <input
+                    autoFocus={true}
                     type="text"
                     placeholder="What are you looking for?"
                     className={`font-openSansRegular text-tugAni-black text-sm ${type !== "sidebar" ? "w-80" : "w-full grow"} py-2 px-3 rounded-l-full outline-none group-hover:shadow group-focus:shadow border focus:border-tugAni-red border-tugAni-black bg-transparent`}

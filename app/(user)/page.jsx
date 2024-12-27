@@ -1,4 +1,4 @@
-import LatestArticlesView, { SectionView } from "./components/ArticleListView";
+import LatestArticlesView, { SectionView } from "../components/ArticleListView";
 
 export default function Home() {
     return (

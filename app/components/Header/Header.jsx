@@ -39,10 +39,10 @@ export default function Header({ children }) {
             }}
             animate={hidden ? "hidden" : "visible"}
             transition={{ duration: 0.35, ease: "easeInOut" }}
-            className="box-border sticky top-0 w-full pt-4 px-[5%]"
+            className="box-border sticky top-0 w-full pt-4 px-[5%] z-50"
         >
-            <div className="w-full px-4 md:pb-2 flex flex-col drop-shadow rounded-2xl glass">
-                <div className="w-full h-16 flex items-center justify-between md:justify-center">
+            <div className="w-full px-8 flex flex-row items-center gap-8 drop-shadow rounded-2xl glass">
+                <div className="w-full md:w-fit h-16 flex items-center justify-between md:justify-center shrink-0">
                     <button 
                         onClick={() => setMenuOpened(!menuOpened)} 
                         title="Menu"
@@ -50,15 +50,15 @@ export default function Header({ children }) {
                     > 
                         <MenuIcon size={20} className="hover:text-tugAni-red" />
                     </button>
-                    <Link href={"/"} className="flex justify-center items-center">
-                        <div className="h-16 w-fit flex flex-row justify-center items-center gap-3">
+                    <Link href={"/"} className="w-full flex justify-center items-center">
+                        <div className="h-16 w-full flex flex-row justify-center items-center gap-3">
                             <img className="h-2/3" src="/logo.svg" alt="Tug-ani logo" />
                             <h1 className="font-bebas text-2xl text-tugAni-black">Tug-ani</h1>
                         </div>
                     </Link>
                     <div></div>
                 </div>
-                <div className="w-full md:flex justify-center gap-4 h-10 hidden">
+                <div className={`w-full md:flex ${searchbarOpened ? "justify-end" : "justify-between"} gap-4 h-10 hidden`}>
                     <div className={`${searchbarOpened ? "hidden" : "flex"} justify-center items-center transition-all`}>
                         {children}
                     </div>

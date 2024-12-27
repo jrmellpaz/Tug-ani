@@ -2,16 +2,13 @@
 
 import useArticles from "@/lib/firebase/article/read";
 import ErrorMessage from "../ErrorMessage";
-import GridSkeleton from "./GridSkeleton";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { useArticleForm } from "@/app/admin/dashboard/articles/form/contexts/ArticleFormContext";
 import { Edit2Icon, Search, TrashIcon } from "lucide-react";
 import useCategories from "@/lib/firebase/category/read";
 import useAuthors from "@/lib/firebase/author/read";
 
 export default function ArticlesListView() {
-    const [deleteId, setDeleteId] = useState(null);
     const [inputSearchValue, setInputSearchValue] = useState("");
     const [searchQuery, setSearchQuery] = useState("");
 
@@ -23,8 +20,6 @@ export default function ArticlesListView() {
         hasMore,
         fetchArticles,
     } = useArticles(searchQuery);
-
-    const { handleDelete } = useArticleForm();
     const { data: categories } = useCategories();
     const { data: authors } = useAuthors();
 
@@ -110,9 +105,9 @@ export default function ArticlesListView() {
                                     {item?.categoryId && categories && <span className="text-base-100 text-xs bg-tugAni-red rounded-badge px-2 py-1 whitespace-nowrap">
                                         {categories.find(category => category.id === item?.categoryId).title} 
                                     </span>}
-                                    <span className="text-tugAni-red text-xs border border-tugAni-red bg-base-100 rounded-badge px-2 py-1 whitespace-nowrap">
+                                    {item?. subcategory && <span className="text-tugAni-red text-xs border border-tugAni-red bg-base-100 rounded-badge px-2 py-1 whitespace-nowrap">
                                         {item?.subcategory} 
-                                    </span>
+                                    </span>}
                                 </div>
                                 <div className="flex flex-row gap-4 items-center mt-3 overflow-clip text-clip w-full">
                                     {(item?.authorId).map(authorId => {
@@ -136,47 +131,8 @@ export default function ArticlesListView() {
                                         <Edit2Icon alt="Options" width="18px" height="18px" className="text-tugAni-black" />
                                     </button>
                                 </Link>
-                                <button
-                                    title="Delete article"
-                                    tabIndex={0} 
-                                    onClick={() => {
-                                        setDeleteId(item?.id);
-                                        document.getElementById("my_modal_2").showModal();
-                                    }} 
-                                    className="p-3 rounded-full bg-base-100 border-none shadow-none hover:bg-red-200"
-                                >
-                                    <TrashIcon alt="Delete forever" width="18px" height="18px" className="text-red-600" />
-                                </button>
                             </div>
                         </div>
-        
-                        <dialog id="my_modal_2" className="modal">
-                            <div className="modal-box box-border overflow-hidden">
-                                <ErrorMessage header="This action can't be undone" />
-                                <p className="pl-4 m-8 ml-10 font-openSansRegular text-tugAni-black">Do you wish to proceed?</p>
-                                <form method="dialog" className="flex flex-row justify-end gap-2">
-                                    <button
-                                        className="text-tugAni-red font-openSansBold text-sm p-3 pl-6 pr-6 hover:bg-red-100 rounded-badge"
-                                    >
-                                        Cancel
-                                    </button>
-                                    <button
-                                        onClick={(event) => {
-                                            // event.preventDefault();
-                                            handleDelete(deleteId);
-                                            console.log("delete", deleteId);
-                                        }}
-                                        className="bg-tugAni-red text-tugAni-white font-openSansBold text-sm p-3 pl-6 pr-6 rounded-badge"
-                                    > 
-                                        Proceed
-                                    </button>
-                                </form>
-                                
-                            </div>
-                            <form method="dialog" className="modal-backdrop">
-                                <button>close</button>
-                            </form>
-                        </dialog>
                     </div>
                 }
                 else {
@@ -209,9 +165,9 @@ export default function ArticlesListView() {
                                     {item?.categoryId && categories && <span className="text-base-100 text-xs bg-tugAni-red rounded-badge px-2 py-1 whitespace-nowrap">
                                         {categories.find(category => category.id === item?.categoryId).title} 
                                     </span>}
-                                    <span className="text-tugAni-red text-xs border border-tugAni-red bg-base-100 rounded-badge px-2 py-1 whitespace-nowrap">
+                                    {item?.subcategory && <span className="text-tugAni-red text-xs border border-tugAni-red bg-base-100 rounded-badge px-2 py-1 whitespace-nowrap">
                                         {item?.subcategory} 
-                                    </span>
+                                    </span>}
                                 </div>
                                 <div className="flex flex-row gap-4 items-center mt-3 overflow-clip text-clip w-full">
                                     {(item?.authorId).map(authorId => {
@@ -235,47 +191,8 @@ export default function ArticlesListView() {
                                         <Edit2Icon alt="Options" width="18px" height="18px" className="text-tugAni-black" />
                                     </button>
                                 </Link>
-                                <button
-                                    title="Delete article"
-                                    tabIndex={0} 
-                                    onClick={() => {
-                                        setDeleteId(item?.id);
-                                        document.getElementById("my_modal_2").showModal();
-                                    }} 
-                                    className="p-3 rounded-full bg-base-100 border-none shadow-none hover:bg-red-200"
-                                >
-                                    <TrashIcon alt="Delete forever" width="18px" height="18px" className="text-red-600" />
-                                </button>
                             </div>
                         </div>
-        
-                        <dialog id="my_modal_2" className="modal">
-                            <div className="modal-box box-border overflow-hidden">
-                                <ErrorMessage header="This action can't be undone" />
-                                <p className="pl-4 m-8 ml-10 font-openSansRegular text-tugAni-black">Do you wish to proceed?</p>
-                                <form method="dialog" className="flex flex-row justify-end gap-2">
-                                    <button
-                                        className="text-tugAni-red font-openSansBold text-sm p-3 pl-6 pr-6 hover:bg-red-100 rounded-badge"
-                                    >
-                                        Cancel
-                                    </button>
-                                    <button
-                                        onClick={(event) => {
-                                            // event.preventDefault();
-                                            handleDelete(deleteId);
-                                            console.log("delete", deleteId);
-                                        }}
-                                        className="bg-tugAni-red text-tugAni-white font-openSansBold text-sm p-3 pl-6 pr-6 rounded-badge"
-                                    > 
-                                        Proceed
-                                    </button>
-                                </form>
-                                
-                            </div>
-                            <form method="dialog" className="modal-backdrop">
-                                <button>close</button>
-                            </form>
-                        </dialog>
                     </div>
                 } 
             })}

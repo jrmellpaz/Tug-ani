@@ -15,7 +15,7 @@ export async function AuthorCard({ authorId, className="" }) {
             {authors.map(author => (
                 <Link 
                     key={author.id}
-                    href={`/author/${author.id}`}
+                    href={`/app/(user)/author/${author.id}`}
                     className="cursor-pointer flex gap-4" 
                 >
                     <div className="flex items-center gap-2 shrink-0">
