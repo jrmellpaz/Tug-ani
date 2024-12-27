@@ -15,7 +15,7 @@ export default async function Menu({ params }) {
                         className="flex items-center"
                     >
                         <li
-                            className="font-openSansBold text-sm uppercase hover:bg-[#ed1f3a10] hover:text-tugAni-red py-2 px-3 rounded-btn cursor-pointer transition-all md:text-center"
+                            className="font-openSansBold w-full text-sm uppercase hover:bg-[#ed1f3a10] hover:text-tugAni-red py-2 px-3 rounded-btn cursor-pointer transition-all md:text-center"
                         >
                             {category.title}
                         </li>

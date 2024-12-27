@@ -8,7 +8,7 @@ export default function Searchbar({ searchbarOpened, setSearchbarOpened, type=""
 
     useEffect(() => {
         function handleClickOutside(event) {
-            if (searchbarRef.current && !searchbarRef.current.contains(event.target)) {
+            if (type !== "sidebar" && searchbarRef.current && !searchbarRef.current.contains(event.target)) {
                 setSearchbarOpened(false);
             }
         }

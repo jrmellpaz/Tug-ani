@@ -22,7 +22,7 @@ export default async function LatestArticlesView({ title }) {
                     return (
                         <>
                             <Banner key={key} article={article} />
-                            <div className="w-full flex flex-row justify-start items-center gap-3 mt-8">
+                            <div className="w-full flex flex-row justify-start items-center gap-3 mt-4 md:mt-8 p-8 md:p-0">
                                 <TrendingUp className="w-12 h-12 text-tugAni-red" />
                                 <h1 className="text-3xl font-bebas text-tugAni-red">
                                     {title}
@@ -33,10 +33,10 @@ export default async function LatestArticlesView({ title }) {
                 }
                 else {
                     return (
-                        <>
+                        <section className="w-full p-8 md:p-8">
                             <ArticleCard key={key} article={article} />
                             <div className="divider m-0 last:hidden"></div>
-                        </>
+                        </section>
                     );
                 }
             })}
@@ -116,27 +116,27 @@ function Banner({ article }) {
     return (
         <>
             <div
-                className="aspect-video max-w-[800px] w-full border relative bg-tugAni-black rounded-box overflow-clip md:hidden"
+                className="aspect-video w-full border relative bg-gray-700 overflow-clip md:hidden"
             >
                 <div
                     className="absolute top-0 w-full h-full flex flex-col justify-end p-8 z-10 group"
                 >
                     <Link href={`/app/(user)/articles/${article?.id}`}>
                         <CategoryCard categoryId={article?.categoryId}
-                                      className="text-tugAni-white uppercase font-openSansBold drop-shadow"/>
-                        <h2 className="font-gotham text-4xl long-text tracking-tighter text-tugAni-white drop-shadow-2xl group-hover:underline">
+                                      className="text-tugAni-white text-sm uppercase font-openSansBold drop-shadow"/>
+                        <h2 className="font-gotham text-xl long-text tracking-tight text-tugAni-white drop-shadow-2xl group-hover:underline">
                             {article?.title}
                         </h2>
                         <span className="font-openSansRegular text-xs my-1 text-tugAni-white title">
                             {formattedDate}
                         </span>
                     </Link>
-                    <AuthorCard authorId={article?.authorId} className="mt-4 overflow-hidden text-tugAni-white flex-wrap shrink-0 drop-shadow-2xl"/>
+                    {/* <AuthorCard authorId={article?.authorId} className="mt-4 overflow-hidden text-tugAni-white flex-nowrap shrink-0 drop-shadow-2xl"/> */}
                 </div>
                 <img
                     src={article.imageURL}
                     alt={article.slug}
-                    className="object-cover aspect-video w-full opacity-50 rounded-box"
+                    className="object-cover aspect-video w-full opacity-70 rounded-box"
                 />
             </div>
             <div
