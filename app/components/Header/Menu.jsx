@@ -10,11 +10,11 @@ export default async function Menu({ params }) {
             {categories.map((category, key) => {
                 return (
                     <Link
+                        key={key}
                         href={`/app/(user)/category/${category.id}`}
                         className="flex items-center"
                     >
                         <li
-                            key={key}
                             className="font-openSansBold text-sm uppercase hover:bg-[#ed1f3a10] hover:text-tugAni-red py-2 px-3 rounded-btn cursor-pointer transition-all md:text-center"
                         >
                             {category.title}
