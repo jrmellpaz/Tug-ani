@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import ErrorMessage from "@/app/components/ErrorMessage";
 import SuccessMessage from "@/app/components/SuccessMessage";
-import { Plus, Trash2, UserCircle2Icon, UserRound } from "lucide-react";
+import { Plus, Trash2, UserCircle2Icon } from "lucide-react";
 import TextAreaAutosize from "react-textarea-autosize";
 import { useAboutForm } from "./AboutContext";
 
@@ -96,6 +96,9 @@ function TextInput({ title, placeholder, sectionTitle }) {
                 minRows={3}
                 className="w-full p-2 bg-gray-100 hover:bg-gray-200 focus-visible:bg-gray-200 border-0 border-b-2 focus-visible:border-b-tugAni-red outline-none font-openSansRegular text-sm resize-none"
             />
+            <span className="text-gray-500 text-xs w-fit font-openSansRegular">
+                Use "\n" to render new lines
+            </span>
         </div>
     );
 }
@@ -221,13 +224,13 @@ function ProfileGallery() {
                             <img 
                                 src={URL.createObjectURL(profile.image)} 
                                 alt="Profile Preview" 
-                                className="mt-4 aspect-square object-cover max-w-[200px] w-full h-auto rounded-full self-center" 
+                                className="mt-4 aspect-square object-cover max-w-[200px] w-full h-auto rounded-box self-center" 
                             />
                         ) : (
                             profile.imageURL && <img 
                                 src={profile.imageURL} 
                                 alt="Profile Image" 
-                                className="mt-4 aspect-square object-cover max-w-[200px] w-full h-auto rounded-full self-center"  
+                                className="mt-4 aspect-square object-cover max-w-[200px] w-full h-auto rounded-box self-center"  
                             />
                         )}
                     </div>

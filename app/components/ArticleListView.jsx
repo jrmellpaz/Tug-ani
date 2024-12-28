@@ -63,7 +63,7 @@ export async function SectionView() {
                             className="flex flex-col gap-4 odd:bg-tugAni-white p-4 pt-8 rounded-box odd:shadow" 
                         >
                             <Link
-                                href={`/app/(user)/category/${category.id}`}
+                                href={`/category/${category.id}`}
                                 className="flex items-center gap-2 cursor-pointer group w-fit"
                             >
                                 <h1 className="text-3xl font-bebas text-tugAni-red ml-4">{category.title}</h1>
@@ -121,7 +121,7 @@ function Banner({ article }) {
                 <div
                     className="absolute top-0 w-full h-full flex flex-col justify-end p-8 z-10 group"
                 >
-                    <Link href={`/app/(user)/articles/${article?.id}`}>
+                    <Link href={`/articles/${article?.id}`}>
                         <CategoryCard categoryId={article?.categoryId}
                                       className="text-tugAni-white text-sm uppercase font-openSansBold drop-shadow"/>
                         <h2 className="font-gotham text-xl long-text tracking-tight text-tugAni-white drop-shadow-2xl group-hover:underline">
@@ -143,7 +143,7 @@ function Banner({ article }) {
                 className="hidden w-full md:h-96 md:flex md:flex-row h-auto justify-between items-center gap-6 md:gap-2 cursor-pointer articleCard box-border"
             >
                 <div className="flex flex-col text-tugAni-black grow max-w-fit w-full justify-center shrink">
-                    <Link href={`/app/(user)/articles/${article?.id}`}>
+                    <Link href={`/articles/${article?.id}`}>
                         <CategoryCard categoryId={article?.categoryId} className="text-tugAni-red uppercase font-openSansBold"/>
                         <h2 className="font-gotham text-4xl long-text tracking-tighter">
                             {article?.title}
@@ -158,7 +158,7 @@ function Banner({ article }) {
                     <AuthorCard authorId={article?.authorId} className="mt-4 overflow-hidden flex-wrap shrink-0"/>
                 </div>
                 <Link
-                    href={`/app/(user)/articles/${article?.id}`}
+                    href={`/articles/${article?.id}`}
                     className="w-full flex justify-end"
                 >
                     <img

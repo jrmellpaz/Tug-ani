@@ -25,7 +25,7 @@ export default function ArticleCard({ article, className, type }) {
                 />
             </Link>
             <div className="flex flex-col text-tugAni-black grow pt-1 w-full sm:w-[80%] justify-center">
-                <Link href={`/app/(user)/articles/${article?.id}`} className="w-full">
+                <Link href={`/articles/${article?.id}`} className="w-full">
                     {type === "section"
                         ? <SubcategoryCard subcategory={article?.subcategory} className="text-xs text-tugAni-red uppercase font-openSansBold" />
                         : <CategoryCard categoryId={article?.categoryId} className="text-xs text-tugAni-red uppercase font-openSansBold" />
