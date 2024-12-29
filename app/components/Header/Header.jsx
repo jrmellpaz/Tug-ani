@@ -112,14 +112,22 @@ function SideDrawer({ isOpen, setIsOpen, children }) {
             onAnimationEnd={handleAnimationEnd}
         >
             <div className="flex flex-col gap-4 p-4 h-full w-full">
-                <button 
-                    ref={closeRef}
-                    onClick={() => setAnimation(true)} 
-                    title="Close menu"
-                    className="flex justify-center items-center md:hidden outline-none w-10 h-10 rounded-full hover:bg-[#ed1f3a10] mt-4"
-                > 
-                    <X size={20} className="hover:text-tugAni-red" />
-                </button>
+                <div className={"flex flex-row items-center gap-4"}>
+                    <button
+                        ref={closeRef}
+                        onClick={() => setAnimation(true)}
+                        title="Close menu"
+                        className="flex justify-center items-center outline-none w-10 h-10 rounded-full hover:bg-[#ed1f3a10] shrink-0"
+                    >
+                        <X size={20} className="hover:text-tugAni-red" />
+                    </button>
+                    <Link href={"/"} className="w-full flex justify-center items-center pr-8">
+                        <div className="h-16 w-full flex items-center gap-3">
+                            <img className="h-2/3" src="/logo.svg" alt="Tug-ani logo" />
+                            <h1 className="font-bebas text-2xl text-tugAni-black">Tug-ani</h1>
+                        </div>
+                    </Link>
+                </div>
                 <div className="w-full my-4">
                     <Searchbar type="sidebar" />
                 </div>

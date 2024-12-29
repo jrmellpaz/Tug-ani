@@ -16,15 +16,15 @@ export default async function LatestArticlesView({ title }) {
     }
 
     return (
-        <div className="flex flex-col items-center gap-4 mb-8">
+        <div className="flex flex-col items-center gap-2 mb-8">
             {articles.map((article, key) => {
                 if (key === 0) {
                     return (
                         <>
                             <Banner key={key} article={article} />
-                            <div className="w-full flex flex-row justify-start items-center gap-3 mt-4 md:mt-8 p-8 md:p-0">
-                                <TrendingUp className="w-12 h-12 text-tugAni-red" />
-                                <h1 className="text-3xl font-bebas text-tugAni-red">
+                            <div className="w-full flex flex-row justify-start items-center gap-3 mt-8 px-4">
+                                <TrendingUp size={36} className="text-tugAni-red" />
+                                <h1 className="text-3xl font-bebas text-tugAni-red mt-1">
                                     {title}
                                 </h1>
                             </div>
@@ -33,9 +33,9 @@ export default async function LatestArticlesView({ title }) {
                 }
                 else {
                     return (
-                        <section className="w-full p-8 md:p-8">
+                        <section className="w-full flex flex-col gap-2 px-4">
                             <ArticleCard key={key} article={article} />
-                            <div className="divider m-0 last:hidden"></div>
+                            <hr className={"border-t-gray-300"} />
                         </section>
                     );
                 }
@@ -60,7 +60,7 @@ export async function SectionView() {
                     return (
                         <div 
                             key={key}
-                            className="flex flex-col gap-4 odd:bg-tugAni-white p-4 pt-8 rounded-box odd:shadow" 
+                            className="flex flex-col gap-4 odd:bg-white p-4 pt-8 rounded-box odd:shadow"
                         >
                             <Link
                                 href={`/category/${category.id}`}
@@ -116,27 +116,27 @@ function Banner({ article }) {
     return (
         <>
             <div
-                className="aspect-video w-full border relative bg-gray-700 overflow-clip md:hidden"
+                className="aspect-video w-full border relative bg-tugAni-black overflow-clip md:hidden"
             >
                 <div
                     className="absolute top-0 w-full h-full flex flex-col justify-end p-8 z-10 group"
                 >
                     <Link href={`/articles/${article?.id}`}>
                         <CategoryCard categoryId={article?.categoryId}
-                                      className="text-tugAni-white text-sm uppercase font-openSansBold drop-shadow"/>
-                        <h2 className="font-gotham text-xl long-text tracking-tight text-tugAni-white drop-shadow-2xl group-hover:underline">
+                                      className="text-tugAni-white text-xs uppercase font-openSansBold drop-shadow"/>
+                        <h2 className="font-gotham text-xl long-text text-tugAni-white drop-shadow-2xl group-hover:underline">
                             {article?.title}
                         </h2>
                         <span className="font-openSansRegular text-xs my-1 text-tugAni-white title">
                             {formattedDate}
                         </span>
                     </Link>
-                    {/* <AuthorCard authorId={article?.authorId} className="mt-4 overflow-hidden text-tugAni-white flex-nowrap shrink-0 drop-shadow-2xl"/> */}
+                    <AuthorCard authorId={article?.authorId} className="mt-4 overflow-hidden text-tugAni-white text-xs flex-nowrap shrink-0 drop-shadow-2xl"/>
                 </div>
                 <img
                     src={article.imageURL}
                     alt={article.slug}
-                    className="object-cover aspect-video w-full opacity-70 rounded-box"
+                    className="object-cover aspect-video w-full opacity-50 rounded-box"
                 />
             </div>
             <div

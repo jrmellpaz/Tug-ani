@@ -30,7 +30,7 @@ export default async function Page({ params }) {
 function AuthorDetails({ author }) {
     return (
         <div
-            className="flex flex-col gap-8 bg-tugAni-red py-12 px-8 md:px-20 text-tugAni-white w-full selection:bg-[#ED1F3A]"
+            className="flex flex-col gap-8 bg-tugAni-red py-12 px-8 md:px-20 text-tugAni-white w-full selection:bg-[#ED1F3A] rounded-b-box"
         >
             <div
                 className="flex flex-col md:flex-row items-center gap-8 w-full"
@@ -38,7 +38,7 @@ function AuthorDetails({ author }) {
                 <img 
                     src={author.photoURL} 
                     alt={author.name}
-                    className="aspect-square w-28 md:w-48 rounded-full object-cover" 
+                    className="aspect-square w-32 md:w-48 rounded-full object-cover"
                 />
                 <div className="w-full">
                     <h3
@@ -47,16 +47,16 @@ function AuthorDetails({ author }) {
                         ALL STORIES BY:
                     </h3>
                     <h1
-                        className="font-gotham tracking-tighter text-center md:text-left text-5xl sm:text-6xl md:text-7l"
+                        className="font-gotham tracking-tighter text-center md:text-left text-3xl sm:text-4xl md:text-5xl"
                     >
                         {author.name}
                     </h1>
                     {author.email && <div
-                        className="flex items-center gap-3 mt-4 justify-self-center md:justify-self-start"
+                        className="flex items-center gap-2 mt-4 justify-self-center md:justify-self-start"
                     >
-                        <Mail className="h-8 w-8" />
+                        <Mail size={22} />
                         <span 
-                            className="font-openSansRegular select-all"
+                            className="font-openSansRegular text-sm select-all"
                         >
                             {author.email}
                         </span>
