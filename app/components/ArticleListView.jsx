@@ -123,8 +123,8 @@ function Banner({ article }) {
                 >
                     <Link href={`/articles/${article?.id}`}>
                         <CategoryCard categoryId={article?.categoryId}
-                                      className="text-tugAni-white text-xs uppercase font-openSansBold drop-shadow"/>
-                        <h2 className="font-gotham text-xl long-text text-tugAni-white drop-shadow-2xl group-hover:underline">
+                                      className="text-tugAni-red text-xs uppercase font-openSansBold drop-shadow bg-tugAni-white px-2 py-1 rounded-badge"/>
+                        <h2 className="font-gotham text-xl long-text text-tugAni-white drop-shadow-2xl group-hover:underline mt-1">
                             {article?.title}
                         </h2>
                         <span className="font-openSansRegular text-xs my-1 text-tugAni-white title">

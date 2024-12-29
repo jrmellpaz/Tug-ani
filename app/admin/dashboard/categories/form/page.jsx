@@ -94,9 +94,10 @@ export default function CategoriesForm() {
                         <input required
                             type="text"
                             onChange={(event) => {
-                                handleData("subcategories", JSON.stringify(event.target.value.split(/\s*,\s*(?:,\s*)*/)));
+                                console.log("res", event.target.value.split(/\s*,\s*(?:,\s*)*/))
+                                handleData("subcategories", event.target.value.split(/\s*,\s*(?:,\s*)*/));
                             }}
-                            value={data?.subcategories ? JSON.parse(data?.subcategories) : data?.subcategories}
+                            value={data?.subcategories ? data?.subcategories : []}
                             id="categorySub"
                             name="categorySub"
                             placeholder="Separate by comma"

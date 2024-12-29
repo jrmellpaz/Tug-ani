@@ -33,7 +33,7 @@ export default function CategoriesListView() {
     return (
         <section className="w-full gap-4 pb-16 items-center grid grid-cols-[repeat(auto-fill,_400px)] auto-rows-max gap-y-8 justify-center box-border">
             {data?.sort((a, b) => a.order - b.order).map((item, key) => {
-                return <div key={item?.id} className="card bg-base-100 w-96 shadow h-full">
+                return <div key={key} className="card bg-base-100 w-96 shadow h-full">
                     <figure>
                         <img
                             src={item?.iconURL}
@@ -72,7 +72,7 @@ export default function CategoriesListView() {
                             </div>
                         </div>
                         <div className="font-openSansRegular text-xs flex flex-row gap-1 flex-wrap mb-3">
-                            {item?.subcategories ? JSON.parse(item?.subcategories).filter(subcategory => subcategory.length > 0).map((subcategory, key) => {
+                            {item?.subcategories ? (item?.subcategories).map((subcategory, key) => {
                                 return <span 
                                     key={key}
                                     className="text-base-100 bg-tugAni-red rounded-badge px-3 py-1"

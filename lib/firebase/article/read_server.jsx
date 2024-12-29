@@ -23,11 +23,10 @@ export const getArticlesByCategory = async (categoryId) => {
         articlesRef,
         where("categoryId", "==", categoryId),
         orderBy("publishedTimestamp", "desc"),
-        limit(20)
+        limit(9)
     );
     const articlesSnapshot = await getDocs(articlesQuery);
-    const articlesList = articlesSnapshot.docs.map(doc => doc.data());
-    return articlesList;
+    return articlesSnapshot.docs.map(doc => doc.data());
 }
 
 export const getArticlesByAuthor = async (authorId) => {
@@ -38,11 +37,22 @@ export const getArticlesByAuthor = async (authorId) => {
         orderBy("publishedTimestamp", "desc")
     );
     const articlesSnapshot = await getDocs(articlesQuery);
-    const articlesList = articlesSnapshot.docs.map(doc => doc.data());
-    return articlesList;
+    return articlesSnapshot.docs.map(doc => doc.data());
 }
 
 export const getArticle = async (id) => {
     const res =  await getDoc(doc(db, `articles/${id}`));
     return res.data();
+}
+
+export const getArticlesBySubcategory = async (id) => {
+    const articlesRef = collection(db, "articles");
+    const articlesQuery = query(
+        articlesRef,
+        where("subcategory", "==", id),
+        orderBy("publishedTimestamp", "desc"),
+        limit(9)
+    );
+    const articlesSnapshot = await getDocs(articlesQuery);
+    return articlesSnapshot.docs.map(doc => doc.data());
 }

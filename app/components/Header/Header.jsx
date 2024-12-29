@@ -41,24 +41,24 @@ export default function Header({ children }) {
             transition={{ duration: 0.35, ease: "easeInOut" }}
             className="box-border sticky top-0 w-full pt-4 px-[5%] z-50"
         >
-            <div className="w-full px-4 md:px-8 flex flex-row items-center drop-shadow rounded-2xl glass">
-                <div className="w-full md:w-fit h-16 flex items-center justify-between md:justify-center shrink-0">
+            <div className="w-full px-4 lg:px-8 flex flex-row items-center drop-shadow rounded-2xl glass">
+                <div className="w-full lg:w-fit h-16 flex items-center justify-between lg:justify-center shrink-0">
                     <button 
                         onClick={() => setMenuOpened(!menuOpened)} 
                         title="Menu"
-                        className="flex justify-center items-center md:hidden outline-none w-10 h-10 rounded-full hover:bg-[#ed1f3a10]"
+                        className="flex justify-center items-center lg:hidden outline-none w-10 h-10 rounded-full hover:bg-[#ed1f3a10]"
                     > 
                         <MenuIcon size={20} className="hover:text-tugAni-red" />
                     </button>
                     <Link href={"/"} className="w-full flex justify-center items-center pr-8">
                         <div className="h-16 w-full flex flex-row justify-center items-center gap-3">
                             <img className="h-2/3" src="/logo.svg" alt="Tug-ani logo" />
-                            <h1 className="font-bebas text-2xl text-tugAni-black md:hidden lg:block">Tug-ani</h1>
+                            <h1 className="font-bebas text-2xl text-tugAni-blac">Tug-ani</h1>
                         </div>
                     </Link>
                     <div></div>
                 </div>
-                <div className={`w-full md:flex ${searchbarOpened ? "justify-end" : "justify-between"} gap-4 h-10 hidden`}>
+                <div className={`w-full lg:flex ${searchbarOpened ? "justify-end" : "justify-between"} gap-4 h-10 hidden`}>
                     <div className={`${searchbarOpened ? "hidden" : "flex"} justify-center items-center transition-all`}>
                         {children}
                     </div>

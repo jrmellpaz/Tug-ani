@@ -5,8 +5,7 @@ export const getCategories = async () => {
     const categoriesRef = collection(db, "categories");
     const categoriesQuery = query(categoriesRef, orderBy("order"));
     const categoriesSnapshot = await getDocs(categoriesQuery);
-    const categoriesList = categoriesSnapshot.docs.map(doc => doc.data());
-    return categoriesList;
+    return categoriesSnapshot.docs.map(doc => doc.data());
 }
 
 export const getCategory = async (id) => {
