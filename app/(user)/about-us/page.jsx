@@ -1,5 +1,9 @@
 import { getAbout } from "@/lib/firebase/about/read_server"
 
+export const metadata = {
+    title: "About us",
+}
+
 export default async function Page() {
     const { bannerURL, boardTitle, boardTitleText, intro, introText, profiles }  = await getAbout();
     return (

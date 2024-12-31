@@ -1,23 +1,95 @@
 import { getArticle } from "@/lib/firebase/article/read_server"
 import { AuthorCard } from "@/app/components/AuthorCard";
 import { CategoryCard } from "@/app/components/CategoryCard";
+import { getCategory } from "@/lib/firebase/category/read_server";
+import {getAuthors} from "@/lib/firebase/author/read_server";
+
+export async function generateMetadata({ params }) {
+    const { articleId } = await params;
+    const article = await getArticle(articleId);
+    const category = await getCategory(article.categoryId);
+    const authorPromises = article.authorId.map(id => getAuthors(id));
+    const authors = await Promise.all(authorPromises);
+
+    const formattedDate = new Date(article.publishedTimestamp.seconds * 1000).toLocaleString("en-GB", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+    });
+
+    let formattedEditDate = '';
+    if (article.editedTimestamp) {
+        formattedEditDate = new Date(article.editedTimestamp.seconds * 1000).toLocaleString("en-GB", {
+            day: "2-digit",
+            month: "long",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true,
+        });
+    }
+
+    return {
+        title: article.title,
+        description: article.description,
+        keywords: [
+            category.title,
+            article.subcategory,
+        ],
+        category: category.title,
+        openGraph: {
+            siteName: "Tug-ani",
+            title: article.title,
+            description: article.description,
+            type: "article",
+            publishedTime: formattedDate,
+            modifiedTime: formattedEditDate,
+            authors: authors.map((author) => author.name),
+            section: category.title,
+            tag: [article.subcategory],
+            images: [
+                {
+                    url: article.imageURL,
+                    alt: `${article.title} banner`,
+                }
+            ]
+        },
+        twitter: {
+            title: article.title,
+            description: article.description,
+            image: {
+                url: article.imageURL,
+                alt: `${article.title} banner`,
+            }
+        }
+    }
+}
 
 export default async function Page({ params }) {
     const { articleId } = await params;
     const article = await getArticle(articleId);
     console.log("article", article);
-    const formattedDate = new Date(article.publishedTimestamp.seconds * 1000).toLocaleDateString("en-GB", {
+    const formattedDate = new Date(article.publishedTimestamp.seconds * 1000).toLocaleString("en-GB", {
         day: "2-digit",
         month: "long",
-        year: "numeric"
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
     });
     
     let formattedEditDate = '';
     if (article.editedTimestamp) {
-        formattedEditDate = new Date(article.editedTimestamp.seconds * 1000).toLocaleDateString("en-GB", {
+        formattedEditDate = new Date(article.editedTimestamp.seconds * 1000).toLocaleString("en-GB", {
             day: "2-digit",
             month: "long",
-            year: "numeric"
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true,
         });
     }
 

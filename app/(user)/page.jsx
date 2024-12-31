@@ -1,5 +1,9 @@
 import LatestArticlesView, { SectionView } from "../components/ArticleListView";
 
+export const metadata = {
+    title: "Home",
+}
+
 export default function Home() {
     return (
         <>

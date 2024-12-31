@@ -58,13 +58,79 @@ const gotham = localFont({
 });
 
 export const metadata = {
-	title: "Tug-ani",
+	title: {
+		template: "%s - Tug-ani",
+		default: "Tug-ani",
+	},
 	description: "Tug-ani is the official school publication of the University of the Philippines Cebu since its advent in 1974.",
+	icons: {
+		icon: [
+			{
+				media: "(prefers-color-scheme: dark)",
+				url: "/icons/favicon.ico",
+				href: "/icons/favicon.ico",
+			},
+			{
+				media: "(prefers-color-scheme: light)",
+				url: "/icons/icon.png",
+				href: "/icons/icon.png",
+			},
+		],
+	},
+	keywords: [
+		"Tug-ani",
+		"UP",
+		"UP Cebu",
+		"University of the Philippines",
+		"University of the Philippines Cebu",
+		"publication",
+		"school publication",
+		"journalism",
+		"news",
+		"newspaper",
+		"Cebu",
+		"Philippines",
+		"Visayas",
+		"editorial board",
+		"editorial"
+	],
+	applicationName: "Tug-ani",
+	publisher: "Tug-ani",
+	openGraph: {
+		siteName: "Tug-ani",
+		title: "Tug-ani",
+		description: "The official school publication of the University of the Philippines Cebu since 1974",
+		images: [
+			{
+				url: "https://firebasestorage.googleapis.com/v0/b/tug-ani.appspot.com/o/openGraph%2Fbanner.png?alt=media&token=94360740-faa8-45a4-be15-e24d6713adb5",
+				alt: "Tug-ani banner",
+				width: 3840,
+				height: 2160,
+			}
+		]
+	},
+	twitter: {
+		card: "summary_large_image",
+		creator: "@upcebutugani",
+		title: "Tug-ani — the official publication of UP Cebu",
+		description: "The official school publication of the University of the Philippines Cebu since 1974",
+		images: {
+			url: "https://firebasestorage.googleapis.com/v0/b/tug-ani.appspot.com/o/openGraph%2Fbanner.png?alt=media&token=94360740-faa8-45a4-be15-e24d6713adb5",
+			// url: "https://firebasestorage.googleapis.com/v0/b/tug-ani.appspot.com/o/openGraph%2Flogo.svg?alt=media&token=b637102e-6c85-493c-940b-35104fd8f06d",
+			alt: "Tug-ani banner",
+		},
+	},
+	category: "news",
 };
 
 export default function RootLayout({ children }) {
 	return (
 		<html lang="en">
+			{/* <head>
+				<link rel="icon" href="/icons/icon.png" sizes="any" />
+				<link rel="manifest" href="public/icons/manifest.json" />
+				<meta name="apple-mobile-web-app-title" content="Tug-ani"/>
+			</head> */}
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable} ${interRegular.variable} ${interBold.variable} ${interItalic.variable} ${openSansRegular.variable} ${openSansBold.variable} ${openSansItalic.variable} ${openSansBoldItalic.variable} ${gotham.variable} antialiased box-border`}
 			>

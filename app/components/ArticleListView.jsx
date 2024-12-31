@@ -20,15 +20,18 @@ export default async function LatestArticlesView({ title }) {
             {articles.map((article, key) => {
                 if (key === 0) {
                     return (
-                        <>
-                            <Banner key={key} article={article} />
+                        <div
+                            key={key}
+                            className={"w-full"}
+                        >
+                            <Banner article={article} />
                             <div className="w-full flex flex-row justify-start items-center gap-3 mt-8 px-4">
                                 <TrendingUp size={36} className="text-tugAni-red" />
                                 <h1 className="text-3xl font-bebas text-tugAni-red mt-1">
                                     {title}
                                 </h1>
                             </div>
-                        </>
+                        </div>
                     );
                 }
                 else {

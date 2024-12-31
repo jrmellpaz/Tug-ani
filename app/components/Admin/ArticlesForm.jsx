@@ -375,7 +375,7 @@ function SelectSubcategoryField() {
             className="p-2 bg-gray-200 font-openSansRegular border-solid border-r-[16px] border-r-transparent outline-none text-tugAni-black text-sm"
         >
             <option value="disabled" disabled selected className="text-gray-500 p-2">Choose a subcategory</option>
-            {data?.categoryId && categories && JSON.parse(categories.find(category => category.id === data?.categoryId).subcategories).filter(subcategory => subcategory !== "").map((subcategory) => {
+            {data?.categoryId && categories && (categories.find(category => category.id === data?.categoryId).subcategories).filter(subcategory => subcategory !== "").map((subcategory) => {
                 return <option
                     key={subcategory}
                     value={subcategory}

@@ -1,7 +1,48 @@
-import {getArticlesByCategory, getArticlesBySubcategory} from "@/lib/firebase/article/read_server";
+import { getArticlesByCategory, getArticlesBySubcategory } from "@/lib/firebase/article/read_server";
 import { getCategory } from "@/lib/firebase/category/read_server";
 import Link from "next/link";
-import {CategoryCard, SubcategoryCard} from "@/app/components/CategoryCard";
+import { SubcategoryCard } from "@/app/components/CategoryCard";
+
+export async function generateMetadata({ params }) {
+    const { categoryId } = await params;
+    const category = await getCategory(categoryId);
+
+    return {
+        title: category.title,
+        description: category.description,
+        keywords: [
+            category.title,
+            "category",
+            "news",
+            "Tug-ani",
+            "UP Cebu",
+            "University of the Philippines Cebu",
+            ...category.subcategories,
+        ],
+        category: category.title,
+        openGraph: {
+            siteName: "Tug-ani",
+            title: category.title,
+            description: category.description,
+            type: "article",
+            section: category.title,
+            images: [
+                {
+                    url: category.iconURL,
+                    alt: `${category.title} banner`,
+                }
+            ]
+        },
+        twitter: {
+            title: category.title,
+            description: category.description,
+            image: {
+                url: category.iconURL,
+                alt: `${category.title} banner`,
+            }
+        }
+    }
+}
 
 export default async function Page({ params }) {
     const { categoryId } = await params;

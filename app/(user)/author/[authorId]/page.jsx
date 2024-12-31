@@ -3,6 +3,44 @@ import { getArticlesByAuthor } from "@/lib/firebase/article/read_server";
 import { getAuthors } from "@/lib/firebase/author/read_server";
 import { Mail } from "lucide-react";
 
+export async function generateMetadata({ params }) {
+    const { authorId } = await params;
+    const author = await getAuthors(authorId);
+
+    return {
+        title: author.name,
+        description: author.description,
+        keywords: [
+            author.name,
+            "author",
+            "Tug-ani",
+            "UP Cebu",
+            "University of the Philippines Cebu",
+        ],
+        category: "news",
+        openGraph: {
+            siteName: "Tug-ani",
+            title: author.name,
+            description: author.description,
+            type: "profile",
+            images: [
+                {
+                    url: author.photoURL,
+                    alt: `${article.title} profile photo`,
+                }
+            ]
+        },
+        twitter: {
+            title: author.name,
+            description: author.description,
+            image: {
+                url: author.photoURL,
+                alt: `${author.name} profile photo`,
+            }
+        }
+    }
+}
+
 export default async function Page({ params }) {
     const { authorId } = await params;
     const author = await getAuthors(authorId);
