@@ -48,10 +48,10 @@ function Banner({ category }) {
                     >
                         {category.title}
                     </h1>
-                    <div className="flex gap-1 mt-2">
+                    <div className="flex gap-2 mt-2">
                         {category.subcategories.map((subcategory) => {
                             return (
-                                <SubcategoryCard subcategory={subcategory} key={subcategory} className="px-2 py-1 bg-tugAni-white rounded-badge text-tugAni-black font-openSansRegular text-xs" />
+                                <SubcategoryCard subcategory={subcategory} key={subcategory} className="px-2 py-1 bg-tugAni-white rounded-badge text-tugAni-red font-openSansBold text-xs uppercase" />
                             );
                         })}
                     </div>
@@ -81,14 +81,14 @@ function Latest({ articles }) {
             </h1>
             {articles.map((article, key) => {
                 return (
-                    <Card key={key} article={article}/>
+                    <Card key={key} article={article} type={"latest"} />
                 )
             })}
         </div>
     );
 }
 
-function Card({article}) {
+function Card({article, type}) {
     const formattedDate = new Date(article.publishedTimestamp.seconds * 1000).toLocaleDateString("en-GB", {
         day: "2-digit",
         month: "long",
@@ -107,11 +107,11 @@ function Card({article}) {
                     className="aspect-video w-full h-auto object-cover rounded-box"
                 />
                 <div className="flex flex-col">
-                    <span
-                        className="font-openSansBold text-xs text-tugAni-red"
+                    {type === "latest" && <span
+                        className="font-openSansBold text-xs text-tugAni-red uppercase"
                     >
                         {article.subcategory}
-                    </span>
+                    </span>}
                     <h1
                         className="mt-1 font-gotham text-tugAni-black text-2xl leading-5 group-hover:text-tugAni-red group-hover:underline"
                     >
@@ -142,7 +142,7 @@ async function Subcategory({ subcategory }) {
             </h1>
             {articles.map((article) => {
                 return (
-                    <Card key={article.id} article={article}/>
+                    <Card key={article.id} article={article} />
                 )
             })}
         </div>

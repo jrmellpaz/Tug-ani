@@ -12,14 +12,15 @@ export default async function Page({ params }) {
         <section>
             <AuthorDetails author={author} />
             <section
-                className="flex flex-col my-12 mx-8 md:mx-20"
+                className="flex flex-col my-12 mx-8 md:mx-20 gap-2"
             >
                 {articles.map((article, key) => {
                     return (
-                        <>
-                            <ArticleCard key={key} article={article} />
-                            <div className="divider last:hidden"></div>
-                        </>
+                        <div key={key} className={"flex flex-col w-full gap-2"}>
+                            <ArticleCard article={article} />
+                            <hr className={"border-t-gray-300"} />
+                            {/*<div className="divider last:hidden"></div>*/}
+                        </div>
                     )
                 })}
             </section>
