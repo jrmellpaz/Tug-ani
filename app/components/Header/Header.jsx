@@ -23,14 +23,6 @@ export default function Header({ children }) {
         }
     });
 
-    function handleMenuClick() {
-        setMenuOpened(!menuOpened);
-    }
-
-    function handleSearchbarClick() {
-        setSearchbarOpened(!searchbarOpened);
-    }
-
     return (
         <motion.nav 
             variants={{
@@ -39,7 +31,7 @@ export default function Header({ children }) {
             }}
             animate={hidden ? "hidden" : "visible"}
             transition={{ duration: 0.35, ease: "easeInOut" }}
-            className="box-border sticky top-0 w-full pt-4 px-[5%] z-50"
+            className="box-border sticky top-0 w-full pt-3 px-[5%] z-50"
         >
             <div className="w-full px-4 lg:px-8 flex flex-row items-center drop-shadow rounded-2xl glass">
                 <div className="w-full lg:w-fit h-16 flex items-center justify-between lg:justify-center shrink-0">

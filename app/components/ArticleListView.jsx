@@ -95,10 +95,10 @@ async function Section({ category }) {
             <div className="flex flex-col gap-4">
                 {articles.map((article, key) => {
                     return (
-                        <>
-                            <ArticleCard key={key} article={article} type="section" />
+                        <div key={key}>
+                            <ArticleCard article={article} type="section" />
                             <div className="divider m-0 last:hidden"></div>
-                        </>
+                        </div>
                     );
                 })}
             </div>
