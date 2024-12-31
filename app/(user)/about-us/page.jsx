@@ -34,7 +34,6 @@ function Intro({ heading, body }) {
             <h1 className="text-4xl md:text-6xl font-gotham text-tugAni-red tracking-tighter">
                 {heading}
             </h1>
-            {console.log("body", formattedBody)}
             <p 
                 className="font-openSansRegular text-tugAni-black"
                 dangerouslySetInnerHTML={{ __html: formattedBody }}
