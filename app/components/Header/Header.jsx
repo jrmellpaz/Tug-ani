@@ -42,7 +42,7 @@ export default function Header({ children }) {
                     > 
                         <MenuIcon size={20} className="hover:text-tugAni-red" />
                     </button>
-                    <Link href={"/"} className="w-full flex justify-center items-center pr-8">
+                    <Link href={"/"} className="w-fit flex justify-center items-center pr-8">
                         <div className="h-16 w-full flex flex-row justify-center items-center gap-3">
                             <img className="h-2/3" src="/logo.svg" alt="Tug-ani logo" />
                             <h1 className="font-bebas text-2xl text-tugAni-blac">Tug-ani</h1>
