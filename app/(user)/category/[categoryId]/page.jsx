@@ -58,10 +58,10 @@ export default async function Page({ params }) {
                 <Latest articles={articles} />
             </section>
             <section>
-                {category.subcategories.map((subcategory) => {
+                {category.subcategories.map((subcategory, index) => {
                     return (
                         <div
-                            key={subcategory.id}
+                            key={index}
                             className="w-full odd:bg-white"
                         >
                             <Subcategory subcategory={subcategory} />
@@ -93,9 +93,9 @@ function Banner({ category }) {
                         {category.title}
                     </h1>
                     <div className="flex gap-2 mt-2">
-                        {category.subcategories.map((subcategory) => {
+                        {category.subcategories.map((subcategory, index) => {
                             return (
-                                <SubcategoryCard subcategory={subcategory} key={subcategory} className="px-2 py-1 bg-tugAni-white rounded-badge text-tugAni-red font-openSansBold text-xs uppercase" />
+                                <SubcategoryCard subcategory={subcategory} key={index} className="px-2 py-1 bg-tugAni-white rounded-badge text-tugAni-red font-openSansBold text-xs uppercase" />
                             );
                         })}
                     </div>
@@ -157,7 +157,7 @@ function Card({article, type}) {
                         {article.subcategory}
                     </span>}
                     <h1
-                        className="mt-1 font-gotham text-tugAni-black text-2xl tracking-tight leading-5 group-hover:text-tugAni-red group-hover:underline"
+                        className="mt-1 font-gotham text-tugAni-black text-2xl tracking-tight leading-5 group-hover:text-tugAni-red group-hover:underline category-card-title"
                     >
                         {article.title}
                     </h1>
@@ -184,9 +184,9 @@ async function Subcategory({ subcategory }) {
             >
                 {subcategory}
             </h1>
-            {articles.map((article) => {
+            {articles.map((article, index) => {
                 return (
-                    <Card key={article.id} article={article} />
+                    <Card key={index} article={article} />
                 )
             })}
         </div>

@@ -15,7 +15,7 @@ export default function ArticleCard({ article, className, type }) {
             className={cn("w-full flex flex-col gap-2 sm:gap-4 sm:flex-row h-auto items-start sm:items-center articleCard cursor-pointer transition-all p-3 rounded-box overflow-hidden hover:bg-[#ed1f3a10]", className)}
         >
             <Link 
-                href={`/app/(user)/articles/${article?.id}`}
+                href={`/articles/${article?.id}`}
                 className="w-full sm:max-w-fit shrink-0"
             >
                 <img
