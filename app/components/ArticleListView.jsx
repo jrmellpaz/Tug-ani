@@ -36,8 +36,8 @@ export default async function LatestArticlesView({ title }) {
                 }
                 else {
                     return (
-                        <section className="w-full flex flex-col gap-2 px-4">
-                            <ArticleCard key={key} article={article} />
+                        <section key={key} className="w-full flex flex-col gap-2 px-4">
+                            <ArticleCard article={article} />
                             <hr className={"border-t-gray-300"} />
                         </section>
                     );

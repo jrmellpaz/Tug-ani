@@ -54,13 +54,18 @@ export default async function Page({ params }) {
             <section className="w-full flex justify-center md:px-20">
                 <Banner category={category} />
             </section>
-            <section>
+            <section className="w-full">
                 <Latest articles={articles} />
             </section>
             <section>
                 {category.subcategories.map((subcategory) => {
                     return (
-                        <Subcategory subcategory={subcategory} key={subcategory.id} />
+                        <div
+                            key={subcategory.id}
+                            className="w-full odd:bg-white"
+                        >
+                            <Subcategory subcategory={subcategory} />
+                        </div>
                     )
                 })}
             </section>
@@ -69,8 +74,6 @@ export default async function Page({ params }) {
 }
 
 function Banner({ category }) {
-    console.log(category);
-
     return (
         <div
             className="w-full h-[400px] border relative bg-tugAni-black overflow-clip rounded-b-box"
@@ -113,7 +116,7 @@ function Banner({ category }) {
 function Latest({ articles }) {
     return (
         <div
-            className="grid grid-cols-[repeat(auto-fill,_400px)] auto-rows-max justify-center gap-8 py-12 px-8"
+            className="w-full grid grid-cols-[repeat(auto-fill,minmax(256px,1fr))] auto-rows-max justify-center gap-4 gap-y-8 py-12 px-8 sm:px-20"
         >
             <h1
                 className="text-3xl font-bebas text-tugAni-red col-span-row col-span-full"
@@ -137,10 +140,10 @@ function Card({article, type}) {
     });
 
     return (
-        <div className="min-w-96">
+        <div className="w-full">
             <Link
-                href={`/article/${article.id}`}
-                className="flex flex-col gap-4 group"
+                href={`/articles/${article.id}`}
+                className="flex flex-col gap-2 group"
             >
                 <img
                     src={article.imageURL}
@@ -154,7 +157,7 @@ function Card({article, type}) {
                         {article.subcategory}
                     </span>}
                     <h1
-                        className="mt-1 font-gotham text-tugAni-black text-2xl leading-5 group-hover:text-tugAni-red group-hover:underline"
+                        className="mt-1 font-gotham text-tugAni-black text-2xl tracking-tight leading-5 group-hover:text-tugAni-red group-hover:underline"
                     >
                         {article.title}
                     </h1>
@@ -174,7 +177,7 @@ async function Subcategory({ subcategory }) {
 
     return (
         <div
-            className="grid grid-cols-[repeat(auto-fill,_400px)] auto-rows-max justify-center gap-8 py-12 px-8 odd:bg-white"
+            className="w-full grid grid-cols-[repeat(auto-fill,minmax(256px,1fr))] auto-rows-max justify-center gap-4 gap-y-8 py-12 px-8 sm:px-20"
         >
             <h1
                 className="text-3xl font-bebas text-tugAni-red col-span-full"

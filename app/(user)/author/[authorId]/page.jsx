@@ -26,7 +26,7 @@ export async function generateMetadata({ params }) {
             images: [
                 {
                     url: author.photoURL,
-                    alt: `${article.title} profile photo`,
+                    alt: `${author.name} profile photo`,
                 }
             ]
         },

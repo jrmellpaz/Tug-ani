@@ -107,7 +107,7 @@ function SideDrawer({ isOpen, setIsOpen, children }) {
         <dialog
             id="side-drawer"
             ref={dialogRef}
-            className={`sidebar bg-base-100 p-0 ${animation ? "sidebar-close" : ""}`}
+            className={`sidebar bg-base-100 p-0 h-dvh ${animation ? "sidebar-close" : ""}`}
             onClick={handleClose}
             onAnimationEnd={handleAnimationEnd}
         >
