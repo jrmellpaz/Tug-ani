@@ -36,7 +36,7 @@ export default async function LatestArticlesView({ title }) {
                 }
                 else {
                     return (
-                        <section key={key} className="w-full flex flex-col gap-2 px-4">
+                        <section key={key} className="w-full flex flex-col gap-2 px-4 [&:last-child_hr]:hidden">
                             <ArticleCard article={article} />
                             <hr className={"border-t-gray-300"} />
                         </section>
@@ -92,12 +92,12 @@ async function Section({ category }) {
 
     return (
         <section>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-2">
                 {articles.map((article, key) => {
                     return (
-                        <div key={key}>
+                        <div key={key} className="flex flex-col gap-2 [&:last-child_hr]:hidden">
                             <ArticleCard article={article} type="section" />
-                            <div className="divider m-0 last:hidden"></div>
+                            <hr className={"border-t-gray-300"} />
                         </div>
                     );
                 })}
@@ -143,7 +143,7 @@ function Banner({ article }) {
                 />
             </div>
             <div
-                className="hidden w-full md:h-96 md:flex md:flex-row h-auto justify-between items-center gap-6 md:gap-2 cursor-pointer articleCard box-border"
+                className="hidden w-full md:h-96 md:flex md:flex-row h-auto justify-between items-center gap-6 cursor-pointer articleCard box-border"
             >
                 <div className="flex flex-col text-tugAni-black grow max-w-fit w-full justify-center shrink">
                     <Link href={`/articles/${article?.id}`}>
@@ -154,7 +154,7 @@ function Banner({ article }) {
                         <span className="font-openSansRegular text-xs my-1 text-gray-500 title">
                                 {formattedDate}
                         </span>
-                        <p className="mt-4 long-text font-openSansRegular">
+                        <p className="mt-4 long-text font-openSansRegular text-gray-700">
                             {article?.description}
                         </p>
                     </Link>
