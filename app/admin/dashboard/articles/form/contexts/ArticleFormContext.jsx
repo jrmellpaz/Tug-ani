@@ -2,6 +2,7 @@
 
 import { getArticle } from "@/lib/firebase/article/read";
 import { createNewArticle, deleteArticle, updateArticle } from "@/lib/firebase/article/write";
+import { redirect } from "next/navigation";
 import { createContext, useContext, useState } from"react";
 
 const ArticleFormContext = createContext();
@@ -27,8 +28,10 @@ export default function ArticleFormContextProvider({ children }) {
         setIsLoading(true);
         setIsDone(false);
 
+        let id;
+
         try {
-            await createNewArticle({data: data, image: image});
+            id = await createNewArticle({data: data, image: image});
             setIsDone(true);
         }
         catch (error) {
@@ -36,6 +39,7 @@ export default function ArticleFormContextProvider({ children }) {
         }
 
         setIsLoading(false);
+        redirect(`/admin/dashboard/articles/form?id=${id}`);
     };
 
     const handleUpdate = async () => {

@@ -45,6 +45,8 @@ export const createNewArticle = async ({ data, image }) => {
         imageURL: imageURL,
         publishedTimestamp: Timestamp.now(),
     });
+
+    return id;
 }
 
 export const uploadContentImage = async (image) => {
