@@ -1,9 +1,39 @@
 "use client";
 
 import { SearchIcon, X } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useSearchParams, usePathname, useRouter } from "next/navigation";
 
-export default function Searchbar({ searchbarOpened, setSearchbarOpened, type="" }) {
+export default function Searchbar({ searchbarOpened, setSearchbarOpened, type = "" }) {
+    const searchParams = useSearchParams();
+    const pathname = usePathname();
+    const { replace } = useRouter();
+
+    const [query, setQuery] = useState(searchParams.get("query") || "");
+    const debounceTimer = useRef(null); 
+
+    const handleSearch = (term) => {
+        if (debounceTimer.current) {
+            clearTimeout(debounceTimer.current); 
+        }
+
+        debounceTimer.current = setTimeout(() => {
+            console.log(`Searching... ${term}`);
+            const params = new URLSearchParams(searchParams);
+            if (term) {
+                params.set("query", term);
+            } else {
+                params.delete("query");
+            }
+
+            if (replace) {
+                replace(`${pathname}?${params.toString()}`);
+            } else {
+                window.history.replaceState(null, "", `${pathname}?${params.toString()}`);
+            }
+        }, 300); 
+    };
+
     const searchbarRef = useRef(null);
 
     useEffect(() => {
@@ -17,12 +47,20 @@ export default function Searchbar({ searchbarOpened, setSearchbarOpened, type=""
 
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
-        }
+            if (debounceTimer.current) {
+                clearTimeout(debounceTimer.current); 
+            }
+        };
     }, [searchbarRef, setSearchbarOpened]);
 
     const handleSubmit = (event) => {
         event.preventDefault();
-    }
+        if (debounceTimer.current) {
+            clearTimeout(debounceTimer.current);
+            debounceTimer.current = null;
+        }
+        handleSearch(query);
+    };
 
     if (!searchbarOpened && type !== "sidebar") {
         return (
@@ -35,19 +73,18 @@ export default function Searchbar({ searchbarOpened, setSearchbarOpened, type=""
             </button>
         );
     }
-    
+
     return (
         <div className="flex items-center gap-2 border-box">
-            {type !== "sidebar" && <button 
-                title="Close searchbar"
-                className="outline-none p-3 rounded-full flex justify-center items-center hover:bg-[#ed1f3a10] group"
-            >
-                <X 
+            {type !== "sidebar" && (
+                <button
+                    title="Close searchbar"
+                    className="outline-none p-3 rounded-full flex justify-center items-center hover:bg-[#ed1f3a10] group"
                     onClick={() => setSearchbarOpened(false)}
-                    strokeWidth={3} 
-                    className="h-4 w-4 group-hover:text-tugAni-red" 
-                />
-            </button>}
+                >
+                    <X strokeWidth={3} className="h-4 w-4 group-hover:text-tugAni-red" />
+                </button>
+            )}
             <form
                 ref={searchbarRef}
                 className="flex items-center group w-full"
@@ -56,8 +93,15 @@ export default function Searchbar({ searchbarOpened, setSearchbarOpened, type=""
                 <input
                     autoFocus={true}
                     type="text"
+                    value={query}
+                    onChange={(e) => {
+                        setQuery(e.target.value);
+                        handleSearch(e.target.value);
+                    }}
                     placeholder="What are you looking for?"
-                    className={`font-openSansRegular text-tugAni-black text-sm ${type !== "sidebar" ? "w-80" : "w-full grow"} py-2 px-3 rounded-l-full outline-none group-hover:shadow group-focus:shadow border focus:border-tugAni-red border-tugAni-black bg-transparent`}
+                    className={`font-openSansRegular text-tugAni-black text-sm ${
+                        type !== "sidebar" ? "w-80" : "w-full grow"
+                    } py-2 px-3 rounded-l-full outline-none group-hover:shadow group-focus:shadow border focus:border-tugAni-red border-tugAni-black bg-transparent`}
                 />
                 <button
                     className="bg-tugAni-red py-[8.5px] pl-3 pr-4 rounded-r-full group-hover:shadow group-focus:shadow-xl"
