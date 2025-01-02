@@ -30,7 +30,7 @@ export default function ArticleCard({ article, className, type }) {
                         ? <SubcategoryCard subcategory={article?.subcategory} className="text-xs text-tugAni-red uppercase font-openSansBold" />
                         : <CategoryCard categoryId={article?.categoryId} className="text-xs text-tugAni-red uppercase font-openSansBold" />
                     }
-                    <h2 className="font-gotham text-xl title tracking-tight m-0 p-0">
+                    <h2 className="font-gotham text-xl long-text leading-5 lg:title tracking-tight m-0 p-0">
                         {article?.title}
                     </h2>
                     <span className="font-openSansRegular text-xs my-1 text-gray-500 title">

@@ -11,7 +11,7 @@ export async function AuthorCard({ authorId, className="" }) {
     }
 
     return (
-        <div className={cn("flex gap-4 w-full", className)}>
+        <div className={cn("flex gap-4 w-full text-sm overflow-x-auto", className)}>
             {authors.map(author => (
                 <Link 
                     key={author.id}
@@ -24,7 +24,7 @@ export async function AuthorCard({ authorId, className="" }) {
                             alt={author.name}
                             className="aspect-square rounded-full w-6 h-6 object-cover"
                         />
-                        <p className="font-openSansBold text-sm whitespace-nowrap hover:text-tugAni-red">{author.name}</p>
+                        <p className="font-openSansBold whitespace-nowrap hover:text-tugAni-red">{author.name}</p>
                     </div>
                 </Link>
             ))}
