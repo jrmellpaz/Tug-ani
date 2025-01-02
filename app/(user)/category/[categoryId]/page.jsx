@@ -58,7 +58,7 @@ export default async function Page({ params }) {
                 <Latest articles={articles} />
             </section>
             <section>
-                {category.subcategories.map((subcategory, index) => {
+                {category?.subcategories.map((subcategory, index) => {
                     return (
                         <div
                             key={index}
@@ -81,21 +81,21 @@ function Banner({ category }) {
             <div
                 className="absolute top-0 w-full h-full flex flex-col justify-between p-8 md:px-20 z-10 group text-tugAni-white"
             >
-                <div>
+                <div className="flex flex-col">
                     <h3
                         className="uppercase font-bebas text-2xl"
                     >
                         ALL STORIES TAGGED:
                     </h3>
                     <h1
-                        className="font-gotham tracking-tighter text-7xl drop-shadow-lg"
+                        className="font-gotham tracking-tighter text-5xl md:text-7xl drop-shadow-lg"
                     >
                         {category.title}
                     </h1>
-                    <div className="flex gap-2 mt-2">
+                    <div className="flex gap-2 mt-2 overflow-x-auto">
                         {category.subcategories.map((subcategory, index) => {
                             return (
-                                <SubcategoryCard subcategory={subcategory} key={index} className="px-2 py-1 bg-tugAni-white rounded-badge text-tugAni-red font-openSansBold text-xs uppercase" />
+                                <SubcategoryCard subcategory={subcategory} key={index} className="px-2 py-1 bg-tugAni-white rounded-badge text-tugAni-red font-openSansBold text-xs uppercase shrink-0" />
                             );
                         })}
                     </div>

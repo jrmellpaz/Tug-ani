@@ -63,7 +63,7 @@ export const metadata = {
 		default: "Tug-ani",
 	},
 	description: "Tug-ani is the official school publication of the University of the Philippines Cebu since its advent in 1974.",
-	manifest: "./manifest.json",
+	// manifest: "./manifest.json",
 	icons: {
 		icon: [
 			{

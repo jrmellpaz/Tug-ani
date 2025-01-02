@@ -5,7 +5,7 @@ export default async function Menu() {
     const categories = await getCategories();
 
     return (
-        <ul className="justify-start flex flex-col lg:flex-row pb-1 lg:gap-1">
+        <ul className="justify-start flex flex-col lg:flex-row pb-1">
             <Link
                 href="/"
                 className="flex items-center"

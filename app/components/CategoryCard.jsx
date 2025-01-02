@@ -10,6 +10,6 @@ export async function CategoryCard({ categoryId, className }) {
 
 export function SubcategoryCard({ subcategory, className }) {
     return (
-        <span className={cn(className)}>{subcategory}</span>
+        <span className={cn(className, "w-fit")}>{subcategory}</span>
     );
 }
