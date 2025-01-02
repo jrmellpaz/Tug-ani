@@ -15,7 +15,7 @@ export default function ArticleCard({ article, className, type }) {
             className={cn("w-full flex flex-col gap-2 sm:gap-4 sm:flex-row h-auto items-start sm:items-center articleCard cursor-pointer transition-all p-3 rounded-box overflow-hidden hover:bg-[#ed1f3a10]", className)}
         >
             <Link 
-                href={`/articles/${article?.id}`}
+                href={`/article/${article?.id}`}
                 className="w-full sm:max-w-fit shrink-0"
             >
                 <img
@@ -25,7 +25,7 @@ export default function ArticleCard({ article, className, type }) {
                 />
             </Link>
             <div className="flex flex-col text-tugAni-black grow pt-1 w-full sm:w-[80%] justify-center">
-                <Link href={`/articles/${article?.id}`} className="w-full">
+                <Link href={`/article/${article?.id}`} className="w-full">
                     {type === "section"
                         ? <SubcategoryCard subcategory={article?.subcategory} className="text-xs text-tugAni-red uppercase font-openSansBold" />
                         : <CategoryCard categoryId={article?.categoryId} className="text-xs text-tugAni-red uppercase font-openSansBold" />

@@ -142,7 +142,7 @@ function Card({article, type}) {
     return (
         <div className="w-full">
             <Link
-                href={`/articles/${article.id}`}
+                href={`/article/${article.id}`}
                 className="flex flex-col gap-2 group"
             >
                 <img
