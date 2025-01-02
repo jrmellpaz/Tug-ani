@@ -35,7 +35,7 @@ function Intro({ heading, body }) {
 
     return (
         <div className="flex flex-col items-center w-full gap-4">
-            <h1 className="text-4xl md:text-6xl font-gotham text-tugAni-red tracking-tighter">
+            <h1 className="text-4xl md:text-6xl font-gotham text-tugAni-red tracking-tighter text-center">
                 {heading}
             </h1>
             <p 
