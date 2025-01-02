@@ -63,6 +63,7 @@ export const metadata = {
 		default: "Tug-ani",
 	},
 	description: "Tug-ani is the official school publication of the University of the Philippines Cebu since its advent in 1974.",
+	manifest: "./manifest.json",
 	icons: {
 		icon: [
 			{
@@ -116,7 +117,6 @@ export const metadata = {
 		description: "The official school publication of the University of the Philippines Cebu since 1974",
 		images: {
 			url: "https://firebasestorage.googleapis.com/v0/b/tug-ani.appspot.com/o/openGraph%2Fbanner.png?alt=media&token=94360740-faa8-45a4-be15-e24d6713adb5",
-			// url: "https://firebasestorage.googleapis.com/v0/b/tug-ani.appspot.com/o/openGraph%2Flogo.svg?alt=media&token=b637102e-6c85-493c-940b-35104fd8f06d",
 			alt: "Tug-ani banner",
 		},
 	},
@@ -126,11 +126,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
 	return (
 		<html lang="en">
-			{/* <head>
-				<link rel="icon" href="/icons/icon.png" sizes="any" />
-				<link rel="manifest" href="public/icons/manifest.json" />
+			<head>
 				<meta name="apple-mobile-web-app-title" content="Tug-ani"/>
-			</head> */}
+			</head>
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable} ${interRegular.variable} ${interBold.variable} ${interItalic.variable} ${openSansRegular.variable} ${openSansBold.variable} ${openSansItalic.variable} ${openSansBoldItalic.variable} ${gotham.variable} antialiased box-border`}
 			>
