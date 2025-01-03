@@ -54,10 +54,9 @@ export default async function Page({ params }) {
             >
                 {articles.map((article, key) => {
                     return (
-                        <div key={key} className={"flex flex-col w-full gap-2"}>
+                        <div key={key} className={"flex flex-col w-full gap-2 [&:last-child_hr]:hidden"}>
                             <ArticleCard article={article} />
                             <hr className={"border-t-gray-300"} />
-                            {/*<div className="divider last:hidden"></div>*/}
                         </div>
                     )
                 })}

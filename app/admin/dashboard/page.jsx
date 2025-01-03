@@ -8,6 +8,9 @@ export default function AdminDashboard() {
     return (
         <>
             <AdminHeader />
+            <h1 className="font-bebas mt-8 ml-8 sm:ml-20 text-4xl text-tugAni-red">
+                Dashboard
+            </h1>
             <main className="box-border p-8 sm:px-20 pb-16 h-fit w-dvw bg-tugAni-white grid grid-cols-[repeat(auto-fill,_minmax(240px,_1fr))] gap-4">
                 <DashboardLink href="/admin/dashboard/articles">
                     <NewspaperIcon size={56} className="text-tugAni-black" />

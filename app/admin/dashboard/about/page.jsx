@@ -194,7 +194,7 @@ function ProfileGallery() {
                         onChange={(e) => handleProfileChange(index, "name", e.target.value)}
                         type="text"
                         placeholder="Enter profile name"
-                        className="w-full p-2 bg-gray-100 hover:bg-gray-200 focus-visible:bg-gray-200 border-0 border-b-2 focus-visible:border-b-tugAni-red outline-none font-gotham text-3xl"
+                        className="w-full p-2 bg-gray-100 hover:bg-gray-200 focus-visible:bg-gray-200 border-0 border-b-2 focus-visible:border-b-tugAni-red outline-none font-gotham text-3xl tracking-tighter"
                     />
                     <input
                         required
@@ -224,13 +224,13 @@ function ProfileGallery() {
                             <img 
                                 src={URL.createObjectURL(profile.image)} 
                                 alt="Profile Preview" 
-                                className="mt-4 aspect-square object-cover max-w-[200px] w-full h-auto rounded-box self-center" 
+                                className="mt-4 aspect-square object-cover max-w-[200px] w-full h-auto rounded-full self-center" 
                             />
                         ) : (
                             profile.imageURL && <img 
                                 src={profile.imageURL} 
                                 alt="Profile Image" 
-                                className="mt-4 aspect-square object-cover max-w-[200px] w-full h-auto rounded-box self-center"  
+                                className="mt-4 aspect-square object-cover max-w-[200px] w-full h-auto rounded-full self-center"  
                             />
                         )}
                     </div>
