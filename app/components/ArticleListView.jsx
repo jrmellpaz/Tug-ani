@@ -124,7 +124,7 @@ function Banner({ article }) {
                 <div
                     className="absolute top-0 w-full h-full flex flex-col justify-end p-8 z-10 group"
                 >
-                    <Link href={`/articles/${article?.id}`}>
+                    <Link href={`/article/${article?.id}`}>
                         <CategoryCard categoryId={article?.categoryId}
                                       className="text-tugAni-red text-[0.5rem] uppercase font-openSansBold drop-shadow bg-tugAni-white p-1 rounded-badge"/>
                         <h2 className="font-gotham text-xl long-text leading-5 text-tugAni-white drop-shadow-2xl group-hover:underline mt-1">
@@ -146,7 +146,7 @@ function Banner({ article }) {
                 className="hidden w-full md:h-96 md:flex md:flex-row h-auto justify-between items-center gap-6 cursor-pointer articleCard box-border"
             >
                 <div className="flex flex-col text-tugAni-black grow max-w-fit w-full justify-center shrink">
-                    <Link href={`/articles/${article?.id}`}>
+                    <Link href={`/article/${article?.id}`}>
                         <CategoryCard categoryId={article?.categoryId} className="text-tugAni-red uppercase font-openSansBold"/>
                         <h2 className="font-gotham text-4xl long-text tracking-tighter">
                             {article?.title}
@@ -161,7 +161,7 @@ function Banner({ article }) {
                     <AuthorCard authorId={article?.authorId} className="mt-4 overflow-hidden flex-wrap shrink-0"/>
                 </div>
                 <Link
-                    href={`/articles/${article?.id}`}
+                    href={`/article/${article?.id}`}
                     className="w-full flex justify-end"
                 >
                     <img
