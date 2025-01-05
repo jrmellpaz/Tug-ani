@@ -1,8 +1,9 @@
 import { getArticle } from "@/lib/firebase/article/read_server"
 import { AuthorCard } from "@/app/components/AuthorCard";
-import { CategoryCard } from "@/app/components/CategoryCard";
+import { CategoryCard, SubcategoryCard } from "@/app/components/CategoryCard";
 import { getCategory } from "@/lib/firebase/category/read_server";
-import {getAuthors} from "@/lib/firebase/author/read_server";
+import { getAuthors } from "@/lib/firebase/author/read_server";
+// import ReadOnlyEditor from "@/app/components/ReadOnlyEditor"
 
 export async function generateMetadata({ params }) {
     const { articleId } = await params;
@@ -80,7 +81,7 @@ export default async function Page({ params }) {
         minute: "2-digit",
         hour12: true,
     });
-    
+
     let formattedEditDate = '';
     if (article.editedTimestamp) {
         formattedEditDate = new Date(article.editedTimestamp.seconds * 1000).toLocaleString("en-GB", {
@@ -97,21 +98,36 @@ export default async function Page({ params }) {
         <main className="p-10">
             <div>
                 <img className="h-[400px] w-full object-cover" src={article?.imageURL} alt={article?.slug} />
-                <CategoryCard categoryId={article?.categoryId} className="text-xs text-tugAni-red uppercase font-openSansBold" />
+                <div className="flex items-center space-x-2 mt-2"> 
+                    <CategoryCard categoryId={article?.categoryId} className="text-xs text-tugAni-red uppercase font-openSansBold"/>
+                    <span className="text-xs text-tugAni-red font-openSansBold">/</span>
+                    <SubcategoryCard subcategory={article?.subcategory} className="text-xs text-tugAni-red uppercase font-openSansBold"/>
+                </div>
                 <h1 className="font-gotham text-tugAni-red mb-1 text-4xl">
                     {article?.title}
                 </h1>
-                <div className="flex items-center">
+                <h3 className="long-text font-openSansRegular text-gray-70">
+                    {article?.description}
+                </h3>
+                <div className="mt-2">
                     <AuthorCard authorId={article?.authorId} className="mt-0 overflow-hidden" />
-                    <span className="font-openSansRegular text-sm my-0 text-gray-500 ml-5">
-                        Published on {formattedDate}
-                    </span>
-                    {formattedEditDate && (
-                        <span className="font-openSansRegular text-sm my-0 text-gray-500 ml-5">
-                            Edited on {formattedEditDate}
+                    <div className="mt-2">
+                        <span className="font-openSansRegular text-sm my-0 text-gray-500">
+                            Published on {formattedDate}
                         </span>
-                    )}
+                        {formattedEditDate && (
+                            <span className="font-openSansRegular text-sm my-0 text-gray-500 ml-5">
+                                Edited on {formattedEditDate}
+                            </span>
+                        )}
+                    </div>
                 </div>
+                {/* <div className="mt-6">
+                    <ReadOnlyEditor content={article.content} />
+                </div> */}
+            </div>
+            <div>
+                {/* author card info hrtr */}
             </div>
         </main>
     );
