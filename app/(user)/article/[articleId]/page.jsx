@@ -1,9 +1,10 @@
-import { getArticle } from "@/lib/firebase/article/read_server"
+import { getArticle } from "@/lib/firebase/article/read_server";
 import { AuthorCard } from "@/app/components/AuthorCard";
 import { CategoryCard, SubcategoryCard } from "@/app/components/CategoryCard";
 import { getCategory } from "@/lib/firebase/category/read_server";
 import { getAuthors } from "@/lib/firebase/author/read_server";
-// import ReadOnlyEditor from "@/app/components/ReadOnlyEditor"
+import { Mail } from "lucide-react";
+import Link from "next/link";
 
 export async function generateMetadata({ params }) {
     const { articleId } = await params;
@@ -70,9 +71,8 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function Page({ params }) {
-    const { articleId } = await params;
+    const { articleId } = await params; 
     const article = await getArticle(articleId);
-    console.log("article", article);
     const formattedDate = new Date(article.publishedTimestamp.seconds * 1000).toLocaleString("en-GB", {
         day: "2-digit",
         month: "long",
@@ -81,7 +81,7 @@ export default async function Page({ params }) {
         minute: "2-digit",
         hour12: true,
     });
-
+    
     let formattedEditDate = '';
     if (article.editedTimestamp) {
         formattedEditDate = new Date(article.editedTimestamp.seconds * 1000).toLocaleString("en-GB", {
@@ -93,6 +93,9 @@ export default async function Page({ params }) {
             hour12: true,
         });
     }
+
+    const authorPromises = article.authorId.map((id) => getAuthors(id));
+    const authors = await Promise.all(authorPromises);
 
     return (
         <main className="p-10">
@@ -126,9 +129,41 @@ export default async function Page({ params }) {
                     <ReadOnlyEditor content={article.content} />
                 </div> */}
             </div>
-            <div>
-                {/* author card info hrtr */}
+            <div className={"flex flex-col w-full gap-2"}>
+                <h3 className="uppercase font-bebas text-center md:text-left text-2xl">ABOUT THE AUTHORS:</h3>
+                {authors.map((author, index) => (
+                    <div key={author.id} className="flex flex-col">
+                        <AuthorDetails author={author} />
+                        {index < authors.length - 1 && <hr className="border-t-gray-300 mt-2" />}
+                    </div>
+                ))}
             </div>
+        </main>
+    );
+}
+
+function AuthorDetails({ author }) {
+    return (
+        <main>
+            <Link href={`/author/${author.id}`} >
+            <div className="flex flex-col md:flex-row items-center gap-8 w-full">
+                <img src={author.photoURL} alt={author.name} className="aspect-square w-16 md:w-24 rounded-full object-cover"/>
+                <div className="w-full">
+                    <h1 className="font-gotham tracking-tighter text-center md:text-left text-3xl sm:text-4xl md:text-2xl hover:text-tugAni-red">
+                        {author.name}
+                    </h1>
+                    {author.email && (
+                        <div className="flex items-center gap-2 mt-0 justify-self-center md:justify-self-start">
+                            <Mail size={22} />
+                            <span className="font-openSansRegular text-sm select-all">{author.email}</span>
+                        </div>
+                    )}
+                    <div className="flex flex-col gap-4">
+                        <p className="font-openSansRegular text-sm md:text-base">{author.description}</p>
+                    </div>
+                </div>
+            </div>
+            </Link>
         </main>
     );
 }
