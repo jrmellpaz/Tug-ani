@@ -98,32 +98,30 @@ export default async function Page({ params }) {
     const authors = await Promise.all(authorPromises);
 
     return (
-        <main className="p-10">
-            <div>
+        <main className="p-2 md:p-10 pt-0">
+            <div className="flex flex-col">
                 <img className="object-cover aspect-video w-full max-w-[1440px] rounded-box transition-all" src={article?.imageURL} alt={article?.slug} />
-                <div className="flex items-center space-x-2 mt-2">
-                    <Link href={`/category/${article?.categoryId}`} className="flex items-center gap-2 cursor-pointer group w-fit "> 
-                    <CategoryCard categoryId={article?.categoryId} className="group text-xs text-tugAni-red uppercase font-openSansBold group-hover:text-tugAni-black"/>
+                <div className="flex items-center gap-1 mt-4 self-center">
+                    <Link href={`/category/${article?.categoryId}`} className="flex items-center gap-1 cursor-pointer group w-fit "> 
+                        <CategoryCard categoryId={article?.categoryId} className="group text-2xl text-tugAni-red uppercase font-bebas group-hover:text-tugAni-black"/>
+                        {article?.subcategory && (
+                            <>
+                            <span className="text-2xl text-tugAni-red font-bebas">/</span> 
+                            <SubcategoryCard subcategory={article?.subcategory} className="group text-2xl text-tugAni-red uppercase font-bebas group-hover:text-tugAni-black"/>
+                            </>
+                        )}
                     </Link>
-                    {article?.subcategory && (
-                        <>
-                        <span className="text-xs text-tugAni-red font-openSansBold">/</span>
-                        <Link href={`/category/${article?.categoryId}`} className="flex items-center gap-2 cursor-pointer group w-fit"> 
-                        <SubcategoryCard subcategory={article?.subcategory} className="group text-xs text-tugAni-red uppercase font-openSansBold group-hover:text-tugAni-black"/>
-                        </Link>
-                        </>
-                    )}
                 </div>
 
-                <h1 className="font-gotham text-tugAni-red mb-1 text-4xl">
+                <h1 className="font-gotham text-tugAni-black mb-1 text-4xl md:text-5xl tracking-tighter self-center text-center">
                     {article?.title}
                 </h1>
-                <h3 className="long-text font-openSansRegular text-gray-70">
+                <h3 className="font-openSansRegular text-gray-700 self-center text-center my-4">
                     {article?.description}
                 </h3>
-                <div className="mt-2">
-                    <AuthorCard authorId={article?.authorId} className="mt-0 overflow-hidden" />
-                    <div className="mt-2">
+                <div className="mt-2 self-center flex flex-col">
+                    <AuthorCard authorId={article?.authorId} className="mt-0 overflow-hidden self-center justify-center" />
+                    <div className="mt-1 flex flex-col md:flex-row text-center">
                         <span className="font-openSansRegular text-sm my-0 text-gray-500">
                             Published on {formattedDate}
                         </span>
@@ -138,8 +136,10 @@ export default async function Page({ params }) {
                     <ReadOnlyEditor content={article.content} />
                 </div> */}
             </div>
-            <div className="flex flex-col gap-4 bg-white p-4 rounded-box shadow">
-            <h3 className="uppercase font-bebas text-center md:text-left text-2xl text-tugAni-red"> {authors.length === 1 ? "ABOUT THE AUTHOR:" : "ABOUT THE AUTHORS:"} </h3>
+            <div className="flex flex-col gap-4 bg-white p-4 md:p-8 rounded-box shadow">
+                <h3 className="uppercase font-bebas text-center md:text-left text-2xl text-tugAni-red"> 
+                    {authors.length === 1 ? "ABOUT THE AUTHOR:" : "ABOUT THE AUTHORS:"} 
+                </h3>
                 {authors.map((author, index) => (
                     <div key={author.id} className="flex flex-col">
                         <AuthorDetails author={author} />
@@ -155,19 +155,19 @@ function AuthorDetails({ author }) {
     return (
         <main>
             <Link href={`/author/${author.id}`} >
-            <div className="flex flex-col md:flex-row items-center gap-8 w-full">
+            <div className="flex flex-col md:flex-row items-center gap-2 md:gap-8 w-full">
                 <img src={author.photoURL} alt={author.name} className="aspect-square w-16 md:w-24 rounded-full object-cover"/>
                 <div className="w-full">
                     <h1 className="font-gotham tracking-tighter text-center md:text-left text-3xl sm:text-4xl md:text-2xl hover:text-tugAni-red">
                         {author.name}
                     </h1>
                     {author.email && (
-                        <div className="flex items-center gap-2 mt-0 justify-self-center md:justify-self-start">
-                            <Mail size={22} />
+                        <div className="flex items-center gap-1 mt-0 justify-self-center md:justify-self-start">
+                            <Mail size={20} />
                             <span className="font-openSansRegular text-sm select-all">{author.email}</span>
                         </div>
                     )}
-                    <div className="flex flex-col gap-4">
+                    <div className="flex flex-col mt-2">
                         <p className="font-openSansRegular text-sm md:text-base">{author.description}</p>
                     </div>
                 </div>
