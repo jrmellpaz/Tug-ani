@@ -102,11 +102,11 @@ export default async function Page({ params }) {
             <div className="flex flex-col">
                 <img className="object-cover aspect-video w-full rounded-box transition-all" src={article?.imageURL} alt={article?.slug} />
                 <div className="flex items-center gap-1 mt-4 self-center">
-                    <Link href={`/category/${article?.categoryId}`} className="flex items-center gap-1 cursor-pointer group w-fit "> 
+                    <Link href={`/category/${article?.categoryId}`} className="flex items-center gap-1 cursor-pointer group w-fit"> 
                         <CategoryCard categoryId={article?.categoryId} className="group text-2xl text-tugAni-red uppercase font-bebas group-hover:text-tugAni-black"/>
                         {article?.subcategory && (
                             <>
-                            <span className="text-2xl text-tugAni-red font-bebas">/</span> 
+                            <span className="text-2xl text-tugAni-red font-bebas group-hover:text-tugAni-black">/</span> 
                             <SubcategoryCard subcategory={article?.subcategory} className="group text-2xl text-tugAni-red uppercase font-bebas group-hover:text-tugAni-black"/>
                             </>
                         )}
