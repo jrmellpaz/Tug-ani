@@ -48,7 +48,9 @@ export default async function Page({ params }) {
 
     return (
         <section>
-            <AuthorDetails author={author} />
+            <section className="w-full lg:px-20">
+                <AuthorDetails author={author} />
+            </section>
             <section
                 className="flex flex-col my-12 mx-8 md:mx-20 gap-2"
             >
