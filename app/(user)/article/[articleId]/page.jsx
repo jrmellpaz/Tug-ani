@@ -129,8 +129,8 @@ export default async function Page({ params }) {
                     <ReadOnlyEditor content={article.content} />
                 </div> */}
             </div>
-            <div className={"flex flex-col w-full gap-2"}>
-                <h3 className="uppercase font-bebas text-center md:text-left text-2xl">ABOUT THE AUTHORS:</h3>
+            <div className="flex flex-col gap-4 bg-white p-4 rounded-box shadow">
+            <h3 className="uppercase font-bebas text-center md:text-left text-2xl text-tugAni-red">ABOUT THE AUTHORS:</h3>
                 {authors.map((author, index) => (
                     <div key={author.id} className="flex flex-col">
                         <AuthorDetails author={author} />
