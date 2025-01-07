@@ -102,10 +102,15 @@ export default async function Page({ params }) {
             <div>
                 <img className="h-[400px] w-full object-cover" src={article?.imageURL} alt={article?.slug} />
                 <div className="flex items-center space-x-2 mt-2"> 
-                    <CategoryCard categoryId={article?.categoryId} className="text-xs text-tugAni-red uppercase font-openSansBold"/>
+                <CategoryCard categoryId={article?.categoryId} className="text-xs text-tugAni-red uppercase font-openSansBold"/>
+                {article?.subcategory && (
+                    <>
                     <span className="text-xs text-tugAni-red font-openSansBold">/</span>
                     <SubcategoryCard subcategory={article?.subcategory} className="text-xs text-tugAni-red uppercase font-openSansBold"/>
-                </div>
+                    </>
+                )}
+        </div>
+
                 <h1 className="font-gotham text-tugAni-red mb-1 text-4xl">
                     {article?.title}
                 </h1>
@@ -130,7 +135,7 @@ export default async function Page({ params }) {
                 </div> */}
             </div>
             <div className="flex flex-col gap-4 bg-white p-4 rounded-box shadow">
-            <h3 className="uppercase font-bebas text-center md:text-left text-2xl text-tugAni-red">ABOUT THE AUTHORS:</h3>
+            <h3 className="uppercase font-bebas text-center md:text-left text-2xl text-tugAni-red"> {authors.length === 1 ? "ABOUT THE AUTHOR" : "ABOUT THE AUTHORS"} </h3>
                 {authors.map((author, index) => (
                     <div key={author.id} className="flex flex-col">
                         <AuthorDetails author={author} />
