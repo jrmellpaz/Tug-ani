@@ -98,9 +98,9 @@ export default async function Page({ params }) {
     const authors = await Promise.all(authorPromises);
 
     return (
-        <main className="p-2 md:p-10 pt-0">
+        <main className="p-2 pt-0 md:p-10 w-full max-w-[1200px] mx-auto md:pt-0">
             <div className="flex flex-col">
-                <img className="object-cover aspect-video w-full max-w-[1440px] rounded-box transition-all" src={article?.imageURL} alt={article?.slug} />
+                <img className="object-cover aspect-video w-full rounded-box transition-all" src={article?.imageURL} alt={article?.slug} />
                 <div className="flex items-center gap-1 mt-4 self-center">
                     <Link href={`/category/${article?.categoryId}`} className="flex items-center gap-1 cursor-pointer group w-fit "> 
                         <CategoryCard categoryId={article?.categoryId} className="group text-2xl text-tugAni-red uppercase font-bebas group-hover:text-tugAni-black"/>
@@ -113,7 +113,7 @@ export default async function Page({ params }) {
                     </Link>
                 </div>
 
-                <h1 className="font-gotham text-tugAni-black mb-1 text-4xl md:text-5xl tracking-tighter self-center text-center">
+                <h1 className="font-gotham text-tugAni-black mb-1 text-4xl md:text-5xl tracking-tight md:tracking-tighter self-center text-center leading-none">
                     {article?.title}
                 </h1>
                 <h3 className="font-openSansRegular text-gray-700 self-center text-center my-4">
