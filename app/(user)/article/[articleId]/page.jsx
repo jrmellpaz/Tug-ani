@@ -121,7 +121,7 @@ export default async function Page({ params }) {
                 </h3>
                 <div className="mt-2 self-center flex flex-col">
                     <AuthorCard authorId={article?.authorId} className="mt-0 overflow-hidden self-center justify-center" />
-                    <div className="mt-1 flex flex-col md:flex-row text-center">
+                    <div className="mt-1 flex flex-col md:flex-row justify-center items-center text-center">
                         <span className="font-openSansRegular text-sm my-0 text-gray-500">
                             Published on {formattedDate}
                         </span>
