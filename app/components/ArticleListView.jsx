@@ -107,7 +107,7 @@ async function Section({ category }) {
 }
 
 function Banner({ article }) {
-    const formattedDate = new Date(article.publishedTimestamp.seconds * 1000).toLocaleString("en-GB", {
+    const formattedDate = new Date(article.publishedTimestamp.seconds * 1000).toLocaleString("en-US", {
         day: "2-digit",
         month: "long",
         year: "numeric",

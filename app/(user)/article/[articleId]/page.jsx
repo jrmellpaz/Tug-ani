@@ -13,7 +13,7 @@ export async function generateMetadata({ params }) {
     const authorPromises = article.authorId.map(id => getAuthors(id));
     const authors = await Promise.all(authorPromises);
 
-    const formattedDate = new Date(article.publishedTimestamp.seconds * 1000).toLocaleString("en-GB", {
+    const formattedDate = new Date(article.publishedTimestamp.seconds * 1000).toLocaleString("en-US", {
         day: "2-digit",
         month: "long",
         year: "numeric",
@@ -24,7 +24,7 @@ export async function generateMetadata({ params }) {
 
     let formattedEditDate = '';
     if (article.editedTimestamp) {
-        formattedEditDate = new Date(article.editedTimestamp.seconds * 1000).toLocaleString("en-GB", {
+        formattedEditDate = new Date(article.editedTimestamp.seconds * 1000).toLocaleString("en-US", {
             day: "2-digit",
             month: "long",
             year: "numeric",
@@ -73,7 +73,7 @@ export async function generateMetadata({ params }) {
 export default async function Page({ params }) {
     const { articleId } = await params; 
     const article = await getArticle(articleId);
-    const formattedDate = new Date(article.publishedTimestamp.seconds * 1000).toLocaleString("en-GB", {
+    const formattedDate = new Date(article.publishedTimestamp.seconds * 1000).toLocaleString("en-US", {
         day: "2-digit",
         month: "long",
         year: "numeric",
@@ -84,7 +84,7 @@ export default async function Page({ params }) {
     
     let formattedEditDate = '';
     if (article.editedTimestamp) {
-        formattedEditDate = new Date(article.editedTimestamp.seconds * 1000).toLocaleString("en-GB", {
+        formattedEditDate = new Date(article.editedTimestamp.seconds * 1000).toLocaleString("en-US", {
             day: "2-digit",
             month: "long",
             year: "numeric",
@@ -93,7 +93,7 @@ export default async function Page({ params }) {
             hour12: true,
         });
     }
-
+    
     const authorPromises = article.authorId.map((id) => getAuthors(id));
     const authors = await Promise.all(authorPromises);
 
@@ -139,7 +139,7 @@ export default async function Page({ params }) {
                 {authors.map((author, index) => (
                     <div key={author.id} className="flex flex-col">
                         <AuthorDetails author={author} />
-                        {index < authors.length - 1 && <hr className="border-t-gray-300 mt-2" />}
+                        {index < authors.length - 1 && <hr className="border-t-gray-300 mt-4" />}
                     </div>
                 ))}
             </div>

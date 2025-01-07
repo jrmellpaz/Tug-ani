@@ -4,7 +4,7 @@ import { AuthorCard } from "./AuthorCard";
 import { CategoryCard, SubcategoryCard } from "./CategoryCard";
 
 export default function ArticleCard({ article, className, type }) {
-    const formattedDate = new Date(article.publishedTimestamp.seconds * 1000).toLocaleDateString("en-GB", {
+    const formattedDate = new Date(article.publishedTimestamp.seconds * 1000).toLocaleDateString("en-US", {
         day: "2-digit",
         month: "long",
         year: "numeric"
