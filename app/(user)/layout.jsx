@@ -1,6 +1,7 @@
 import Header from "@/app/components/Header/Header";
 import Menu from "@/app/components/Header/Menu";
 import NextTopLoader from "nextjs-toploader";
+import { Footer } from "@/app/components/Footer";
 
 export default function AdminLayout({ children }) {
     return (
@@ -13,6 +14,7 @@ export default function AdminLayout({ children }) {
                 <Menu />
             </Header>
             {children}
+            <Footer />
         </>
     );
 }
