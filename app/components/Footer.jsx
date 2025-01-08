@@ -1,5 +1,5 @@
 import { getCategories } from "@/lib/firebase/category/read_server";
-import { Facebook, Mail, MapPin } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 import Link from "next/link";
 
 export async function Footer() {
