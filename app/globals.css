@@ -154,3 +154,7 @@ input::file-selector-button:hover {
 .sidebar-close {
   animation: sidebar-out 0.5s;
 }
+
+.bn-container .bn-editor * {
+  @apply font-openSansRegular;
+}
