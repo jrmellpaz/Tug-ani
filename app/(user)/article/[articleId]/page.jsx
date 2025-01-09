@@ -5,6 +5,7 @@ import { getCategory } from "@/lib/firebase/category/read_server";
 import { getAuthors } from "@/lib/firebase/author/read_server";
 import { Mail } from "lucide-react";
 import Link from "next/link";
+import ReadOnlyEditor from "@/app/components/ReadOnlyEditor"
 
 export async function generateMetadata({ params }) {
     const { articleId } = await params;
@@ -132,9 +133,9 @@ export default async function Page({ params }) {
                         )}
                     </div>
                 </div>
-                {/* <div className="mt-6">
-                    <ReadOnlyEditor content={article.content} />
-                </div> */}
+                <div className="mt-6">
+                    <ReadOnlyEditor content={article?.content} />
+                </div>
             </div>
             <div className="flex flex-col gap-4 bg-white p-4 md:p-8 rounded-box shadow">
                 <h3 className="uppercase font-bebas text-center md:text-left text-2xl text-tugAni-red"> 
