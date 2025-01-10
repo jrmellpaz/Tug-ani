@@ -1,4 +1,4 @@
-import { getArticle } from "@/lib/firebase/article/read_server";
+import { getArticle, getArticlesBySubcategory } from "@/lib/firebase/article/read_server";
 import { AuthorCard } from "@/app/components/AuthorCard";
 import { CategoryCard, SubcategoryCard } from "@/app/components/CategoryCard";
 import { getCategory } from "@/lib/firebase/category/read_server";
@@ -97,7 +97,15 @@ export default async function Page({ params }) {
     
     const authorPromises = article.authorId.map((id) => getAuthors(id));
     const authors = await Promise.all(authorPromises);
+    let relatedArticles = await getArticlesBySubcategory(article.subcategory);
 
+    if (relatedArticles.length === 0) {
+        relatedArticles = (await getArticlesByCategory(article.category)).filter((related) => related.id !== articleId);
+    } else {
+        relatedArticles = relatedArticles.filter((related) => related.id !== articleId);
+    }
+    relatedArticles = relatedArticles.slice(0, 3);
+    console.log(relatedArticles.categoryId)
     return (
         <main className="p-2 pt-0 md:p-10 w-full max-w-[1200px] mx-auto md:pt-0">
             <div className="flex flex-col">
@@ -148,6 +156,18 @@ export default async function Page({ params }) {
                     </div>
                 ))}
             </div>
+            {relatedArticles.length > 0 && (
+                <div className="mt-5">
+                    <h3 className="uppercase font-bebas text-center md:text-left py-4 text-2xl text-tugAni-red">
+                        More from {article?.subcategory}
+                    </h3>
+                    <div className="w-full grid grid-cols-3 auto-rows-max justify-center gap-4 gap-y-8 py-4">
+                        {relatedArticles.map((related) => (
+                            <Card key={related.id} article={related} />
+                        ))}
+                    </div>
+                </div>
+            )}
         </main>
     );
 }
@@ -176,4 +196,29 @@ function AuthorDetails({ author }) {
             </Link>
         </main>
     );
+}
+
+function Card({article}) {
+    const formattedDate = new Date(article.publishedTimestamp.seconds * 1000).toLocaleDateString("en-US", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric"
+    });
+
+    return (
+        <div className="w-full">
+            <Link href={`/article/${article.id}`} className="flex flex-col gap-2 group">
+                <img src={article.imageURL} alt={article.slug} className="aspect-video w-full h-auto object-cover rounded-box"/>
+                <div className="flex flex-col">
+                    <h1 className="mt-1 font-gotham text-tugAni-black text-2xl tracking-tight leading-5 group-hover:text-tugAni-red group-hover:underline category-card-title">
+                        {article.title}
+                    </h1>
+                </div>
+            </Link>
+            <span className="mt-2 font-openSansRegular text-xs text-gray-600">
+                {formattedDate}
+            </span>
+            <AuthorCard authorId={article.authorId} className="mt-2 overflow-hidden shrink-0" />
+        </div>
+    )
 }
