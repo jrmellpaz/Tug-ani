@@ -1,4 +1,4 @@
-import { getArticle, getArticlesBySubcategory } from "@/lib/firebase/article/read_server";
+import { getArticle, getArticlesBySubcategory, getArticlesByCategory } from "@/lib/firebase/article/read_server";
 import { AuthorCard } from "@/app/components/AuthorCard";
 import { CategoryCard, SubcategoryCard } from "@/app/components/CategoryCard";
 import { getCategory } from "@/lib/firebase/category/read_server";
@@ -98,14 +98,13 @@ export default async function Page({ params }) {
     const authorPromises = article.authorId.map((id) => getAuthors(id));
     const authors = await Promise.all(authorPromises);
     let relatedArticles = await getArticlesBySubcategory(article.subcategory);
-
-    if (relatedArticles.length === 0) {
-        relatedArticles = (await getArticlesByCategory(article.category)).filter((related) => related.id !== articleId);
+    if (relatedArticles.length === 1) {
+        relatedArticles = (await getArticlesByCategory(article.categoryId)).filter((related) => related.id !== articleId);
     } else {
         relatedArticles = relatedArticles.filter((related) => related.id !== articleId);
     }
     relatedArticles = relatedArticles.slice(0, 3);
-    console.log(relatedArticles.categoryId)
+    
     return (
         <main className="p-2 pt-0 md:p-10 w-full max-w-[1200px] mx-auto md:pt-0">
             <div className="flex flex-col">
