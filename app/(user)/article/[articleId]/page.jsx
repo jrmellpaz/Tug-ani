@@ -160,7 +160,7 @@ export default async function Page({ params }) {
                     <h3 className="uppercase font-bebas text-center md:text-left py-4 text-2xl text-tugAni-red">
                         More from {article?.subcategory}
                     </h3>
-                    <div className="w-full grid grid-cols-3 auto-rows-max justify-center gap-4 gap-y-8 py-4">
+                    <div className="w-full grid grid-cols-[repeat(auto-fill,minmax(256px,1fr))] auto-rows-max justify-center gap-4 gap-y-8 py-12 px-8 sm:px-20">
                         {relatedArticles.map((related) => (
                             <Card key={related.id} article={related} />
                         ))}
@@ -205,7 +205,7 @@ function Card({article}) {
     });
 
     return (
-        <div className="w-full">
+        <div>
             <Link href={`/article/${article.id}`} className="flex flex-col gap-2 group">
                 <img src={article.imageURL} alt={article.slug} className="aspect-video w-full h-auto object-cover rounded-box"/>
                 <div className="flex flex-col">
