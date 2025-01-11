@@ -1,1 +1,1 @@
-https://tug-ani.vercel.app
+https://tug-ani.vercel.app/
