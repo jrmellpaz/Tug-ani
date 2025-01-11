@@ -98,14 +98,14 @@ export default async function Page({ params }) {
     const authorPromises = article.authorId.map((id) => getAuthors(id));
     const authors = await Promise.all(authorPromises);
     let relatedArticles = [];
-    let relatedText = '';
+    let relatedFromText = '';
     if (article.subcategory) {
-        relatedText = `More from ${article.subcategory}`;
+        relatedFromText = (<SubcategoryCard subcategory={article.subcategory} className="uppercase font-bebas text-center md:text-left py-4 text-2xl text-tugAni-red" />);
         relatedArticles = (await getArticlesBySubcategory(article.subcategory)).filter((related) => related.id !== articleId);
     }
     
     if (relatedArticles.length === 0) {
-        relatedText = `More from ${article.categoryId}`;
+        relatedFromText = (<CategoryCard categoryId={article.categoryId} className="uppercase font-bebas text-center md:text-left py-4 text-2xl text-tugAni-red" />);
         relatedArticles = (await getArticlesByCategory(article.categoryId)).filter((related) => related.id !== articleId);
     }
     
@@ -164,7 +164,7 @@ export default async function Page({ params }) {
             {relatedArticles.length > 0 && (
                 <div className="mt-5">
                     <h3 className="uppercase font-bebas text-center md:text-left py-4 text-2xl text-tugAni-red">
-                        {relatedText}
+                        More from {relatedFromText}
                     </h3>
                     <div className="w-full grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] auto-rows-max justify-center gap-4 gap-y-8">
                         {relatedArticles.map((related) => (
