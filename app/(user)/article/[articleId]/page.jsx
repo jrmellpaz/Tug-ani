@@ -97,12 +97,18 @@ export default async function Page({ params }) {
     
     const authorPromises = article.authorId.map((id) => getAuthors(id));
     const authors = await Promise.all(authorPromises);
-    let relatedArticles = await getArticlesBySubcategory(article.subcategory);
-    if (relatedArticles.length === 1) {
-        relatedArticles = (await getArticlesByCategory(article.categoryId)).filter((related) => related.id !== articleId);
-    } else {
-        relatedArticles = relatedArticles.filter((related) => related.id !== articleId);
+    let relatedArticles = [];
+    let relatedText = '';
+    if (article.subcategory) {
+        relatedText = `More from ${article.subcategory}`;
+        relatedArticles = (await getArticlesBySubcategory(article.subcategory)).filter((related) => related.id !== articleId);
     }
+    
+    if (relatedArticles.length === 0) {
+        relatedText = `More from ${article.categoryId}`;
+        relatedArticles = (await getArticlesByCategory(article.categoryId)).filter((related) => related.id !== articleId);
+    }
+    
     relatedArticles = relatedArticles.slice(0, 3);
     
     return (
@@ -158,7 +164,7 @@ export default async function Page({ params }) {
             {relatedArticles.length > 0 && (
                 <div className="mt-5">
                     <h3 className="uppercase font-bebas text-center md:text-left py-4 text-2xl text-tugAni-red">
-                        More from {article?.subcategory}
+                        {relatedText}
                     </h3>
                     <div className="w-full grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] auto-rows-max justify-center gap-4 gap-y-8">
                         {relatedArticles.map((related) => (
