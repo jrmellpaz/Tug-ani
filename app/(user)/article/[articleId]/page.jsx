@@ -160,7 +160,7 @@ export default async function Page({ params }) {
                     <h3 className="uppercase font-bebas text-center md:text-left py-4 text-2xl text-tugAni-red">
                         More from {article?.subcategory}
                     </h3>
-                    <div className="w-full grid grid-cols-[repeat(auto-fill,minmax(256px,1fr))] auto-rows-max justify-center gap-4 gap-y-8 py-12 px-8 sm:px-20">
+                    <div className="w-full grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] auto-rows-max justify-center gap-4 gap-y-8">
                         {relatedArticles.map((related) => (
                             <Card key={related.id} article={related} />
                         ))}
