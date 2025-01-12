@@ -6,6 +6,7 @@ import { getAuthors } from "@/lib/firebase/author/read_server";
 import { Mail } from "lucide-react";
 import Link from "next/link";
 import ReadOnlyEditor from "@/app/components/ReadOnlyEditor"
+import ShareButtons from "@/app/components/ShareButtons";
 
 export async function generateMetadata({ params }) {
     const { articleId } = await params;
@@ -94,6 +95,9 @@ export default async function Page({ params }) {
             hour12: true,
         });
     }
+
+    const shareUrl = `https://tug-ani.vercel.app/article/${articleId}`;
+    const title = article?.title;
     
     const authorPromises = article.authorId.map((id) => getAuthors(id));
     const authors = await Promise.all(authorPromises);
@@ -145,6 +149,9 @@ export default async function Page({ params }) {
                             </span>
                         )}
                     </div>
+                </div>
+                <div>
+                    <ShareButtons shareUrl={shareUrl} title={title} />
                 </div>
                 <div className="mt-6">
                     <ReadOnlyEditor content={article?.content} />

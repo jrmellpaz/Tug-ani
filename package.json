@@ -27,6 +27,7 @@
     "react": "19.0.0-rc-69d4b800-20241021",
     "react-dom": "19.0.0-rc-69d4b800-20241021",
     "react-firebase-hooks": "^5.1.1",
+    "react-share": "^5.1.2",
     "react-textarea-autosize": "^8.5.4",
     "sass": "^1.80.6",
     "server-only": "^0.0.1",
