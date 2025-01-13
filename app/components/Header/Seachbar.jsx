@@ -2,37 +2,11 @@
 
 import { SearchIcon, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { useSearchParams, usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function Searchbar({ searchbarOpened, setSearchbarOpened, type = "" }) {
-    const searchParams = useSearchParams();
-    const pathname = usePathname();
     const { replace } = useRouter();
-
-    const [query, setQuery] = useState(searchParams.get("query") || "");
-    const debounceTimer = useRef(null); 
-
-    const handleSearch = (term) => {
-        if (debounceTimer.current) {
-            clearTimeout(debounceTimer.current); 
-        }
-
-        debounceTimer.current = setTimeout(() => {
-            console.log(`Searching... ${term}`);
-            const params = new URLSearchParams(searchParams);
-            if (term) {
-                params.set("query", term);
-            } else {
-                params.delete("query");
-            }
-
-            if (replace) {
-                replace(`${pathname}?${params.toString()}`);
-            } else {
-                window.history.replaceState(null, "", `${pathname}?${params.toString()}`);
-            }
-        }, 300); 
-    };
+    const [query, setQuery] = useState("");
 
     const searchbarRef = useRef(null);
 
@@ -40,6 +14,7 @@ export default function Searchbar({ searchbarOpened, setSearchbarOpened, type = 
         function handleClickOutside(event) {
             if (type !== "sidebar" && searchbarRef.current && !searchbarRef.current.contains(event.target)) {
                 setSearchbarOpened(false);
+                setQuery("");
             }
         }
 
@@ -47,19 +22,13 @@ export default function Searchbar({ searchbarOpened, setSearchbarOpened, type = 
 
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
-            if (debounceTimer.current) {
-                clearTimeout(debounceTimer.current); 
-            }
         };
     }, [searchbarRef, setSearchbarOpened]);
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (debounceTimer.current) {
-            clearTimeout(debounceTimer.current);
-            debounceTimer.current = null;
-        }
-        handleSearch(query);
+        if (!query.trim()) return;
+        replace(`/search/${encodeURIComponent(query)}`);
     };
 
     if (!searchbarOpened && type !== "sidebar") {
@@ -94,16 +63,15 @@ export default function Searchbar({ searchbarOpened, setSearchbarOpened, type = 
                     autoFocus={true}
                     type="text"
                     value={query}
-                    onChange={(e) => {
-                        setQuery(e.target.value);
-                        handleSearch(e.target.value);
-                    }}
+                    onChange={(e) => 
+                        setQuery(e.target.value)}
                     placeholder="What are you looking for?"
                     className={`font-openSansRegular text-tugAni-black text-sm ${
                         type !== "sidebar" ? "w-80" : "w-full grow"
                     } py-2 px-3 rounded-l-full outline-none group-hover:shadow group-focus:shadow border focus:border-tugAni-red border-tugAni-black bg-transparent`}
                 />
                 <button
+                    type="submit"
                     className="bg-tugAni-red py-[8.5px] pl-3 pr-4 rounded-r-full group-hover:shadow group-focus:shadow-xl"
                 >
                     <SearchIcon className="h-5 w-5 text-tugAni-white" />

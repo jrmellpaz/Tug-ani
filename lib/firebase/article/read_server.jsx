@@ -56,3 +56,19 @@ export const getArticlesBySubcategory = async (id) => {
     const articlesSnapshot = await getDocs(articlesQuery);
     return articlesSnapshot.docs.map(doc => doc.data());
 }
+
+export const searchArticles = async (queryText) => {
+    const ref = collection(db, "articles");
+    const snapshot = await getDocs(ref);
+    const articles = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+
+    const keys = ["title", "description", "content"];
+
+    const filteredArticles = articles.filter((article) =>
+        keys.some((key) =>
+            article[key]?.toLowerCase().includes(queryText.toLowerCase())
+        )
+    );
+
+    return filteredArticles;
+};
