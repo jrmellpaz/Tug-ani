@@ -15,7 +15,7 @@ export default async function SearchResultsPage({ params }) {
 
     return (
         <div className="border-box w-full md:px-20 overflow-hidden mb-8 mt-8">
-            <h1 className="text-2xl font-bold mb-4">Search results for "{decodeURIComponent(query)}"</h1>
+            <h1 className="text-2xl font-bold mb-4 font-openSansRegular text-tugAni-black sm:px-4">Search results for "{decodeURIComponent(query)}"</h1>
             {searchResults.length > 0 ? (
                 <div className="flex flex-col gap-2">
                     {searchResults.map((article, key) => (
@@ -26,7 +26,7 @@ export default async function SearchResultsPage({ params }) {
                     ))}
                 </div>
             ) : (
-                <p>No results found for "{decodeURIComponent(query)}".</p>
+                <p className="mb-4 font-openSansRegular text-tugAni-black sm:px-4">No results found for "{decodeURIComponent(query)}".</p>
             )}
         </div>
     );
