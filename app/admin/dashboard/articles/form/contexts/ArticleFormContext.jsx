@@ -33,13 +33,13 @@ export default function ArticleFormContextProvider({ children }) {
         try {
             id = await createNewArticle({data: data, image: image});
             setIsDone(true);
+            redirect(`/admin/dashboard/articles/form?id=${id}`);
         }
         catch (error) {
             setError(error?.message);
         }
 
         setIsLoading(false);
-        redirect(`/admin/dashboard/articles/form?id=${id}`);
     };
 
     const handleUpdate = async () => {
