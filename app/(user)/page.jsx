@@ -13,9 +13,6 @@ export default function Home() {
             <section className="border-box w-full md:px-20 overflow-hidden">
                 <SectionView />
             </section>
-            {/* TODO:
-                - Add a footer component
-            */}
         </>
     );
 }
