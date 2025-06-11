@@ -1,7 +1,6 @@
-import { getArticlesByCategory, getArticlesBySubcategory } from "@/lib/firebase/article/read_server";
 import { getCategory } from "@/lib/firebase/category/read_server";
-import Link from "next/link";
 import { SubcategoryCard } from "@/app/components/CategoryCard";
+import { LatestCategoryArticles } from "@/app/components/LatestCategoryArticles";
 
 export async function generateMetadata({ params }) {
     const { categoryId } = await params;
@@ -47,7 +46,6 @@ export async function generateMetadata({ params }) {
 export default async function Page({ params }) {
     const { categoryId } = await params;
     const category = await getCategory(categoryId);
-    const articles = await getArticlesByCategory(categoryId);
 
     return (
         <main className="flex flex-col w-full">
@@ -55,9 +53,9 @@ export default async function Page({ params }) {
                 <Banner category={category} />
             </section>
             <section className="w-full">
-                <Latest articles={articles} />
+                <LatestCategoryArticles categoryId={categoryId} />
             </section>
-            <section>
+            {/* <section>
                 {category?.subcategories.map((subcategory, index) => {
                     return (
                         <div
@@ -68,7 +66,7 @@ export default async function Page({ params }) {
                         </div>
                     )
                 })}
-            </section>
+            </section> */}
         </main>
     );
 }
@@ -113,82 +111,23 @@ function Banner({ category }) {
     );
 }
 
-function Latest({ articles }) {
-    return (
-        <div
-            className="w-full grid grid-cols-[repeat(auto-fill,minmax(256px,1fr))] auto-rows-max justify-center gap-4 gap-y-8 py-12 px-8 sm:px-20"
-        >
-            <h1
-                className="text-3xl font-bebas text-tugAni-red col-span-row col-span-full"
-            >
-                Latest
-            </h1>
-            {articles.map((article, key) => {
-                return (
-                    <Card key={key} article={article} type={"latest"} />
-                )
-            })}
-        </div>
-    );
-}
+// async function Subcategory({ subcategory }) {
+//     const articles = await getArticlesBySubcategory(subcategory);
 
-function Card({article, type}) {
-    const formattedDate = new Date(article.publishedTimestamp.seconds * 1000).toLocaleDateString("en-US", {
-        day: "2-digit",
-        month: "long",
-        year: "numeric"
-    });
-
-    return (
-        <div className="w-full">
-            <Link
-                href={`/article/${article.id}`}
-                className="flex flex-col gap-2 group"
-            >
-                <img
-                    src={article.imageURL}
-                    alt={article.slug}
-                    className="aspect-video w-full h-auto object-cover rounded-box"
-                />
-                <div className="flex flex-col">
-                    {type === "latest" && <span
-                        className="font-openSansBold text-xs text-tugAni-red uppercase"
-                    >
-                        {article.subcategory}
-                    </span>}
-                    <h1
-                        className="mt-1 font-gotham text-tugAni-black text-2xl tracking-tight leading-5 group-hover:text-tugAni-red group-hover:underline category-card-title"
-                    >
-                        {article.title}
-                    </h1>
-                    <span
-                        className="mt-2 font-openSansRegular text-xs text-gray-600"
-                    >
-                        {formattedDate}
-                    </span>
-                </div>
-            </Link>
-        </div>
-    )
-}
-
-async function Subcategory({ subcategory }) {
-    const articles = await getArticlesBySubcategory(subcategory);
-
-    return (
-        <div
-            className="w-full grid grid-cols-[repeat(auto-fill,minmax(256px,1fr))] auto-rows-max justify-center gap-4 gap-y-8 py-12 px-8 sm:px-20"
-        >
-            <h1
-                className="text-3xl font-bebas text-tugAni-red col-span-full"
-            >
-                {subcategory}
-            </h1>
-            {articles.map((article, index) => {
-                return (
-                    <Card key={index} article={article} />
-                )
-            })}
-        </div>
-    );
-}
+//     return (
+//         <div
+//             className="w-full grid grid-cols-[repeat(auto-fill,minmax(256px,1fr))] auto-rows-max justify-center gap-4 gap-y-8 py-12 px-8 sm:px-20"
+//         >
+//             <h1
+//                 className="text-3xl font-bebas text-tugAni-red col-span-full"
+//             >
+//                 {subcategory}
+//             </h1>
+//             {articles.map((article, index) => {
+//                 return (
+//                     <Card key={index} article={article} />
+//                 )
+//             })}
+//         </div>
+//     );
+// }

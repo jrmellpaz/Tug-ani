@@ -1,7 +1,6 @@
-import ArticleCard from "@/app/components/ArticleCard";
-import { getArticlesByAuthor } from "@/lib/firebase/article/read_server";
 import { getAuthors } from "@/lib/firebase/author/read_server";
 import { Mail } from "lucide-react";
+import { LatestAuthorArticles } from "@/app/components/LatestAuthorArticles";
 
 export async function generateMetadata({ params }) {
     const { authorId } = await params;
@@ -44,7 +43,6 @@ export async function generateMetadata({ params }) {
 export default async function Page({ params }) {
     const { authorId } = await params;
     const author = await getAuthors(authorId);
-    const articles = await getArticlesByAuthor(authorId);
 
     return (
         <section>
@@ -54,14 +52,15 @@ export default async function Page({ params }) {
             <section
                 className="flex flex-col my-12 mx-8 md:mx-20 gap-2"
             >
-                {articles.map((article, key) => {
+                {/* {articles.map((article, key) => {
                     return (
                         <div key={key} className={"flex flex-col w-full gap-2 [&:last-child_hr]:hidden"}>
                             <ArticleCard article={article} />
                             <hr className={"border-t-gray-300"} />
                         </div>
                     )
-                })}
+                })} */}
+                <LatestAuthorArticles authorId={authorId} />
             </section>
         </section>
     );

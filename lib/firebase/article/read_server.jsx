@@ -1,5 +1,5 @@
 import { db } from "@/lib/firebase";
-import { query, getDocs, collection, orderBy, Query, limit, where, doc, getDoc,} from "firebase/firestore";
+import { query, getDocs, collection, orderBy, Query, limit, where, doc, getDoc, startAfter,} from "firebase/firestore";
 
 export const getArticles = async (type) => {
     const ref = collection(db, "articles");
@@ -23,7 +23,8 @@ export const getArticlesByCategory = async (categoryId) => {
         articlesRef,
         where("categoryId", "==", categoryId),
         orderBy("publishedTimestamp", "desc"),
-        limit(9)
+        limit(9),
+        
     );
     const articlesSnapshot = await getDocs(articlesQuery);
     return articlesSnapshot.docs.map(doc => doc.data());
