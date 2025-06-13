@@ -1,4 +1,4 @@
-import { db } from "@/lib/firebase"; // Ensure you have the correct import for your Firestore instance
+import { db } from "@/lib/firebase"; 
 import { doc, getDoc } from "firebase/firestore";
 
 export const getAbout = async () => {

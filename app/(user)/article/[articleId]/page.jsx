@@ -129,14 +129,14 @@ export default async function Page({ params }) {
                             </>
                         )}
                     </Link>
-                </div>
-
-                <h1 className="font-gotham text-tugAni-black mb-1 text-4xl md:text-5xl tracking-tight md:tracking-tighter self-center text-center leading-none">
+                </div>                <h1 className="font-gotham text-tugAni-black mb-1 text-4xl md:text-5xl tracking-tight md:tracking-tighter self-center text-center leading-none">
                     {article?.title}
                 </h1>
-                <h3 className="font-openSansRegular text-gray-700 self-center text-center my-4">
-                    {article?.description}
-                </h3>
+                {article?.description && (
+                    <h3 className="font-openSansRegular text-gray-700 self-center text-center my-4">
+                        {article.description}
+                    </h3>
+                )}
                 <div className="mt-2 self-center flex flex-col">
                     <AuthorCard authorId={article?.authorId} className="mt-0 overflow-hidden self-center justify-center" />
                     <div className="mt-1 flex flex-col md:flex-row justify-center items-center text-center">
